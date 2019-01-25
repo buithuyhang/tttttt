@@ -1,0 +1,389 @@
+﻿
+@{
+    ViewBag.Title = "BaoCaoTaiTuyen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title" id="plTitle_Tuyen"></h3>
+    </div>
+    <div class="panel-body">
+        <div id="body_dau">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <div class="row" style="margin-top: 5px;">
+                            <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px; padding-right: 5px; text-align: right;">SỞ:</span>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="cbbSo_BCKhongHoatDongTuyen" class="input-group" style="max-width: 100000px; width: 100%;" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 5px;">
+                            <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px; padding-right: 5px; text-align: right;">BẾN:</span>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="cbbBen_BCKhongHoatDongTuyen" class="input-group" style="max-width: 100000px; width: 100%;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <div class="row" style="margin-top: 5px;">
+                            <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px; padding-right: 5px; text-align: right;">TỪ:</span>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="dtpTuNgay_BCKhongHoatDongTuyen" class="input-group" style="max-width: 100000px; width: 100%;" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 5px;">
+                            <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px; padding-right: 5px; text-align: right;">TUYẾN:</span>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="cbbTuyen_BCKhongHoatDongTuyen" class="input-group" style="max-width: 100000px; width: 100%;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <div class="row" style="margin-top: 5px;">
+                            <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px; padding-right: 5px; text-align: right;">ĐẾN:</span>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="dtpDenNgay_BCKhongHoatDongTuyen" class="input-group" style="max-width: 100000px; width: 100%;" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 5px;">
+                            <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px; padding-right: 5px; text-align: right;">ĐƠN VỊ:</span>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="cbbDV_BCKhongHoatDongTuyen" placeholder="CHỌN ĐƠN VỊ..." style="max-width: 100000px; width: 100%;">
+                                <input id="hf_cbbDV_BCKhongHoatDongTuyen" type="hidden">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3">
+                        <button id="btnXemBaoCaoTheoTuyen" class="btn btn-primary btn-block">XEM</button>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-9">
+                        <input type="search" id="txtSearch_cbbDV_BCKhongHoatDongTuyen" class="k-textbox" style="max-width: 100000px; width: 100%;" placeholder="Tìm Kiếm" />
+                    </div>
+                </div>
+            </div>
+            <hr style="margin-bottom: 10px; margin-top: 10px;" />
+            <div class="row" style="padding-bottom: 5px;">
+                <span>TÊN TUYẾN: </span>
+                <strong> <span id="sp_TenTuyen_Search"></span> </strong>
+                <span>| MÃ TUYẾN: </span>
+                <strong> <span id="sp_MaTuyen_Search"></span> </strong>
+                <span>| BẾN ĐI: </span>
+                <strong> <span id="sp_BenDi_Search"></span> </strong>
+                <span>| BẾN ĐẾN: </span>
+                <strong> <span id="sp_BenDen_Search"></span> </strong>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <span>HÀNH TRÌNH: </span>
+                <strong> <span id="sp_HanhTrinh_Search"></span> </strong>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <span>ĐÃ CHỌN : </span>
+                <span id="spanfabric" style="font-weight:bold;">0</span><span> ĐƠN VỊ</span><span id="chitietchon" style="font-weight:bold;"></span>
+            </div>
+        </div>
+    </div>
+    <div id="grid_BaoCaoHoatDongTuyen"></div>
+</div>
+@section scripts{
+
+    <script src="~/Scripts/BaoCao/KhongHoatDong/DungChung.js"></script>
+    <script>
+        //Set Information Tuyến
+        function SetDataTuyen(obj) {
+            $("#sp_TenTuyen_Search").html(obj.TuyenDuong);
+            $("#sp_MaTuyen_Search").html(obj.LT_MaTuyen);
+            $("#sp_BenDi_Search").html(obj.LT_DC_TenBen_01);
+            $("#sp_BenDen_Search").html(obj.LT_DC_TenBen_02);
+            $("#sp_HanhTrinh_Search").html(obj.LT_HanhTrinhChay);
+        }
+    </script>
+
+    @*Set data default*@
+    <script>
+
+        var dataDefault = @Html.Raw(Json.Encode(ViewBag.dataDefault));
+
+
+        // set datetime
+
+        $("#dtpTuNgay_BCKhongHoatDongTuyen").kendoDatePicker({
+            dateInput: true,
+            format: "dd/MM/yyyy",
+            culture: "vi-VN",
+            value: kendo.parseDate(new Date()),
+        });
+        var dtp_TuNgay = $("#dtpTuNgay_BCKhongHoatDongTuyen").data("kendoDatePicker");
+        dtp_TuNgay.value(dataDefault.dateBatDau);
+
+        $("#dtpDenNgay_BCKhongHoatDongTuyen").kendoDatePicker({
+            dateInput: true,
+            format: "dd/MM/yyyy",
+            culture: "vi-VN",
+            value: kendo.parseDate(new Date()),
+        });
+        var dtp_DenNgay = $("#dtpDenNgay_BCKhongHoatDongTuyen").data("kendoDatePicker");
+        dtp_DenNgay.value(dataDefault.dateKetThuc);
+
+       // sở
+        $("#cbbSo_BCKhongHoatDongTuyen").kendoComboBox({
+            dataTextField: "TS_TenTinh",
+            dataValueField: "TS_IdTinh_So",
+            dataSource: {
+                data: @Html.Raw(Json.Encode(ViewBag.lstSo)),
+                sort: { field: "TS_IdTinh_So", dir: "asc" }
+            },
+            filter: "contains",
+            suggest: true,
+            index: 0
+        });
+        var combobox = $("#cbbSo_BCKhongHoatDongTuyen").data("kendoComboBox");
+        combobox.value(dataDefault.Id_So);
+
+        //bến
+        $("#cbbBen_BCKhongHoatDongTuyen").kendoComboBox({
+             dataTextField: "TenBenXe",
+            dataValueField: "BX_IdBenXe",
+            dataSource: {
+                data: @Html.Raw(Json.Encode(ViewBag.lstBen)),
+                sort: { field: "BX_IdBenXe", dir: "asc" }
+            },
+            filter: "contains",
+            suggest: true,
+            index: 0
+        });
+         var comboboxBen = $("#cbbBen_BCKhongHoatDongTuyen").data("kendoComboBox");
+         comboboxBen.value(dataDefault.Id_Ben);
+
+         //Tuyến  IdLuongTuyen", "TenLuongTuyen   "LT_IdLuongTuyen", "TuyenDuong"
+         $("#cbbTuyen_BCKhongHoatDongTuyen").kendoComboBox({
+             dataTextField: "TuyenDuong",
+             dataValueField: "LT_IdLuongTuyen",
+            dataSource: {
+                data: @Html.Raw(Json.Encode(ViewBag.lstTuyen)),
+                sort: { field: "LT_IdLuongTuyen", dir: "asc" }
+            },
+            filter: "contains",
+            suggest: true,
+            index: 0
+        });
+         var comboboxBen = $("#cbbTuyen_BCKhongHoatDongTuyen").data("kendoComboBox");
+         comboboxBen.value(dataDefault.Id_Ben);
+
+          // combobox chon nhiều đơn vị
+         $("#cbbDV_BCKhongHoatDongTuyen").kendoDropDownList({
+             name: "cbbDV_BCKhongHoatDongTuyen",
+             dataTextField: "TenCongTy",
+             dataValueField: "CT_IdCongTyVT",
+        dataSource: @Html.Raw(Json.Encode(ViewBag.lstCongTy)),
+        filter: "contains",
+        suggest: true,
+        template:
+            "<input type='checkbox' id='chk_cbbDV_BCKhongHoatDongTuyen_#=data.CT_IdCongTyVT #' onclick='UpdateIdinHF(this);' value='#=data.CT_IdCongTyVT #' name='cbbDV_BCKhongHoatDongTuyen' />" +
+                "<label>" +
+                "${ data.TenCongTy }" +
+                "</label>",
+        close: onClose(event, "cbbDV_BCKhongHoatDongTuyen"),
+        change: onChange,
+        });
+
+        //Event Cbb
+        function setDefaultCbb(cbb, id, text) {
+            var obj = {};
+            obj[id] = -1;
+            obj[text] = "Không có";
+            var response = [obj];
+            dataCbb = new kendo.data.DataSource({
+                data: response,
+            });
+            cbb.setDataSource(dataCbb);
+            cbb.dataSource.read();
+            cbb.refresh();
+            cbb.value(response[0][id]);
+        }
+
+        function getListBenXe() {
+            var cbbSo = $("#cbbSo_BCKhongHoatDongTuyen").data("kendoComboBox");
+            var idSo = cbbSo.value();
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetListBenXe", "BaoCaoHoatDong"))),
+                data: {
+                    idSo
+                },
+                cache: false,
+                dataType: "json",
+                success: function(response) {
+                    var cbbBen = $("#cbbBen_BCKhongHoatDongTuyen").data("kendoComboBox");
+
+                    if (response != null && response.length > 0) {
+                        dataCbb = new kendo.data.DataSource({
+                            data: response,
+                            sort: { field: "BX_IdBenXe", dir: "asc" }
+                        });
+                        cbbBen.setDataSource(dataCbb);
+                        cbbBen.dataSource.read();
+                        cbbBen.refresh();
+                        console.log(response);
+                        cbbBen.value(response[0].BX_IdBenXe);
+
+                        getListTuyen();
+                    } else {
+                        setDefaultCbb(cbbBen, "BX_IdBenXe", "TenBenXe");
+                        //setDefaultCbb(cbb, "IdLuongTuyen", "TenLuongTuyen");
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+        function getListTuyen() {
+
+            var cbbBen = $("#cbbBen_BCKhongHoatDongTuyen").data("kendoComboBox");
+            var idBenXe = cbbBen.value();
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetListTuyen", "BaoCaoHoatDong"))),
+                data: {
+                    idBenXe
+                },
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    //debugger;
+                    var cbbTuyen = $("#cbbTuyen_BCKhongHoatDongTuyen").data("kendoComboBox");
+
+                    if (response != null && response.length > 0) {
+                        dataCbb = new kendo.data.DataSource({
+                            data: response,
+                            sort: { field: "LT_IdLuongTuyen", dir: "asc" }
+                        });
+                        cbbTuyen.setDataSource(dataCbb);
+                        cbbTuyen.dataSource.read();
+                        cbbTuyen.refresh();
+                        console.log(response);
+                        cbbTuyen.value(response[0].IdLuongTuyen);
+                        getListDonVi();
+                    } else {
+                        setDefaultCbb(cbbTuyen, "LT_IdLuongTuyen", "TuyenDuong");
+
+                        //
+                        $('input[id*="chk_"]').each(function() {
+                            $(this).remove();
+                        });
+                        $('#hf_cbbDV_BCKhongHoatDongTuyen').val("");
+                        $("#cbbDV_BCKhongHoatDongTuyen").kendoDropDownList({
+                            name: "cbbDV_BCKhongHoatDongTuyen",
+                            dataTextField: "TenCongTy",
+                            dataValueField: "CT_IdCongTyVT",
+                            dataSource: [{ CT_IdCongTyVT: "-1", TenCongTy: "Không có" }],
+                            filter: "contains",
+                            suggest: true,
+                            template:
+                            "<input type='checkbox' id='chk_cbbDV_BCKhongHoatDongTuyen_#=data.CT_IdCongTyVT #' onclick='UpdateIdinHF(this);' value='#=data.CT_IdCongTyVT #' name='cbbDV_BCKhongHoatDongTuyen' />" +
+                            "<label>" +
+                            "${ data.TenCongTy }" +
+                            "</label>",
+                            close: onClose(event, "cbbDV_BCKhongHoatDongTuyen"),
+                            change: onChange,
+                        });
+                    }
+                }
+            };
+            $.ajax(options);
+
+        }
+
+        function getListDonVi() {
+
+          //  debugger;
+            var cbbBen = $("#cbbBen_BCKhongHoatDongTuyen").data("kendoComboBox");
+            var cbbTuyen = $("#cbbTuyen_BCKhongHoatDongTuyen").data("kendoComboBox");
+            var idBenXe = cbbBen.value();
+            idBenXe = idBenXe.toString();
+            var idLuongTuyen = cbbTuyen.value();
+            idLuongTuyen = idLuongTuyen.toString();
+            var options = {
+                type: "GET",
+                url: @Html.Raw(Json.Encode(Url.Action("GetListDonVi", "BaoCaoKhongHoatDong"))),
+                data: {
+                    idBenXe,
+                    idLuongTuyen
+                },
+                cache: false,
+                dataType: "json",
+                success: function(response) {
+                    SetDataTuyen(response.ThongTinTuyen);
+                    console.log(response.List);
+                    if (response != null) {
+                        $('input[id*="chk_"]').each(function() {
+                            $(this).remove();
+                        });
+
+                        $('#hf_cbbDV_BCKhongHoatDongTuyen').val("");
+                        $("#cbbDV_BCKhongHoatDongTuyen").kendoDropDownList({
+                            name: "cbbDV_BCKhongHoatDongTuyen",
+                            dataTextField: "TenCongTy",
+                            dataValueField: "CT_IdCongTyVT",
+                            dataSource: response.List,
+                            filter: "contains",
+                            suggest: true,
+                            template:
+                            "<input type='checkbox' id='chk_cbbDV_BCKhongHoatDongTuyen_#=data.CT_IdCongTyVT #' onclick='UpdateIdinHF(this);' value='#=data.CT_IdCongTyVT #' name='cbbDV_BCKhongHoatDongTuyen' />" +
+                            "<label>" +
+                            "${ data.TenCongTy }" +
+                            "</label>",
+                            close: onClose(event, "cbbDV_BCKhongHoatDongTuyen"),
+                            change: onChange,
+                        });
+                        $('input[id*="chk_"]').each(function () {
+                            $(this).prop("checked", true);
+                            UpdateIdInHiddenField($("#hf_cbbDV_BCKhongHoatDongTuyen").get(0), $(this).val(), true);
+                        });
+                    } else {
+                        $('input[id*="chk_"]').each(function() {
+                            $(this).remove();
+                        });
+                        $('#hf_cbbDV_BCKhongHoatDongTuyen').val("");
+                        $("#cbbDV_BCKhongHoatDongTuyen").kendoDropDownList({
+//                                enable: false,
+                            name: "cbbDV_BCKhongHoatDongTuyen",
+                            dataTextField: "TenCongTy",
+                            dataValueField: "CT_IdCongTyVT",
+                            dataSource: [{ CT_IdCongTyVT: "-1", TenCongTy: "Không có" }],
+                            filter: "contains",
+                            suggest: true,
+                            template:
+                            "<input type='checkbox' id='chk_cbbDV_BCKhongHoatDongTuyen_#=data.CT_IdCongTyVT #' onclick='UpdateIdinHF(this);' value='#=data.CT_IdCongTyVT #' name='cbbDV_BCKhongHoatDongTuyen' />" +
+                            "<label>" +
+                            "${ data.TenCongTy }" +
+                            "</label>",
+                            close: onClose(event, "cbbDV_BCKhongHoatDongTuyen"),
+                            change: onChange,
+                        });
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+        $('#cbbSo_BCKhongHoatDongTuyen').change(function() {
+            getListBenXe();
+        });
+
+        $('#cbbBen_BCKhongHoatDongTuyen').change(function() {
+            getListTuyen();
+        });
+
+        $('#cbbTuyen_BCKhongHoatDongTuyen').change(function() {
+            getListDonVi();
+        });
+
+    </script>
+
+}

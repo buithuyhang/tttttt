@@ -1,0 +1,269 @@
+﻿
+@{
+    ViewBag.Title = "BÁO CÁO TỔNG HỢP TOÀN QUỐC";
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title" id="plTitle_TongHopTongCuc"></h3>
+    </div>
+    <div class="panel-body">
+        <div id="body_dau">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <span class="col-lg-1 col-md-1 col-sm-1 col-xs-2" style="padding-left:0px; padding-right:5px; text-align:right;">THÁNG:</span>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <input id="datepicker_BaoCaoTongHopTongCuc" class="input-group" style="width:100%; ">
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-xs-2" style="padding-left:0px;">
+                        <button class="btn btn-primary input-group" id="btnXem_BaoCaoTongHopToanQuoc" style="width:100%;">XEM</button>
+                    </div>
+                </div>
+                    @*<div class="row" style="padding-bottom:5px;">
+                        <div class="col-md-4">THÁNG:</div>
+                        <div class="col-md-8"><input id="datepicker_BaoCaoTongHopTongCuc"></div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary input-group" id="btnXem_BaoCaoTongHopToanQuoc">XEM</button>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    <div id="grid_BaoCaoTongHopTongCuc"></div>
+</div>
+@section scripts{
+<script src="~/Scripts/BaoCao/gridKendo.js"></script>
+    <!--DataSource-->
+    <script>
+        var bien = @Html.Raw(Json.Encode(ViewBag.BienSo));
+        var datatest = @Html.Raw(Json.Encode(ViewBag.BaoCaoTongHop_ToanQuoc));
+        console.log(datatest);
+    </script>
+    <script>
+        var otherElementsHeightThongTinXe = $("#body_dau").height() + $(".navbar-fixed-top").height() + 200;
+        $(window).resize(function () {
+            var gridElement = $("#grid_BaoCaoTongHopTongCuc");
+            otherElementsHeightThongTinXe = $("#body_dau").height() + $(".navbar-fixed-top").height() + 200;
+            gridElement.children(".k-grid-content").height($(window).height() - otherElementsHeightThongTinXe);
+        });
+        $("#datepicker_BaoCaoTongHopTongCuc").kendoDatePicker({
+            dateInput: true,
+            start: "year",
+            depth: "year",
+            format: "MM/yyyy",
+            culture: "vi-VN",
+            value: kendo.parseDate(new Date()),
+        });
+        var today = kendo.parseDate(new Date(bien.Nam, bien.Thang - 1), 'MM/yyyy');
+        var datepicker_ThangNam = $("#datepicker_BaoCaoTongHopTongCuc").data('kendoDatePicker');
+        datepicker_ThangNam.value(today);        
+        Panel_Title("plTitle_TongHopTongCuc", "BÁO CÁO TỔNG HỢP", "BÁO CÁO TOÀN QUỐC");
+        //function BaoCaoTongHop_BaoCaoToanQuoc(id, data) {
+        //    var ttt = "#" + id;
+        //    $(ttt).kendoGrid({
+        //        resizeable: true,
+        //        sortable: true,
+        //        selectable: "row",
+        //        scrollable: true,
+        //        dataSource: {
+        //            data: data,
+        //            group: {
+        //                field: "Ten_So", aggregates: [{ field: "ngay", aggregate: "count" }]
+        //            },
+        //            aggregate: { field: "ngay", aggregate: "count" },
+        //        },
+        //        dataBinding: function () {
+        //            record = 0;
+        //            $('.k-grid-content').height($(window).height() - otherElementsHeightThongTinXe);
+        //        },
+        //        columns: [{
+        //            title: "STT",
+        //            template: "#= ++record #",
+        //            width: 30,
+        //            headerAttributes: {
+        //                "class": "table-header-cell",
+        //                style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+        //            },
+        //            groupFooterTemplate: "TỔNG:",
+        //            footerTemplate: "TỔNG:"
+        //        }, {
+        //            field: "ngay",
+        //            title: "NGÀY",
+        //            width: 100,
+        //            headerAttributes: {
+        //                "class": "table-header-cell",
+        //                style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+        //            },
+        //            groupFooterTemplate: "#=count#",
+        //            footerTemplate: "#=count#"
+        //        },
+        //    {
+        //        field: "sochuyenkehoach",
+        //        title: "SỐ CHUYẾN KẾ HOẠCH",
+        //        width: 100,
+        //        headerAttributes: {
+        //            "class": "table-header-cell",
+        //            style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+        //        }
+        //    },
+        //    {
+        //        field: "sochuyenthucte",
+        //        title: "SỐ CHUYẾN THỰC TẾ",
+        //        width: 100,
+        //        headerAttributes: {
+        //            "class": "table-header-cell",
+        //            style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+        //        }
+        //    },
+        //    {
+        //        field: "chenhlech",
+        //        title: "CHÊNH LỆCH",
+        //        width: 100,
+        //        headerAttributes: {
+        //            "class": "table-header-cell",
+        //            style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+        //        }
+        //    },
+        //    {
+        //        field: "tile",
+        //        title: "TỈ LỆ (%)",
+        //        width: 100,
+        //        headerAttributes: {
+        //            "class": "table-header-cell",
+        //            style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+        //        }
+        //    }
+        //        ]
+        //    })
+        //};
+        //BaoCaoTongHop_BaoCaoTaiBen("grid_BaoCaoTongHopTongCuc", datatest);                        
+    </script>
+    <!--Grid data-->
+    <script>
+        $("#grid_BaoCaoTongHopTongCuc").kendoGrid({
+            resizeable: true,
+            sortable: false,
+            selectable: "row",
+            scrollable: true,
+            dataSource: {
+                data: datatest,
+                pageSize: 25,
+                group: {
+                    field: "TS_TenTinh", aggregates: [{ field: "NgayXuatBen", aggregate: "count" }]
+                },
+                aggregate: { field: "NgayXuatBen", aggregate: "count" },
+            },
+            pageable: {
+                pageSizes: [25, 50, 100, 150, 200, "all"],
+                numeric: true,
+                info: false
+            },
+            dataBinding: function () {
+                record = 0;
+                $('.k-grid-content').height($(window).height() - otherElementsHeightThongTinXe);
+            },
+            columns: [
+             {
+                 hidden: true,
+                 title: "Tỉnh - Sở", 
+                 field: "TS_TenTinh",
+            }
+                ,{
+                title: "STT",
+                template: "#= ++record #",
+                width: 30,
+                headerAttributes: {
+                    "class": "table-header-cell",
+                    style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                },
+                groupFooterTemplate: "TỔNG:",
+                footerTemplate: "TỔNG:"
+            }, {
+                field: "NgayXuatBen",
+                title: "NGÀY XUẤT BẾN",
+                width: 100,
+                headerAttributes: {
+                    "class": "table-header-cell",
+                    style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                },
+                groupFooterTemplate: "#=count#",
+                footerTemplate: "#=count#"
+            },
+        {
+            field: "SoLuotXuatBenKeHoachNgay",
+            title: "SỐ CHUYẾN XUẤT BẾNKẾ HOẠCH",
+            width: 100,
+            headerAttributes: {
+                "class": "table-header-cell",
+                style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+            }
+        },
+        {
+            field: "SochuyenXuatBen",
+            title: "SỐ CHUYẾN XUẤT BẾN THỰC TẾ",
+            width: 100,
+            headerAttributes: {
+                "class": "table-header-cell",
+                style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+            },
+            template: '<a target="_blank" href="#=URL#">#=SochuyenXuatBen#</a>'
+        },
+        {
+            field: "SoChuyenChenhLech",
+            title: "SỐ CHUYẾN CHÊNH LỆCH",
+            width: 100,
+            headerAttributes: {
+                "class": "table-header-cell",
+                style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+            }
+        },
+        {
+            field: "TyLeXuatBen",
+            title: "TỈ LỆ (%)",
+            width: 100,
+            headerAttributes: {
+                "class": "table-header-cell",
+                style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+            }
+        }
+            ]
+        });
+        var grid = $("#grid_BaoCaoTongHopTongCuc").data("kendoGrid");
+        grid.dataSource.sort({field:"NgayXuatBen", dir: "asc" });
+        removeitemperpage();
+    </script>
+    <!--Event click-->
+    <script>
+        $('#btnXem_BaoCaoTongHopToanQuoc').on('click', function () {
+            var thangBatDau = kendo.toString($("#datepicker_BaoCaoTongHopTongCuc").data('kendoDatePicker').value(), "MM");
+            var namBatDau = kendo.toString($("#datepicker_BaoCaoTongHopTongCuc").data('kendoDatePicker').value(), "yyyy");
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetBaoCaoTongHopToanQuoc", "BaoCaoTongHop"))),
+                data: '{nam:"' + namBatDau + '", thang:"' + thangBatDau + '"}',
+                cache: false,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    if (response != null) {
+                        var grid = $("#grid_BaoCaoTongHopTongCuc").data("kendoGrid");
+                        dataGrid = new kendo.data.DataSource({
+                            data: response,
+                            pageSize: 25,
+                            group: {
+                                title: "Tỉnh:", field: "TS_TenTinh", aggregates: [{ field: "NgayXuatBen", aggregate: "count" }]
+                            },
+                            aggregate: { field: "NgayXuatBen", aggregate: "count" },
+                        });
+                        grid.setDataSource(dataGrid);
+                        grid.dataSource.read();
+                        grid.dataSource.sort({field:"NgayXuatBen", dir: "asc" });
+                        grid.refresh();
+                    }
+                }
+            };
+            $.ajax(options);
+        });
+    </script>
+}

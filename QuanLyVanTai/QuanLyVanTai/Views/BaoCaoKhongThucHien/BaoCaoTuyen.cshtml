@@ -1,0 +1,573 @@
+﻿@{
+    ViewBag.Title = "BÁO CÁO KHÔNG THỰC HIỆN TUYẾN";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title" id="plTitle_Tuyen"></h3>
+    </div>
+    <div class="panel-body">
+        <div id="body_dau">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <div class="row" style="margin-top: 5px;">
+                            <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px; padding-right: 5px; text-align: right;">SỞ:</span>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="cbbSo_KhongThucHienTuyen" class="input-group" style="max-width: 100000px; width: 100%;" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 5px;">
+                            <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px; padding-right: 5px; text-align: right;">BẾN:</span>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="cbbBen_KhongThucHienTuyen" class="input-group" style="max-width: 100000px; width: 100%;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <div class="row" style="margin-top: 5px;">
+                            <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px; padding-right: 5px; text-align: right;">TỪ:</span>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="dateBatdau_KhongThucHienTuyen" class="input-group" style="max-width: 100000px; width: 100%;" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 5px;">
+                            <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px; padding-right: 5px; text-align: right;">TUYẾN:</span>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="cbbTuyen_KhongThucHienTuyen" class="input-group" style="max-width: 100000px; width: 100%;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <div class="row" style="margin-top: 5px;">
+                            <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px; padding-right: 5px; text-align: right;">ĐẾN:</span>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="dateKetThuc_KhongThucHienTuyen" class="input-group" style="max-width: 100000px; width: 100%;" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 5px;">
+                            <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px; padding-right: 5px; text-align: right;">ĐƠN VỊ:</span>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="selectsDVVT" placeholder="CHỌN ĐƠN VỊ..." style="max-width: 100000px; width: 100%;">
+                                <input id="hf_selectsDVVT" type="hidden">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3">
+                        <button id="btnXemBCTuyenKhongThucHien" class="btn btn-primary btn-block">XEM</button>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-9">
+                        <input type="search" id="txtSearch_KhongThucHienTuyen" class="k-textbox" style="max-width: 100000px; width: 100%;" placeholder="Tìm Kiếm" />
+                    </div>
+                </div>
+            </div>
+            <hr style="margin-bottom: 10px; margin-top: 10px;" />
+            <div class="row" style="padding-bottom: 5px;">
+                <span>TÊN TUYẾN: </span>
+                <strong> <span id="sp_TenTuyen_Search"></span> </strong>
+                <span>| MÃ TUYẾN: </span>
+                <strong> <span id="sp_MaTuyen_Search"></span> </strong>
+                <span>| BẾN ĐI: </span>
+                <strong> <span id="sp_BenDi_Search"></span> </strong>
+                <span>| BẾN ĐẾN: </span>
+                <strong> <span id="sp_BenDen_Search"></span> </strong>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <span>HÀNH TRÌNH: </span>
+                <strong> <span id="sp_HanhTrinh_Search"></span> </strong>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <span>ĐÃ CHỌN : </span>
+                <span id="spanfabric" style="font-weight:bold;">0</span><span> ĐƠN VỊ</span><span id="chitietchon" style="font-weight:bold;"></span>
+            </div>
+        </div>
+    </div>
+    <div id="gridBCTuyenKhongThucHien"></div>
+</div>
+@section scripts{
+    <script src="~/Scripts/BaoCao/KhongHoatDong/DungChung.js"></script>
+    <script>
+        var DataDefault = @Html.Raw(Json.Encode(ViewBag.DataDefault));
+        //Set Information Tuyến
+        function SetDataTuyen(obj){
+            $("#sp_TenTuyen_Search").html(obj.TuyenDuong);
+            $("#sp_MaTuyen_Search").html(obj.LT_MaTuyen);
+            $("#sp_BenDi_Search").html(obj.LT_DC_TenBen_01);
+            $("#sp_BenDen_Search").html(obj.LT_DC_TenBen_02);
+            $("#sp_HanhTrinh_Search").html(obj.LT_HanhTrinhChay);
+        }
+
+        var otherElementsHeightThongTinXe = 0;
+        //$(window).resize(function() {
+        //    var gridElement = $("#gridBCTuyenKhongThucHien");
+        //    otherElementsHeightThongTinXe = $("#body_dau").height() + $(".navbar-fixed-top").height() + 200;
+        //    gridElement.children(".k-grid-content").height($(window).height() - otherElementsHeightThongTinXe);
+        //});
+
+        $("#dateBatdau_KhongThucHienTuyen").kendoDatePicker({
+            dateInput: true,
+            format: "dd/MM/yyyy",
+            culture: "vi-VN",
+            value: kendo.parseDate(DataDefault.TuNgay, "dd/MM/yyyy")
+        });
+
+        $("#dateKetThuc_KhongThucHienTuyen").kendoDatePicker({
+            dateInput: true,
+            format: "dd/MM/yyyy",
+            culture: "vi-VN",
+            value: kendo.parseDate(DataDefault.DenNgay, "dd/MM/yyyy")
+        });
+
+        $("#selectsDVVT").kendoDropDownList({
+            name: "selectsDVVT",
+            dataTextField: "TenCongTy",
+            dataValueField: "CT_IdCongTyVT",
+            dataSource: {
+                data: @Html.Raw(Json.Encode(ViewBag.LstDVTT)),
+                sort: { field: "CT_IdCongTyVT", dir: "asc" }
+            },
+            filter: "contains",
+            suggest: true,
+            template:
+                "<input type='checkbox' id='chk_selectsDVVT_#=data.CT_IdCongTyVT #' onclick='UpdateIdinHF(this);' value='#=data.CT_IdCongTyVT #' name='selectsDVVT' />" +
+                    "<label>" +
+                    "${ data.TenCongTy }" +
+                    "</label>",
+            close: onClose,
+            change: onChange
+        });
+        //set default
+        setDefaultDropList("selectsDVVT", "hf_selectsDVVT");
+
+        $("#cbbSo_KhongThucHienTuyen").kendoComboBox({
+            dataTextField: "TS_TenTinh",
+            dataValueField: "TS_IdTinh_So",
+            dataSource: {
+                data: @Html.Raw(Json.Encode(ViewBag.LstSo)),
+                sort: { field: "TS_IdTinh_So", dir: "asc" }
+            },
+            filter: "contains",
+            suggest: true,
+            index: 1
+        });
+
+        $("#cbbBen_KhongThucHienTuyen").kendoComboBox({
+            dataTextField: "TenBenXe",
+            dataValueField: "BX_IdBenXe",
+            dataSource: {
+                data: @Html.Raw(Json.Encode(ViewBag.LstBenXe)),
+                sort: { field: "BX_IdBenXe", dir: "asc" }
+            },
+            filter: "contains",
+            suggest: true,
+            index: 0
+        });
+
+        $("#cbbTuyen_KhongThucHienTuyen").kendoComboBox({
+            dataTextField: "TuyenDuong",
+            dataValueField: "LT_IdLuongTuyen ",
+            dataSource: {
+                data: @Html.Raw(Json.Encode(ViewBag.LstTuyen)),
+                sort: { field: "IdLuongTuyen", dir: "asc" }
+            },
+            filter: "contains",
+            suggest: true,
+            index: 0
+        });
+
+        var cbbSo = $("#cbbSo_KhongThucHienTuyen").data("kendoComboBox");
+        var cbbTuyen = $("#cbbTuyen_KhongThucHienTuyen").data("kendoComboBox");
+        cbbSo.value(DataDefault.So);
+        cbbTuyen.value(DataDefault.Tuyen);
+        //        $("#sp_HDTuyen_Search").html(combobox1.text());
+        //        $("#sp_HDSo_Search").html(combobox.text());
+        SetDataTuyen(@Html.Raw(Json.Encode(ViewBag.ThongTinTuyen)));
+        Panel_Title("plTitle_Tuyen", "BÁO CÁO KHÔNG THỰC HIỆN", "BÁO CÁO TUYẾN");
+
+        ////Grid
+        $("#gridBCTuyenKhongThucHien").kendoGrid({
+            sortable: true,
+            selectable: "row",
+            scrollable: true,
+            //height: 380,
+            dataSource: {
+                data: @Html.Raw(Json.Encode(ViewBag.DataGrid)),
+                pageSize: 100,
+                aggregate: [
+                    { field: "TenCongTy", aggregate: "count" },
+                    { field: "TongSoXe", aggregate: "sum" },
+                    { field: "TongLuotXuatBen", aggregate: "sum" },
+                    { field: "SoLuotKhach", aggregate: "sum" },
+                    { field: "SoLuotKhongThucHien", aggregate: "sum" },                    
+                ]
+            },
+            pageable: {
+                pageSizes: [100, 150, 200, "all"],
+                numeric: true,
+                info: false
+            },
+            dataBinding: function () {
+                record = 0;
+                $('.k-grid-content').height($(window).height() - otherElementsHeightThongTinXe);
+            },
+            columns: [
+                {
+                    title: "STT",
+                    template: "#= ++record #",
+                    width: 45,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                    },
+                    footerTemplate: "<div style='text-align: right;'><strong>Tổng: </strong> </div>",
+                    attributes: { style: "text-align: center;" }
+                },
+                {
+                    field: "TenCongTy",
+                    title: "ĐƠN VỊ",
+                    width: 150,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                    },
+                    template: '<a href="javascript:void(0)" onclick="troBCKhongThucHienDN(this)" data-IdCongTy="#=CT_IdCongTyVT#">#=TenCongTy#</a>',
+                    attributes: { style: "text-align: left;" },
+                    footerTemplate: "<div style='text-align: left;'><strong>#=kendo.toString(count,'n0')#</strong> Cty</div>",
+                },
+                {
+                    field: "TongSoXe",
+                    title: "TỔNG SỐ XE",
+                    width: 100,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                    },
+                    footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                    format: "{0:n0}",
+                    attributes: { style: "text-align: right;" }
+                },
+                {
+                    field: "TongLuotXuatBen",
+                    title: "TỔNG SỐ LƯỢT XUẤT BẾN",
+                    width: 100,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                    },
+                    footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                    format: "{0:n0}",
+                    attributes: { style: "text-align: right;" }
+                },
+                {
+                    field: "SoLuotKhach",
+                    title: "SỐ LƯỢT KHÁCH",
+                    width: 100,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                    },
+                    footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                    format: "{0:n0}",
+                    attributes: { style: "text-align: right;" }
+                },
+                {
+                    field: "SoLuotKhongThucHien",
+                    title: "SỐ LƯỢT KHÔNG THỰC HIỆN",
+                    width: 100,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                    },
+                    footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                    format: "{0:n0}",
+                    attributes: { style: "text-align: right;" }
+                },
+                {
+                    field: "TyLeKhongThucHien",
+                    title: "TỈ LỆ KHÔNG THỰC HIÊN(%)",
+                    width: 100,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                    },
+                    format: "{0:n2}",
+                    attributes: { style: "text-align: right;" }
+                }
+            ]
+        });
+
+    //<!--Search Event-->
+        $("#txtSearch_KhongThucHienTuyen").keyup(function() {
+            var selecteditem = $('#txtSearch_KhongThucHienTuyen').val();
+            var kgrid = $("#gridBCTuyenKhongThucHien").data("kendoGrid");
+            selecteditem = selecteditem.toUpperCase();
+            var selectedArray = selecteditem.split(" ");
+            if (selecteditem) {
+                //kgrid.dataSource.filter({ field: "UserName", operator: "eq", value: selecteditem });
+                var orfilter = { logic: "or", filters: [] };
+                var andfilter = { logic: "and", filters: [] };
+                $.each(selectedArray,
+                    function(i, v) {
+                        if (v.trim() == "") {
+                        } else {
+                            $.each(selectedArray,
+                                function(i, v1) {
+                                    //var lengthStr = selecteditem.length;
+                                    //var strBS = "";
+                                    //if(lengthStr > 3 && lengthStr < 10 && selecteditem[3] != '-'){
+                                    //    strBS = [selecteditem.slice(0, 3), "-", selecteditem.slice(3)].join('');
+                                    //} else {
+                                    //    strBS = v1;
+                                    //}
+
+                                    if (v1.trim() == "") {
+                                    } else {
+                                        orfilter.filters.push({ field: "TenCongTy", operator: "contains", value: v1 });
+                                        andfilter.filters.push(orfilter);
+                                        orfilter = { logic: "or", filters: [] };
+                                    }
+                                });
+                        }
+                    });
+                kgrid.dataSource.filter(andfilter);
+            } else {
+                kgrid.dataSource.filter({});
+            }
+        });
+
+    //<!--Event Click-->
+
+        $('#btnXemBCTuyenKhongThucHien').on('click',
+            function () {
+                var dateBatDau =
+                    kendo.toString($("#dateBatdau_KhongThucHienTuyen").data('kendoDatePicker').value(),
+                        "dd/MM/yyyy");
+                var dateKetThuc =
+                    kendo.toString($("#dateKetThuc_KhongThucHienTuyen").data('kendoDatePicker').value(),
+                        "dd/MM/yyyy");
+
+                var Ben = $("#cbbBen_KhongThucHienTuyen").data("kendoComboBox");
+                var Tuyen = $("#cbbTuyen_KhongThucHienTuyen").data("kendoComboBox");
+                var options = {
+                    type: "POST",
+                    url: @Html.Raw(Json.Encode(Url.Action("GetBaoCaoTuyen", "BaoCaoKhongThucHien"))),
+                    data: {
+                        Tuyen: Tuyen.value(),
+                        Ben: Ben.value(),
+                        LstCongTy: $("#hf_selectsDVVT").val(),
+                        TuNgay: dateBatDau,
+                        DenNgay: dateKetThuc
+                    },
+                    cache: false,
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status == true) {
+                            var grid = $("#gridBCTuyenKhongThucHien").data("kendoGrid");
+                            var dataGrid = new kendo.data.DataSource({
+                                data: response.data.DataGrid,
+                                pageSize: 100,
+                                aggregate: [
+                                    { field: "TenCongTy", aggregate: "count" },
+                                    { field: "TongSoXe", aggregate: "sum" },
+                                    { field: "TongLuotXuatBen", aggregate: "sum" },
+                                    { field: "SoLuotKhach", aggregate: "sum" },
+                                    { field: "SoLuotKhongThucHien", aggregate: "sum" },
+                                ]
+                            });
+                            grid.setDataSource(dataGrid);
+                            grid.dataSource.read();
+                            grid.refresh();
+                            DataDefault = response.data.DataDefault;
+                            var cbbSo = $('#cbbSo_KhongThucHienTuyen').data("kendoComboBox");
+                            DataDefault.So = cbbSo.value();
+                            //SetDataTuyen(response.data.Tuyen);
+                        }
+                    }
+                };
+                $.ajax(options);
+            });
+
+        //Event Cbb
+        function setDefaultCbb(cbb, id, text) {
+            var obj = {};
+            obj[id] = -2;
+            obj[text] = "Không có";
+            var response = [obj];
+            dataCbb = new kendo.data.DataSource({
+                data: response,
+            });
+            cbb.setDataSource(dataCbb);
+            cbb.dataSource.read();
+            cbb.refresh();
+            console.log(response)
+            cbb.value(response[0][id]);
+        }
+
+        function setDropDownList( idDrop,name, id, value, dataSource) {
+            $('input[id*="chk_' + name + '"]').each(function () {
+                $(this).remove();
+            });
+
+            $("#" + idDrop).kendoDropDownList({
+                name: name,//"selectsDVVT",
+                dataTextField: value,//"TenCongTy",
+                dataValueField: id,//"CT_IdCongTyVT",
+                dataSource: dataSource,
+                filter: "contains",
+                suggest: true,
+                template:
+                "<input type='checkbox' id='chk_" + name + "_#=data['" + id + "'] #' onclick='UpdateIdinHF(this);' value='#=data['" + id + "'] #' name='" + name + "' />" +
+                "<label>" +
+                "${ data['" + value + "'] }" +
+                "</label>"
+            });
+        }
+
+
+        function getListBenXe() {
+            var cbbSo = $("#cbbSo_KhongThucHienTuyen").data("kendoComboBox");
+            var idSo = cbbSo.value();
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetListBenXe", "BaoCaoKhongThucHien"))),
+                data: {
+                    idSo
+                },
+                cache: false,
+                dataType: "json",
+                success: function(response) {
+                    var Ben = $("#cbbBen_KhongThucHienTuyen").data("kendoComboBox");
+                    var Tuyen = $("#cbbTuyen_KhongThucHienTuyen").data("kendoComboBox");
+
+                    if (response.status == true) {
+                        if (response.data.length > 0) {
+                            dataCbb = new kendo.data.DataSource({
+                                data: response.data,
+                                sort: { field: "BX_IdBenXe", dir: "asc" }
+                            });
+                            Ben.setDataSource(dataCbb);
+                            Ben.dataSource.read();
+                            Ben.refresh();
+                            Ben.value(response.data[0].BX_IdBenXe);
+
+                            getListTuyen();
+                        } else {
+                            setDefaultCbb(Ben, "BX_IdBenXe", "TenBenXe");
+                            setDefaultCbb(Tuyen, "LT_IdLuongTuyen", "TuyenDuong");
+                            setDropDownList("selectsDVVT", "selectsDVVT",
+                                "CT_IdCongTyVT", "TenCongTy",
+                                [{ CT_IdCongTyVT: "-1", TenCongTy: "Không có" }]);                        }
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+        function getListTuyen() {
+            var cbbBen = $("#cbbBen_KhongThucHienTuyen").data("kendoComboBox");
+            var idBenXe = cbbBen.value();
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetListTuyen", "BaoCaoKhongThucHien"))),
+                data: {
+                    idBenXe
+                },
+                cache: false,
+                dataType: "json",
+                success: function(response) {
+                    var cbb = $("#cbbTuyen_KhongThucHienTuyen").data("kendoComboBox");
+                    if (response.status == true) {
+                        dataCbb = new kendo.data.DataSource({
+                            data: response.data.Tuyen,
+                            sort: { field: "LT_IdLuongTuyen", dir: "asc" }
+                        });
+                        cbb.setDataSource(dataCbb);
+                        cbb.dataSource.read();
+                        cbb.refresh();
+                        cbb.value(response.data.Tuyen[0].LT_IdLuongTuyen);
+                        getListDonVi();
+                    } else {
+                        setDefaultCbb(cbb, "LT_IdLuongTuyen", "TuyenDuong");
+                        setDropDownList("selectsDVVT", "selectsDVVT",
+                            "CT_IdCongTyVT", "TenCongTy",
+                            [{ CT_IdCongTyVT: "-1", TenCongTy: "Không có" }]);
+                    }
+                }
+            };
+            $.ajax(options);
+
+        }
+
+        function getListDonVi() {
+            var cbbTuyen = $("#cbbTuyen_KhongThucHienTuyen").data("kendoComboBox");
+            var Tuyen = cbbTuyen.value();
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetListDonVi", "BaoCaoKhongThucHien"))),
+                data: {
+                    Tuyen
+                },
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        var data;
+                        if (response.data.length > 0) {
+                            data = response.data;
+                            data.splice(0, 0, { CT_IdCongTyVT: "-1", TenCongTy: "Tất cả" });
+                        } else {
+                            data = [{ CT_IdCongTyVT: "-2", TenCongTy: "Không có" }];
+                        }
+                        setDropDownList("selectsDVVT", "selectsDVVT", "CT_IdCongTyVT", "TenCongTy", data);
+                        //$("#selectsDVVT").kendoDropDownList({
+                        //    name: "selectsDVVT",
+                        //    dataTextField: "TenCongTy",
+                        //    dataValueField: "CT_IdCongTyVT",
+                        //    dataSource: response.data.Tuyen.length > 0 ? reponse.data.Tuyen : [{ CT_IdCongTyVT: "-1", TenCongTy: "Không có" }],
+                        //    filter: "contains",
+                        //    suggest: true,
+                        //    template:
+                        //        "<input type='checkbox' id='chk_selectsDVVT_#=data.CT_IdCongTyVT #' onclick='UpdateIdinHF(this);' value='#=data.CT_IdCongTyVT #' name='fabric' />" +
+                        //            "<label>" +
+                        //            "${ data.TenCongTy }" +
+                        //            "</label>",
+                        //    close: onClose,
+                        //});
+                        //$('input[id*="chk_"]').each(function () {
+                        //    $(this).prop("checked", true);
+                        //    UpdateIdInHiddenField($("#hf_fabric").get(0), $(this).val(), true);
+                        //});
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+        $('#cbbSo_KhongThucHienTuyen').change(function() {
+            getListBenXe();
+        });
+
+        $('#cbbBen_KhongThucHienTuyen').change(function() {
+            getListTuyen();
+        });
+
+        $('#cbbTuyen_KhongThucHienTuyen').change(function() {
+            getListDonVi();
+        });
+
+        function troBCKhongThucHienDN(e) {
+            window.open("@Url.Action("BaoCaoDoanhNghiep", "BaoCaoKhongThucHien")"
+                + "?So=" + DataDefault.So
+                + "&Ben=" + DataDefault.Ben
+                + "&DonVi=" + $(e).attr("data-IdCongTy")
+                + "&Tuyen=" + DataDefault.Tuyen
+                + "&TuNgay=" + DataDefault.TuNgay
+                + "&DenNgay=" + DataDefault.DenNgay);
+            return false;
+        }
+    </script>
+}

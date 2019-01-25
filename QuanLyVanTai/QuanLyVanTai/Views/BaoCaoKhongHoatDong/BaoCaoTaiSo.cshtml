@@ -1,0 +1,318 @@
+﻿
+@{
+    ViewBag.Title = "Báo cáo không hoạt động tại Sở";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*Báo cáo xe không hoạt động tại sở*@
+
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title" id="plTitle_So"></h3>
+    </div>
+    <div class="panel-body">
+        <div id="body_dau">
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <span class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding-left:0px; padding-right:5px; text-align:right;">SỞ:</span>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <!--List So-->
+                        <input id="cbbSo_BCSoKhongHoatDong" class="input-group" style="width:100%; max-width:100000px;" />
+                        @*<input id="fabric" placeholder="CHỌN SỞ..." style="width:100%; max-width:100000px;">
+                            <input id="hf_fabric" type="hidden">
+                            <input id="hf_fabricc" type="hidden">*@
+                    </div>
+                    <span class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding-left:0px; padding-right:5px; text-align:right;">TỪ:</span>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <input id="dtpTuNgay_DCSoKhongHoatDong" class="input-group" style="width:100%; ">
+                    </div>
+                    <span class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding-left:0px; padding-right:5px; text-align:right;">ĐẾN:</span>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <input id="dtpDenNgay_DCSoKhongHoatDong" class="input-group" style="width:100%; ">
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-xs-1" style="padding-left:0px;">
+                        <button class="btn btn-primary input-group" id="btnXem__BCSoKhongHoatDong" style="width:100%;">XEM</button>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="text-align: right;">
+                    <div class="col-lg-0 col-md-0 col-sm-1 col-xs-2"></div>
+                    <div class="col-lg-12 col-md-12 col-sm-11 col-xs-10">
+                        <input type="search" id="txtSearch_BCSoKhongHoatDong" class="k-textbox" style="width:100%;  max-width:100000px;" placeholder="Tìm Kiếm" />
+                    </div>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <span class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding-left:0px; padding-right:5px; text-align:right;">BẾN:</span>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <!--Chọn Bến-->
+                        <input id="cbbBen_BCSoKhongHoatDong" placeholder="CHỌN BẾN..." style="width:100%; max-width:100000px;">
+                        <input id="hf_cbbBen_BCSoKhongHoatDong" type="hidden">
+                    </div> 
+                </div>
+            </div>
+            <hr style="margin-bottom:10px;margin-top:10px;" />
+            <div class="row" style="padding-bottom:5px;">
+                @*<span> TÌM KIẾM THÔNG TIN CHO SỞ:</span>
+                    <strong> <span id="sp_So_Search"></span> </strong>*@
+                <span>ĐÃ CHỌN : </span>
+                <span id="spanfabric" style="font-weight:bold;">0</span><span> SỞ</span><span id="chitietchon" style="font-weight:bold;"></span>
+            </div>
+        </div>
+    </div>
+    <div id="grid_BaoCaoKhongHoatDongSo"></div>
+</div>
+
+@section scripts{
+
+    <script src="~/Scripts/BaoCao/KhongHoatDong/DungChung.js"></script>
+    <script>
+        $(window).resize(function () {
+            var gridElement = $("#grid_BaoCaoKhongHoatDongSo");
+            otherElementsHeightThongTinXe = $("#body_dau").height() + $(".navbar-fixed-top").height() + 200;
+            //gridElement.children(".k-grid-content").height($(window).height() - otherElementsHeightThongTinXe);
+        });
+
+        var dataDefault = @Html.Raw(Json.Encode(ViewBag.dataDefault));
+
+        $("#dtpTuNgay_DCSoKhongHoatDong").kendoDatePicker({
+            dateInput: true,
+            format: "dd/MM/yyyy",
+            culture: "vi-VN",
+            value: kendo.parseDate(new Date()),
+        });
+        var dtp_TuNgay = $("#dtpTuNgay_DCSoKhongHoatDong").data("kendoDatePicker");
+        dtp_TuNgay.value(dataDefault.dateBatDau);
+
+        $("#dtpDenNgay_DCSoKhongHoatDong").kendoDatePicker({
+            dateInput: true,
+            format: "dd/MM/yyyy",
+            culture: "vi-VN",
+            value: kendo.parseDate(new Date()),
+        });
+        var dtp_DenNgay = $("#dtpDenNgay_DCSoKhongHoatDong").data("kendoDatePicker");
+        dtp_DenNgay.value(dataDefault.dateKetThuc);
+
+        //combobox Sở
+
+        var so = @Html.Raw(Json.Encode(ViewBag.lstSo));
+        $("#cbbSo_BCSoKhongHoatDong").kendoComboBox({
+            dataTextField: "TS_TenTinh",
+            dataValueField: "TS_IdTinh_So",
+            dataSource: {
+                data: @Html.Raw(Json.Encode(ViewBag.lstSo)),
+                sort: { field: "TS_IdTinh_So", dir: "asc" }
+            },
+            filter: "contains",
+            suggest: true,
+            index: 0
+        });
+        var combobox = $("#cbbSo_BCSoKhongHoatDong").data("kendoComboBox");
+        combobox.value(dataDefault.Id_So);
+
+         // combobox chon nhiều bến    hf_cbbBen_BCSoKhongHoatDong
+        $("#cbbBen_BCSoKhongHoatDong").kendoDropDownList({
+            name: "cbbBen_BCSoKhongHoatDong",
+            dataTextField: "TenBenXe",
+            dataValueField: "BX_IdBenXe",
+        dataSource: @Html.Raw(Json.Encode(ViewBag.lstBen)),
+        filter: "contains",
+        suggest: true,
+        template:
+            "<input type='checkbox' id='chk_cbbBen_BCSoKhongHoatDong_#=data.BX_IdBenXe #' onclick='UpdateIdinHF(this);' value='#=data.BX_IdBenXe #' name='cbbBen_BCSoKhongHoatDong' />" +
+                "<label>" +
+                "${ data.TenBenXe }" +
+                "</label>",
+        close: onClose(this, "cbbBen_BCSoKhongHoatDong"),
+        change: onChange,
+        });
+
+
+            //Grid
+        var record = 0;
+        $(function () {
+           // debugger;
+            $("#grid_BaoCaoKhongHoatDongSo").kendoGrid({
+
+                sortable: true,
+                selectable: "row",
+                scrollable: true,
+                //height: 380,
+                dataSource: {
+                    data: @Html.Raw(Json.Encode(ViewBag.dataGrid)),
+                    pageSize: 100,
+                    aggregate: [
+                        { field: "TenBenXe", aggregate: "count" },
+                        { field: "SoLuotXuatBenQuyHoach", aggregate: "sum" },
+                        { field: "SoChuyenDangKy", aggregate: "sum" },
+                        { field: "SoChuyenKhongThucHien", aggregate: "sum" },
+                    ]
+                },
+                pageable: {
+                    pageSizes: [100, 150, 200, "all"],
+                    //input: true,
+                    numeric: true,
+                    info: false
+                },
+                dataBinding: function () {
+                    record = 0;
+                  //  $('.k-grid-content').height($(window).height() - otherElementsHeightThongTinXe);
+                },
+                columns: [
+                    {
+                        title: "STT",
+                        template: "#= ++record #",
+                        width: 45,
+                        headerAttributes: {
+                            "class": "table-header-cell",
+                            style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                        },
+                        footerTemplate: "<div style='text-align: right;'><strong>Tổng: </strong> </div>",
+                        attributes: { style: "text-align: center;" }
+                    },
+                    {
+                        field: "TenBenXe",
+                        title: "BẾN XE",
+                        width: 200,
+                        headerAttributes: {
+                            "class": "table-header-cell",
+                            style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                        },
+                        footerTemplate: "<div style='text-align: left;'><strong>#=kendo.toString(count,'n0')#</strong> bến</div>",
+                      //  template: '<a target="_blank" href="" onclick="troBaoCaoKhongHoatDongBen(this)" data-idBen="#=BX_IdBenXe#">#=TenBenXe#</a>',
+                        attributes: { style: "text-align: left;" }
+                    },
+                    {
+                        field: "SoLuotXuatBenQuyHoach",
+                        title: "LƯU LƯỢNG QUY HOẠCH",
+                        width: 100,
+                        headerAttributes: {
+                            "class": "table-header-cell",
+                            style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                        },
+                        footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                        format: "{0:n0}",
+                        attributes: { style: "text-align: right;" }
+                    },
+                    {
+                        field: "SoChuyenDangKy",
+                        title: "SỐ CHUYẾN ĐĂNG KÝ",
+                        width: 100,
+                        headerAttributes: {
+                            "class": "table-header-cell",
+                            style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                        },
+                        footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                        format: "{0:n0}",
+                        attributes: { style: "text-align: right;" }
+                    },
+                    {
+                        field: "SoChuyenKhongThucHien",
+                        title: "SỐ CHUYẾN KHÔNG THỰC HIỆN",
+                        width: 100,
+                        headerAttributes: {
+                            "class": "table-header-cell",
+                            style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                        },
+                        footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                        format: "{0:n0}",
+                        attributes: { style: "text-align: right;" }
+                    },
+                    {
+                        field: "TyLeKhongThucHien",
+                        title: "TỶ LỆ %",
+                        width: 50,
+                        headerAttributes: {
+                            "class": "table-header-cell",
+                            style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                        },
+                        format: "{0:n2}",
+                        attributes: { style: "text-align: right;" }
+                    }
+                ]
+            })
+        });
+
+
+        // trỏ đến báo cáo tại bến
+         function troBaoCaoHoatDongBen(e) {
+            @*var url = "@Url.Action("BaoCaoHoatDong_Ben", "BaoCaoHoatDong")" + "?name=" + dataBien.name
+                +"&Ben=" + $(e).attr("data-idBen") + "&dt1=" + dataBien.dateBatDau
+                + "&dt2=" + dataBien.dateKetThuc + "&So=" + dataBien.So;
+            window.open(url);*@
+            return false;
+        }
+
+
+        //tÌM KIẾM
+         $("#txtSearch_BCSoKhongHoatDong").keyup(function () {
+             var selecteditem = $('#txtSearch_BCSoKhongHoatDong').val();
+             var kgrid = $("#grid_BaoCaoKhongHoatDongSo").data("kendoGrid");
+             selecteditem = selecteditem.toUpperCase();
+             var selectedArray = selecteditem.split(" ");
+             if (selecteditem) {
+                 //kgrid.dataSource.filter({ field: "UserName", operator: "eq", value: selecteditem });
+                 var orfilter = { logic: "or", filters: [] };
+                 var andfilter = { logic: "and", filters: [] };
+                 $.each(selectedArray,
+                     function (i, v) {
+                         if (v.trim() == "") {
+                         } else {
+                             $.each(selectedArray,
+                                 function (i, v1) {
+                                     if (v1.trim() == "") {
+                                     } else {
+                                         orfilter.filters.push({ field: "TenBenXe", operator: "contains", value: v1 });
+                                         andfilter.filters.push(orfilter);
+                                         orfilter = { logic: "or", filters: [] };
+                                     }
+                                 });
+                         }
+                     });
+                 kgrid.dataSource.filter(andfilter);
+             } else {
+                 kgrid.dataSource.filter({});
+             }
+         });
+
+        // nút xem báo cáo
+         $("#btnXem__BCSoKhongHoatDong").click(function() {
+              var options = {
+                    type: "POST",
+                    url: @Html.Raw(Json.Encode(Url.Action("GetBaoCaoSo", "BaoCaoKhongHoatDong"))),
+                    data: {
+                        Id_So: $("#cbbSo_BCSoKhongHoatDong").data("kendoComboBox").value(),
+                        lstBen: $("#hf_cbbBen_BCSoKhongHoatDong").val(),
+                        dateBatDau: kendo.toString($("#dtpTuNgay_DCSoKhongHoatDong").data("kendoDatePicker").value(), "dd/MM/yyyy"),
+                        dateKetThuc: kendo.toString($("#dtpDenNgay_DCSoKhongHoatDong").data("kendoDatePicker").value(), "dd/MM/yyyy"),
+                    },     
+                    cache: false,
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status == true) {
+                            //console.log(response);
+//                            $("#sp_So_Search").html(response[0].TenTuyen);
+//                            $("#sp_So_Search").html(So.text());
+                            var grid = $("#grid_BaoCaoKhongHoatDongSo").data("kendoGrid");
+                            dataGrid = new kendo.data.DataSource({
+                                data: response.data,
+                                pageSize: 150,
+                                aggregate: [
+                                    { field: "TenBenXe", aggregate: "count" },
+                                    { field: "SoLuotXuatBenQuyHoach", aggregate: "sum" },
+                                    { field: "SoChuyenDangKy", aggregate: "sum" },
+                                    { field: "SoChuyenKhongThucHien", aggregate: "sum" },
+                                ]
+                            });
+                            grid.setDataSource(dataGrid);
+                            grid.dataSource.read();
+                            grid.refresh();
+
+                        }
+
+                    }
+                };
+                $.ajax(options);
+        });
+    </script>
+}

@@ -1,0 +1,485 @@
+﻿@{
+    ViewBag.Title = "Quản lý công ty vận tải";
+    Layout = "~/Views/Shared/_Layout_HeThong.cshtml";
+}
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-md-6 text-center" style="margin: 8px 0 8px 0">
+                <span class="h2">QUẢN LÝ CÔNG TY VẬN TẢI</span>
+            </div>
+            <div class="col-sm-3 col-md-3 pull-right">
+                <form class="navbar-form" onsubmit="return false;" role="search">
+                    <div class="input-group" style="width: 100%">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm" id="idTxtSearchCongTyVanTai">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        @*Bang du lieu*@
+        <div class="col-md-12">
+            <div id="gridTTCongTyVanTai"></div>
+        </div>
+
+        @*Begin Button*@
+        <div class="col-md-12" style="margin-top: 15px">
+            <div class="btn btn-group-justified row">
+                <div class="col-md-1">
+                    <button class="btn btn-primary btn-block" onclick="themTTCongTyVanTai()" id="idBtnThemCongTyVanTai">Thêm</button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-warning btn-block" onclick="suaTTCongTyVanTai()" id="idBtnSuaCongTyVanTai">Sửa</button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-danger btn-block" onclick="xoaCongTy()" id="idBtnXoaCongTyVanTai">Xóa</button>
+                </div>
+                @*<div class="col-md-1">
+                        <button class="btn btn-success btn-block" onclick="khoiPhucTTCongTyVanTai()" id="idBtnKhoiCongTyVanTai" disabled>Khôi phục</button>
+                    </div>*@
+            </div>
+        </div>
+        @*End Button*@
+    </div>
+</div>
+<!--Popup Them_Sua-->
+<div id="modalThemSuaCongTyVanTai" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">Thông tin công ty vận tải</h4>
+            </div>
+            <div class="modal-body row">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Mã công ty</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" value="0" min="0" id="idMaCongTyVanTai" placeholder="Mã công ty">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Tên công ty</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="idTenCongTyVanTai" placeholder="Tên công ty">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Địa chỉ</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="idDiaChiCongTyVanTai" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+                    <div class="form-group" id="idSoLuongXeCTVanTai">
+                        <label class="col-sm-3 text-left control-label">Số lượng xe</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" value="0" min="0" id="idSoLuongXeCongTyVanTai" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Tỉnh sở</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="idCbbTinhSoCongTyVanTai"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnThemCongTyVanTai">Thêm</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/QuanLyCongTyVanTai/ScriptQuanLyCongTyVanTai.js"></script>
+
+    <script>
+        //Script grid TT Tinh so
+        CreateGridTTCongTyVanTai();
+        // Removes default text near page size.
+        $('.k-pager-sizes')
+            .contents()
+            .filter(function() {
+
+                return this.nodeType === 3;
+            }).remove();
+        //
+        var dataGrid = @Html.Raw(ViewBag.dataGridCongTyVanTai);
+        var grid = $("#gridTTCongTyVanTai");
+        grid.data("kendoGrid").setDataSource(new kendo.data.DataSource({ data: dataGrid, sort: { field: "TenCongTy", dir: "asc" } }));
+
+        //Event button
+        function themTTCongTyVanTai() {
+            $("#modalThemSuaCongTyVanTai").modal();
+            $("#btnSuaCongTyVanTai").attr('id', 'btnThemCongTyVanTai');
+            $("#btnThemCongTyVanTai").html("Thêm");
+            $("#btnThemCongTyVanTai").removeClass("btn-warning");
+            $("#btnThemCongTyVanTai").addClass("btn-primary");
+            $("#idSoLuongXeCTVanTai").css("display","none");
+            //event Them TT tinh so
+            $("#btnThemCongTyVanTai").unbind("click");
+            $("#btnThemCongTyVanTai").click(themThongTinCongTyVanTai);
+
+            setModalThemCongTyVanTai();
+        }
+
+        function suaTTCongTyVanTai() {
+            if ($("#gridTTCongTyVanTai").data("kendoGrid").select().length === 1 || true) {
+                $("#modalThemSuaCongTyVanTai").modal();
+
+                $("#btnThemCongTyVanTai").attr('id', 'btnSuaCongTyVanTai');
+                $("#btnSuaCongTyVanTai").html("Sửa");
+                $("#btnSuaCongTyVanTai").removeClass("btn-primary");
+                $("#btnSuaCongTyVanTai").addClass("btn-warning");
+                $("#idSoLuongXeCTVanTai").css("display","block");
+
+                //event Sua TT tinh so
+                $("#btnSuaCongTyVanTai").unbind("click");
+                $("#btnSuaCongTyVanTai").click(suaThongTinCongTyVanTai);
+
+                setModalSuaCongTyVanTai();
+            }
+        }
+
+        function setModalThemCongTyVanTai(parameters) {
+            var grid = $("#gridTTCongTyVanTai").data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+
+            $("#idMaCongTyVanTai").val("");
+            $("#idTenCongTyVanTai").val("");
+            $("#idDiaChiCongTyVanTai").val("");
+            $("#idSoLuongXeCongTyVanTai").val("");
+            addOptionSelectTrangThaiTinhSo(1);
+        }
+
+        function setModalSuaCongTyVanTai(parameters) {
+            var grid = $("#gridTTCongTyVanTai").data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+
+            $("#idMaCongTyVanTai").val(selectedItem.MaCongTy);
+            $("#idTenCongTyVanTai").val(selectedItem.TenCongTy);
+            $("#idDiaChiCongTyVanTai").val(selectedItem.DiaChi);
+            $("#idSoLuongXeCongTyVanTai").val(selectedItem.SoLuongXe);
+            addOptionSelectTrangThaiTinhSo(selectedItem.TS_IdTinh_So);
+        }
+
+        function addOptionSelectTrangThaiTinhSo(idSelect) {
+            var newOptions = @Html.Raw(ViewBag.lstTinhSo);
+            var selectedOption = idSelect;
+
+            var select = $("#idCbbTinhSoCongTyVanTai");
+            if(select.prop) {
+                var options = select.prop('options');
+            }
+            else {
+                var options = select.attr('options');
+            }
+            $('option', select).remove();
+
+            $.each(newOptions, function(val, obj) {
+                options[options.length] = new Option(obj.TS_TenTinh, obj.TS_IdTinh_So);
+            });
+            select.val(selectedOption);
+        }
+
+        //Tim kiem trong grid
+        $("#idTxtSearchCongTyVanTai").keyup(function() {
+            var selecteditem = $('#idTxtSearchCongTyVanTai').val();
+            var kgrid = $("#gridTTCongTyVanTai").data("kendoGrid");
+            selecteditem = selecteditem.toUpperCase();
+            var selectedArray = selecteditem.split(" ");
+            if (selecteditem) {
+                //kgrid.dataSource.filter({ field: "UserName", operator: "eq", value: selecteditem });
+                var orfilter = { logic: "or", filters: [] };
+                var andfilter = { logic: "and", filters: [] };
+                $.each(selectedArray,
+                    function(i, v) {
+                        if (v.trim() === "") {
+                        } else {
+                            $.each(selectedArray,
+                                function(i, v1) {
+                                    //var lengthStr = selecteditem.length;
+                                    //var strBS = "";
+                                    //if(lengthStr > 3 && lengthStr < 10 && selecteditem[3] != '-'){
+                                    //    strBS = [selecteditem.slice(0, 3), "-", selecteditem.slice(3)].join('');
+                                    //} else {
+                                    //    strBS = v1;
+                                    //}
+
+                                    if (v1.trim() === "") {
+                                    } else {
+                                        orfilter.filters.push({ field: "MaCongTy", value: v1 },
+                                            { field: "TenCongTy", operator: "contains", value: v1 },
+                                            { field: "TenTinhSo", operator: "contains", value: v1 });
+                                        andfilter.filters.push(orfilter);
+                                        orfilter = { logic: "or", filters: [] };
+                                    }
+                                });
+                        }
+                    });
+                kgrid.dataSource.filter(andfilter);
+            } else {
+                kgrid.dataSource.filter({});
+            }
+        });
+
+        function setdataGridCongTyVanTai(idGrid) {
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetDSCongTyVanTai", "QuanLyCongTyVanTai"))),
+                data: {},
+                cache: false,
+                dataType: "json",
+                success: function(response) {
+                    if (response != null /*&& response.d != null*/) {
+                        if (response.status === true) {
+                            var grid = $('#' + idGrid).data('kendoGrid');
+                            grid.setDataSource(new kendo.data.DataSource({ data: response.data, sort: { field: "TenCongTy", dir: "asc" }  }));
+                            grid.dataSource.read();
+                            grid.refresh();
+                            $('#modalThemSuaCongTyVanTai').modal('hide');
+                        } else {
+                            swal(
+                                'Lỗi!',
+                                response.error,
+                                'error'
+                            );
+                        }
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+
+        //event button popup
+        function themThongTinCongTyVanTai() {
+            swal({
+                //html: true,
+                title: 'Thêm công ty vận tải',
+                html: 'Đang thêm công ty vận tải.<br>Vui lòng đợi trong giây lát...',
+                onOpen: function () {
+                    swal.showLoading()
+                }
+            })
+            ThemTTCongTyVanTai('gridTTCongTyVanTai');
+        };
+
+        function suaThongTinCongTyVanTai() {
+            swal({
+                //html: true,
+                title: 'Sửa công ty vận tải',
+                html: 'Đang sửa công ty vận tải.<br>Vui lòng đợi trong giây lát...',
+                onOpen: function() {
+                    swal.showLoading()
+                }
+            });
+            SuaTTCongTyVanTai('gridTTCongTyVanTai');
+        };
+
+
+        function ThemTTCongTyVanTai(idGrid) {
+            var str = {
+                MaCongTy: $('#idMaCongTyVanTai').val(),
+                TenCongTy: $('#idTenCongTyVanTai').val(),
+                DiaChi: $('#idDiaChiCongTyVanTai').val(),
+                TS_IdTinh_So: $('#idCbbTinhSoCongTyVanTai').val()
+            };
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("ThemTTCongTyVanTai", "QuanLyCongTyVanTai"))),
+                data: str,
+                cache: false,
+                dataType: "json",
+                success: function(response) {
+                    if (response != null /*&& response.d != null*/) {
+                        if (response.status === true) {
+                            swal(
+                                'Thêm!',
+                                'Bạn đã thêm công ty vận tải:' +
+                                '<br>Mã công ty: ' +
+                                $('#idMaCongTyVanTai').val() +
+                                '<br>Tên công ty: ' +
+                                $('#idTenCongTyVanTai').val(),
+                                'success'
+                            );
+
+                            setdataGridCongTyVanTai(idGrid);
+                        } else {
+                            swal(
+                                'Lỗi!',
+                                response.message,
+                                'error'
+                            );
+                        }
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+        function SuaTTCongTyVanTai(idGrid) {
+            //swal({
+            //    title: 'Sửa',
+            //    input: 'password',
+            //    text: "Xác nhận mật khẩu",
+            //    showCancelButton: true,
+            //    confirmButtonText: 'Đồng ý',
+            //    showLoaderOnConfirm: true,
+            //    preConfirm: function(password) {
+            //        return new Promise(function(resolve, reject) {
+            //            setTimeout(function() {
+            //                if (password === '') {
+            //                    reject('Bạn chưa nhập mật khẩu');
+            //                } else {
+            var grid = $('#' + idGrid).data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+
+            console.log(selectedItem);
+            console.log(selectedItem.CT_IdCongTyVT);
+            //request
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("SuaTTCongTyVanTai", "QuanLyCongTyVanTai"))),
+                data: {
+                    CT_IdCongTyVT: selectedItem.CT_IdCongTyVT,
+                    MaCongTy: $('#idMaCongTyVanTai').val(),
+                    TenCongTy: $('#idTenCongTyVanTai').val(),
+                    DiaChi: $('#idDiaChiCongTyVanTai').val(),
+                    TS_IdTinh_So: $('#idCbbTinhSoCongTyVanTai').val()
+                },
+                cache: false,
+                dataType: "json",
+                success: function(response) {
+                    if (response != null /*&& response.d != null*/) {
+                        //var grid = $("#gridBaoCaoHoatDong").data("kendoGrid");
+                        //var dataGrid = new kendo.data.DataSource({ data: response, group: groups, aggregate: agg, pageSize: 50 });
+                        //grid.setDataSource(dataGrid);
+                        //grid.dataSource.read();
+                        //grid.refresh();
+                        if (response.status === true) {
+                            swal(
+                                'Sửa!',
+                                response.message,
+                                'success'
+                            );
+                            setdataGridCongTyVanTai(idGrid);
+
+                            //resolve()
+                        } else {
+                            swal(
+                                'Lỗi!',
+                                response.message,
+                                'error'
+                            );
+                        }
+
+                    }
+                }
+            };
+            $.ajax(options);
+            //                }
+            //            },
+            //                0);
+            //        });
+            //    },
+            //    allowOutsideClick: false
+            //}).then(function(password) {
+            //    //swal({
+            //    //    type: 'success',
+            //    //    title: 'Ajax request finished!',
+            //    //    html: 'Submitted email: ' + email
+            //    //});
+            //});
+        }
+
+        //function editGrid(idGrid){
+        //    // Get a reference to the grid
+        //    var grid = $("#"+idGrid).data("kendoGrid");
+
+        //    // Access the row that is selected
+        //    var select = grid.select();
+        //    // and now the data
+        //    var data = grid.dataItem(select);
+        //    // update the column `symbol` and set its value to `HPQ`
+        //    data.set("maTinh", $('#idMaTinh').val());
+        //    data.set("tenTinh", $('#idTenTinh').val());
+        //    data.set("diaChi", $('#idDiaChi').val());
+        //    data.set("sdt", $('#idSoDienThoai').val());
+        //}
+        function xoaCongTy() {
+            if ($("#gridTTCongTyVanTai").data("kendoGrid").select().length == 1) {
+                var grid = $('#gridTTCongTyVanTai').data("kendoGrid");
+                var selectedItem = grid.dataItem(grid.select());
+                swal({
+                    title: 'Bạn muốn xóa',
+                    html: 'Công ty vận tải: ' +
+                        selectedItem.TenCongTy,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Đồng ý',
+                    cancelButtonText: "Hủy"
+                }).then(function() {
+                    swal({
+                        //html: true,
+                        title: 'Xóa',
+                        html: 'Đang xóa Tỉnh sở.<br>Vui lòng đợi trong giây lát...',
+                        onOpen: function() {
+                            swal.showLoading()
+                        }
+                    });
+                    xoaCongTyVanTai('gridTTCongTyVanTai');
+                });
+            }        
+        }
+
+        function xoaCongTyVanTai(idGrid) {
+            var grid = $('#'+idGrid).data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+
+            //ajax
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("XoaCongTyVanTai", "QuanLyCongTyVanTai"))),
+                data: {
+                    idCongTy: selectedItem.CT_IdCongTyVT
+                },
+                cache: false,
+                dataType: "json",
+                success: function(response) {
+                    if (response != null /*&& response.d != null*/) {
+                        if (response.status == true) {
+                            swal(
+                                'Xóa!',
+                                'Bạn đã xóa:' +
+                                '<br>Công ty vận tải: ' +
+                                selectedItem.MaCongTy,
+                                'success'
+                            );
+                            setdataGridCongTyVanTai(idGrid);
+                        } else {
+                            swal(
+                                'Xóa!',
+                                response.message,
+                                'error'
+                            );
+                        }
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+    </script>
+} 

@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyVanTai", "QuanLyVanTai\QuanLyVanTai.csproj", "{E0A78E58-0D0D-4E10-93C3-31C5B0D43889}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebQuanLyTaiKhoan", "WebQuanLyTaiKhoan\WebQuanLyTaiKhoan.csproj", "{8B9EBDD4-CFE9-4EC5-856C-03CD56D8819F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyTaiKhoan", "QuanLyTaiKhoan\QuanLyTaiKhoan.csproj", "{9B8B2182-1B28-4923-B1BC-40E9AB7F3029}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0A78E58-0D0D-4E10-93C3-31C5B0D43889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0A78E58-0D0D-4E10-93C3-31C5B0D43889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0A78E58-0D0D-4E10-93C3-31C5B0D43889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0A78E58-0D0D-4E10-93C3-31C5B0D43889}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B9EBDD4-CFE9-4EC5-856C-03CD56D8819F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B9EBDD4-CFE9-4EC5-856C-03CD56D8819F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B9EBDD4-CFE9-4EC5-856C-03CD56D8819F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B9EBDD4-CFE9-4EC5-856C-03CD56D8819F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B8B2182-1B28-4923-B1BC-40E9AB7F3029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B8B2182-1B28-4923-B1BC-40E9AB7F3029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B8B2182-1B28-4923-B1BC-40E9AB7F3029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B8B2182-1B28-4923-B1BC-40E9AB7F3029}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://quanlyvantai.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = QuanLyVanTai\\QuanLyVanTai.csproj
+		SccProjectName1 = QuanLyVanTai
+		SccLocalPath1 = QuanLyVanTai
+		SccProjectUniqueName2 = WebQuanLyTaiKhoan\\WebQuanLyTaiKhoan.csproj
+		SccProjectName2 = WebQuanLyTaiKhoan
+		SccLocalPath2 = WebQuanLyTaiKhoan
+		SccProjectUniqueName3 = QuanLyTaiKhoan\\QuanLyTaiKhoan.csproj
+		SccProjectName3 = QuanLyTaiKhoan
+		SccLocalPath3 = QuanLyTaiKhoan
+	EndGlobalSection
+EndGlobal

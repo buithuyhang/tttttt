@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="689f561f29c24a81b53ccba00110f16c" Name="Diagram1">
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.BC_CapDonViVanTai" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.BC_HoatDongCapSo" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.BC_HoatDongCapTuyen" Width="1.5" PointX="9.75" PointY="4.75" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.BC_TongHop_Ben" Width="1.5" PointX="9.75" PointY="8.75" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.HT_NhatKy" Width="1.5" PointX="5.25" PointY="3.5" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.HT_Quyen" Width="1.5" PointX="0.75" PointY="4.25" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.HT_TaiKhoan" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.HT_ThongTinTaiKhoan" Width="1.5" PointX="5.25" PointY="1.25" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.NhatTrinhXe" Width="1.5" PointX="5.25" PointY="31.5" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_CapTuyenChoTinh_So" Width="1.5" PointX="8.25" PointY="15.875" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_CongTyVanTai" Width="1.5" PointX="5.25" PointY="18.25" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_CongTyVanTai_TrangThai" Width="1.5" PointX="3" PointY="20" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_DanhSachCapTuyenChoDN" Width="1.5" PointX="7.5" PointY="18.875" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_LuongTuyen" Width="1.5" PointX="6" PointY="25.125" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_LuongTuyen_DiemDauCuoi" Width="1.5" PointX="3.75" PointY="28.125" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_LuongTuyen_DiemDauCuoi_TrangThai" Width="1.5" PointX="1.5" PointY="28.5" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_LuongTuyen_PhanLoai" Width="1.5" PointX="3.75" PointY="25.625" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_LuongTuyen_TrangThai" Width="1.5" PointX="3.75" PointY="23" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_ThongTinBenXe" Width="1.5" PointX="5.25" PointY="12.125" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_ThongTinTinh_So_Ben_TrangThai" Width="1.5" PointX="0.75" PointY="10.5" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_ThongTinTinh_SoGiaoThong" Width="1.5" PointX="3" PointY="15.25" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_ThongTinXe" Width="1.5" PointX="10.5" PointY="18.25" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_ThongTinXe_beta" Width="1.5" PointX="12.75" PointY="18.75" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_ThongTinXe_GSHT" Width="1.5" PointX="12.75" PointY="21.875" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_ThongTinXe_LichSuThayDoiHopDong" Width="1.5" PointX="12.75" PointY="15.625" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.QLVT_ThongTinXe_TrangThaiXe" Width="1.5" PointX="8.25" PointY="22" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.Transfer_NhatKyTruyenTaiDuLieu" Width="1.5" PointX="7.5" PointY="6.625" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.Transfer_UngDungTruyenTaiDuLieu" Width="1.5" PointX="5.25" PointY="6.625" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.view_LuongTuyen" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="QLVanTai_2017Container1.view_ThongTinXe" Width="1.5" PointX="11.75" PointY="5.75" />
+        <AssociationConnector Association="QLVanTai_2017Container1.fk_TaiKhoan_NhatKy" />
+        <AssociationConnector Association="QLVanTai_2017Container1.fk_TaiKhoan_ThongTinTaiKhoan" />
+        <AssociationConnector Association="QLVanTai_2017Container1.fk_TaiKhoan_UngDungTruyenTaiDuLieu" />
+        <AssociationConnector Association="QLVanTai_2017Container1.fk_NhatTrinhXe_NhatKyTruyenTaiDuLieu" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_CapTuyenChoTinh_So_QLVT_LuongTuyen" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_CapTuyenChoTinh_So_QLVT_ThongTinTinh_SoGiaoThong" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_CongTyVanTai_QLVT_CongTyVanTai_TrangThai" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_CongTyVanTai_QLVT_ThongTinTinh_SoGiaoThong" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_DanhSachCapTuyenChoDN_QLVT_CongTyVanTai" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_ThongTinXe_QLVT_CongTyVanTai" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_DanhSachCapTuyenChoDN_QLVT_LuongTuyen" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_LuongTuyen_QLVT_LuongTuyen_DiemDauCuoi" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_LuongTuyen_QLVT_LuongTuyen_PhanLoai" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_LuongTuyen_QLVT_TrangThaiLuongTuyen" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_LuongTuyen_DiemDauCuoi_QLVT_LuongTuyen_DiemDauCuoi_TrangThai" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_ThongTinBenXe_QLVT_ThongTinTinh_SoGiaoThong" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_ThongTinBenXe_QLVT_TinhSo_Ben_TrangThai" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_ThongTinTinh_SoGiaoThong_QLVT_TinhSo_Ben_TrangThai" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_ThongTinXe_beta_QLVT_ThongTinXe" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_ThongTinXe_GSHT_QLVT_ThongTinXe" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_ThongTinXe_LichSuChuyenNhuong_QLVT_ThongTinXe" />
+        <AssociationConnector Association="QLVanTai_2017Container1.FK_QLVT_ThongTinXe_QLVT_ThongTinXe_TrangThaiXe" />
+        <AssociationConnector Association="QLVanTai_2017Container1.fk_UngDungTruyenTaiDuLieu_NhatKyTruyenTaiDuLieu" />
+        <AssociationConnector Association="QLVanTai_2017Container1.HT_PhanQuyen" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

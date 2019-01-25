@@ -1,0 +1,52 @@
+﻿<!DOCTYPE xhtml>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="~/Content/Vendors/bootstrap-4.0.0-beta-dist/css/bootstrap.min.css" />
+
+        <title>@ViewBag.Title</title>
+
+    </head>
+    <body>
+        <script src="~/Content/Vendors/jquery-3.2.1.min.js"></script>
+        <script src="~/Content/Vendors/popper.min.js"></script>
+
+        <header>
+            <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+                <a class="navbar-brand" href="#">
+                    <img src="~/Content/Assets/logo-co-chu.png" height="50" class="d-inline-block align-top" alt="">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Quản lý tài khoản <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Báo cáo vận tải</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Trợ giúp</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+    	<main class="container-fluid">
+            @RenderBody()
+		</main>
+        <footer>
+
+		</footer>
+
+        <script src="~/Content/Vendors/bootstrap-4.0.0-beta-dist/js/bootstrap.min.js"></script>
+    </body>
+</html>

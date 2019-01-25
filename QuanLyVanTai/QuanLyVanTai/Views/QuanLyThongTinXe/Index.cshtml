@@ -1,0 +1,554 @@
+﻿@{
+    ViewBag.Title = "Quản lý thông tin xe";
+    Layout = "~/Views/Shared/_Layout_HeThong.cshtml";
+}
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-md-6 text-center" style="margin: 8px 0 8px 0">
+                <span class="h2">QUẢN LÝ THÔNG TIN XE</span>
+            </div>
+            <div class="col-sm-3 col-md-3 pull-right">
+                <form class="navbar-form" onsubmit="return false;" role="search">
+                    <div class="input-group" style="width: 100%">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm" id="idTxtSearchThongTinXe">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="body_dau">
+            @*Bang du lieu*@
+            <div class="col-md-12">
+                <div id="gridThongTinXe"></div>
+            </div>
+
+            @*Begin Button*@
+            <div class="col-md-12" style="margin-top: 15px">
+
+                @*<div class="btn btn-group-justified row">*@
+                <div class="col-md-1">
+                    <button class="btn btn-primary btn-block" onclick="themThongTinXe()" id="idBtnThemThongTinXe">Thêm</button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-warning btn-block" onclick="suaThongTinXe()" id="idBtnSuaThongTinXe">Sửa</button>
+                </div>
+                @*<div class="col-md-1">
+                        <button class="btn btn-danger btn-block" onclick="xoaThongTinXe()" id="idBtnXoaThongTinXe">Xóa</button>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-success btn-block" onclick="khoiPhucThongTinXe()" id="idBtnKhoiThongTinXe" disabled>Khôi phục</button>
+                    </div>*@
+                @*</div>*@
+            </div>
+            @*End Button*@
+        </div>
+    </div>
+</div>
+<!--Popup Them_Sua-->
+<div id="modalThemSuaThongTinXe" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">Thông tin xe</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left control-label">Mã số xe</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" value="0" min="0" id="idMaXeThongTinXe" placeholder="Mã số xe" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left control-label">Biển số xe</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="idBienSoXeThongTinXe" placeholder="Biển số xe" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left control-label">Loại xe</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="idCbbLoaiThongTinXe">
+                                <option value="1">Giường nằm</option>
+                                <option value="2">Ghế ngồi</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left control-label">Công ty vận tải</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="idCbbCongTyVanTaiThongTinXe" data-live-search="true"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left control-label">Số chỗ</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" value="0" min="0" id="idSoChoThongTinXe" placeholder="Số chỗ">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left control-label">Tổng số lượt vận chuyển</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="idTongLuotVanChuyenThongTinXe" placeholder="Tổng số lượt vận chuyển">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left control-label">Giờ xuất bến</label>
+                        <div class="col-sm-6">
+                            <input class="k-input" id="idGioXuatBenThongTinXe">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left control-label">Luồng tuyến</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="idCbbLuongTuyenThongTinXe" data-live-search="true"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left control-label">Trạng thái</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="idCbbTrangThaiThongTinXe" data-minimum-results-for-search="Infinity"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnThemThongTinXe">Thêm</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/QuanLyThongTinXe/ScriptThongTinXe.js"></script>
+
+    <script>
+        //Script grid TT Tinh so
+        CreateGridThongTinXe();
+        // Removes default text near page size.
+        $('.k-pager-sizes')
+            .contents()
+            .filter(function () {
+
+                return this.nodeType === 3;
+            }).remove();
+        //
+        var dataGrid = @Html.Raw(ViewBag.lstThongTinXe);
+        var grid = $("#gridThongTinXe");
+        grid.data("kendoGrid").setDataSource(new kendo.data.DataSource({ data: dataGrid }));
+
+        $("#idGioXuatBenThongTinXe").kendoDateInput({
+            format: "HH:mm",
+        });
+
+        //Event button
+        function themThongTinXe() {
+            $("#modalThemSuaThongTinXe").modal();
+            $("#btnSuaThongTinXe").attr('id', 'btnThemThongTinXe');
+            $("#btnThemThongTinXe").html("Thêm");
+            $("#btnThemThongTinXe").removeClass("btn-warning");
+            $("#btnThemThongTinXe").addClass("btn-primary");
+            //event Them TT tinh so
+            $("#btnThemThongTinXe").unbind("click");
+            $("#btnThemThongTinXe").click(themThongTinThongTinXe);
+            //Set gio xuat ben
+
+            $("#idGioXuatBenThongTinXe").removeClass('k-textbox','k-input', 'form-control').parent().removeClass("k-widget k-autocomplete k-header");
+            $("#idGioXuatBenThongTinXe").addClass('form-control');
+            $("span.k-dateinput.k-input.k-state-default").css('width', '100%');
+            setModalThemThongTinXe();
+        }
+
+        function suaThongTinXe() {
+            if ($("#gridThongTinXe").data("kendoGrid").select().length === 1) {
+                $("#modalThemSuaThongTinXe").modal();
+                var grid = $("#gridThongTinXe").data("kendoGrid");
+                var selectedItem = grid.dataItem(grid.select());
+
+                $("#btnThemThongTinXe").attr('id', 'btnSuaThongTinXe');
+                $("#btnSuaThongTinXe").html("Sửa");
+                $("#btnSuaThongTinXe").removeClass("btn-primary");
+                $("#btnSuaThongTinXe").addClass("btn-warning");
+                //event Sua TT tinh so
+                $("#btnSuaThongTinXe").unbind("click");
+                $("#btnSuaThongTinXe").click(suaThongTinThongTinXe);
+                //Set gio xuat ben
+
+                $("#idGioXuatBenThongTinXe").removeClass('k-textbox', 'k-input', 'form-control').parent().removeClass("k-widget k-autocomplete k-header");
+                $("#idGioXuatBenThongTinXe").addClass('form-control');
+                $("span.k-dateinput.k-input.k-state-default").css('width', '100%');
+                setModalSuaThongTinXe();
+            }
+        }
+
+        function setModalThemThongTinXe() {
+            $("#idMaXeThongTinXe").val("");
+            $("#idBienSoXeThongTinXe").val("");
+            $("#idTongLuotVanChuyenThongTinXe").val("");
+            $("#idGioXuatBenThongTinXe").data('kendoDateInput').value(kendo.toString("00:00", 'HH:mm'))
+            $("#idSoChoThongTinXe").val("");
+            //$("#idCbbLoaiThongTinXe").val("");
+            
+            var lstTrangThaiThongTinXe = @Html.Raw(ViewBag.lstTrangThaiThongTinXe);
+            setOptionSelect("idCbbTrangThaiThongTinXe", lstTrangThaiThongTinXe, -1,
+                "TX_TT_IdTrangThaiXe", "TX_TT_IdTenTrangThai")
+
+            var lstLuongTuyenThongTinXe = @Html.Raw(ViewBag.lstLuongTuyenThongTinXe);
+            setOptionSelect("idCbbLuongTuyenThongTinXe", lstLuongTuyenThongTinXe, -1,
+                "LT_IdLuongTuyen", "TenTuyen")
+
+            var lstCongTyVanTaiThongTinXe = @Html.Raw(ViewBag.lstCongTyVanTaiThongTinXe);
+            setOptionSelect("idCbbCongTyVanTaiThongTinXe", lstCongTyVanTaiThongTinXe, -1,
+                "CT_IdCongTyVT", "TenCongTy")
+        }
+
+        function setModalSuaThongTinXe() {
+            var grid = $('#gridThongTinXe').data('kendoGrid');
+            var selectedItem = grid.dataItem(grid.select());
+
+            $("#idMaXeThongTinXe").val(selectedItem.TX_MaSoXe);
+            $("#idBienSoXeThongTinXe").val(selectedItem.TX_BienSoXe);
+            $("#idTongLuotVanChuyenThongTinXe").val(selectedItem.TX_BX_TongLuotVanChuyen);
+            $("#idGioXuatBenThongTinXe").data('kendoDateInput').value(kendo.toString(selectedItem.TX_GioXuatBen, 'HH:mm'))
+
+            if (selectedItem.TX_BX_SoGiuong != 0) {
+                $("#idSoChoThongTinXe").val(selectedItem.TX_BX_SoGiuong);
+                $("#idCbbLoaiThongTinXe").val("1");
+            } else {
+                $("#idSoChoThongTinXe").val(selectedItem.TX_BX_SoGhe);
+                $("#idCbbLoaiThongTinXe").val("2");
+            }
+            //$("#idCbbLoaiThongTinXe").val("");
+            var lstTrangThaiThongTinXe = @Html.Raw(ViewBag.lstTrangThaiThongTinXe);
+            setOptionSelect("idCbbTrangThaiThongTinXe", lstTrangThaiThongTinXe, selectedItem.TX_TT_IdTrangThaiXe,
+                "TX_TT_IdTrangThaiXe", "TX_TT_IdTenTrangThai")
+
+            var lstLuongTuyenThongTinXe = @Html.Raw(ViewBag.lstLuongTuyenThongTinXe);
+            setOptionSelect("idCbbLuongTuyenThongTinXe", lstLuongTuyenThongTinXe, selectedItem.LT_IdLuongTuyen,
+                "LT_IdLuongTuyen", "TenTuyen")
+
+            var lstCongTyVanTaiThongTinXe = @Html.Raw(ViewBag.lstCongTyVanTaiThongTinXe);
+            setOptionSelect("idCbbCongTyVanTaiThongTinXe", lstCongTyVanTaiThongTinXe, selectedItem.CT_IdCongTyVT,
+                "CT_IdCongTyVT", "TenCongTy")
+        }
+
+        @*function addOptionSelectTrangThai(idSelect) {
+            var select = $("#idCbbTrangThaiThongTinXe");
+            var newOptions = @Html.Raw(ViewBag.lstTrangThaiThongTinXe);
+
+            if(select.prop) {
+                var options = select.prop('options');
+            }
+            else {
+                var options = select.attr('options');
+            }
+            $('option', select).remove();
+
+            $.each(newOptions, function(val, obj) {
+                options[options.length] = new Option(obj.TX_TT_IdTenTrangThai, obj.TX_TT_IdTrangThaiXe);
+            });
+            if (idSelect === -1) {
+                select.val(newOptions[0].TX_TT_IdTrangThaiXe);
+            }
+            else
+                select.val(idSelect);
+        }
+
+        function addOptionSelectLuongTuyen(idSelect) {
+            var select = $("#idCbbLuongTuyenThongTinXe");
+            var newOptions = @Html.Raw(ViewBag.lstLuongTuyenThongTinXe);
+            if(select.prop) {
+                var options = select.prop('options');
+            }
+            else {
+                var options = select.attr('options');
+            }
+            $('option', select).remove();
+
+            $.each(newOptions, function(val, obj) {
+                options[options.length] = new Option(obj.TenTuyen, obj.LT_IdLuongTuyen);
+            });
+
+            if (idSelect === -1)
+                select.val(newOptions[0].LT_IdLuongTuyen)
+            else
+                select.val(idSelect);
+        }
+
+        function addOptionSelectCongTyVanTai(idSelect) {
+            var select = $("#idCbbCongTyVanTaiThongTinXe");
+            var newOptions = @Html.Raw(ViewBag.lstCongTyVanTaiThongTinXe);
+            if (select.prop) {
+                var options = select.prop('options');
+            }
+            else {
+                var options = select.attr('options');
+            }
+            $('option', select).remove();
+
+            $.each(newOptions, function (val, obj) {
+                options[options.length] = new Option(obj.TenCongTy, obj.CT_IdCongTyVT);
+            });
+
+            if (idSelect === -1)
+                select.val(newOptions[0].CT_IdCongTyVT)
+            else
+                select.val(idSelect);
+        }*@
+
+        function setOptionSelect(id, data, select, idItem, txtItem, search) {
+            data = $.map(data, function (item) {
+                //console.log(item)
+                return { id: item[idItem], text: item[txtItem] }
+            });
+
+            $("#" + id).select2({
+                placeholder: "Chọn",
+                allowClear: true,
+                //formatSelection: format,
+                //formatResult: format,
+                language: 'vi',
+                data: data,
+                theme: 'bootstrap',
+                containerCssClass: ":all:",
+                width: "100%"
+            });
+            if (select === -1) {
+                $('#' + id).select2("val",$('#'+ id +' option:eq(0)').val());
+            }
+                //$('#'+ id).select2().select2('val', '0');
+            else
+                //$("#" + id).val(select);
+                $('#'+id).val(select).trigger('change');
+        }
+
+        //tim kiem
+        $("#idTxtSearchThongTinXe").keyup(function () {
+            var selecteditem = $('#idTxtSearchThongTinXe').val();
+            var kgrid = $("#gridThongTinXe").data("kendoGrid");
+            selecteditem = selecteditem.toUpperCase();
+            var selectedArray = selecteditem.split(" ");
+            if (selecteditem) {
+                //kgrid.dataSource.filter({ field: "UserName", operator: "eq", value: selecteditem });
+                var orfilter = { logic: "or", filters: [] };
+                var andfilter = { logic: "and", filters: [] };
+                $.each(selectedArray, function (i, v) {
+                    if (v.trim() == "") {
+                    }
+                    else {
+                        $.each(selectedArray, function (i, v1) {
+                            //var lengthStr = selecteditem.length;
+                            //var strBS = "";
+                            //if(lengthStr > 3 && lengthStr < 10 && selecteditem[3] != '-'){
+                            //    strBS = [selecteditem.slice(0, 3), "-", selecteditem.slice(3)].join('');
+                            //} else {
+                            //    strBS = v1;
+                            //}
+
+                            if (v1.trim() == "") {
+                            } else {
+                                orfilter.filters.push({ field: "TX_MaSoXe", value: v1 },
+                                    { field: "TX_BienSoXe", operator: "contains", value: v1 },
+                                    { field: "TenCongTy", operator: "contains", value: v1 },
+                                    { field: "TenTuyen", operator: "contains", value: v1 });
+                                andfilter.filters.push(orfilter);
+                                orfilter = { logic: "or", filters: [] };
+                            }
+                        });
+                    }
+                });
+                kgrid.dataSource.filter(andfilter);
+            }
+            else {
+                kgrid.dataSource.filter({});
+            }
+        });
+
+        function setdataGridThongTinXe(idGrid){
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetDSThongTinXe", "QuanLyThongTinXe"))),
+                data: {},
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response != null /*&& response.d != null*/) {
+                        if(response.status == true){
+                            var grid = $('#' + idGrid).data('kendoGrid');
+                            grid.setDataSource(new kendo.data.DataSource({ data: response.data}));
+                            grid.dataSource.read();
+                            grid.refresh();
+
+                            $('#modalThemSuaThongTinXe').modal('toggle');
+                        } else {
+                            swal(
+                                'Lỗi!',
+                                response.error,
+                                'error'
+                            );
+                        }
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+        //event button popup
+        function themThongTinThongTinXe() {
+            swal({
+                //html: true,
+                title: 'Thêm thông tin xe',
+                html: 'Đang thêm Tỉnh sở.<br>Vui lòng đợi trong giây lát...',
+                onOpen: function() {
+                    swal.showLoading()
+                }
+            });
+            ThemThongTinXe('gridThongTinXe');
+        };
+
+        function suaThongTinThongTinXe() {
+            swal({
+                //html: true,
+                title: 'Sửa thông tin xe',
+                html: 'Đang sửa thông tin xe.<br>Vui lòng đợi trong giây lát...',
+                onOpen: function() {
+                    swal.showLoading()
+                }
+            });
+            SuaThongTinXe('gridThongTinXe');
+        };
+
+
+        function ThemThongTinXe(idGrid) {
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("ThemThongTinXe", "QuanLyThongTinXe"))),
+                data: {
+                    TX_MaSoXe: $("#idMaXeThongTinXe").val(),
+                    TX_BienSoXe: $("#idBienSoXeThongTinXe").val(),
+                    TX_TT_IdTrangThaiXe: $("#idCbbTrangThaiThongTinXe").val(),
+                    LT_IdLuongTuyen: $("#idCbbLuongTuyenThongTinXe").val(),
+                    tongLuotVanChuyen: $("#idTongLuotVanChuyenThongTinXe").val(),
+                    CT_IdCongTyVT: $("#idCbbCongTyVanTaiThongTinXe").val(),
+                    gioXuatBen: $("#idGioXuatBenThongTinXe").val(),
+                    soGhe: $("#idCbbLoaiThongTinXe").val() == 1 ? $("#idSoChoThongTinXe").val() : 0,
+                    soGiuong: $("#idCbbLoaiThongTinXe").val() == 2 ? $("#idSoChoThongTinXe").val() : 0
+                },
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response != null /*&& response.d != null*/) {
+                        if(response.status === true){
+                            swal(
+                                'Thêm!',
+                                response.message,
+                                'success'
+                            );
+                            setdataGridThongTinXe(idGrid);
+                        } else {
+                            swal(
+                                'Lỗi!',
+                                response.error,
+                                'error'
+                            );
+                        }
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+        function SuaThongTinXe(idGrid) {
+            //swal({
+            //    title: 'Sửa',
+            //    input: 'password',
+            //    text: "Xác nhận mật khẩu",
+            //    showCancelButton: true,
+            //    confirmButtonText: 'Đồng ý',
+            //    showLoaderOnConfirm: true,
+            //    preConfirm: function (password) {
+            //        return new Promise(function (resolve, reject) {
+            //            setTimeout(function() {
+            //                if (password === '') {
+            //                    reject('Bạn chưa nhập mật khẩu')
+            //                } else {
+            var grid = $('#' + idGrid).data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+
+            //request
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("SuaThongTinXe", "QuanLyThongTinXe"))),
+                data: {
+                    idXe: selectedItem.TX_IdXe,
+                    TX_MaSoXe: $("#idMaXeThongTinXe").val(),
+                    TX_BienSoXe: $("#idBienSoXeThongTinXe").val(),
+                    TX_TT_IdTrangThaiXe: $("#idCbbTrangThaiThongTinXe").val(),
+                    LT_IdLuongTuyen: $("#idCbbLuongTuyenThongTinXe").val(),
+                    tongLuotVanChuyen: $("#idTongLuotVanChuyenThongTinXe").val(),
+                    CT_IdCongTyVT: $("#idCbbCongTyVanTaiThongTinXe").val(),
+                    gioXuatBen: $("#idGioXuatBenThongTinXe").val(),
+                    soGhe: $("#idCbbLoaiThongTinXe").val() == "1" ? $("#idSoChoThongTinXe").val() : 0,
+                    soGiuong: $("#idCbbLoaiThongTinXe").val() == "2" ? $("#idSoChoThongTinXe").val() : 0
+                },
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response != null /*&& response.d != null*/) {
+                        //var grid = $("#gridBaoCaoHoatDong").data("kendoGrid");
+                        //var dataGrid = new kendo.data.DataSource({ data: response, group: groups, aggregate: agg, pageSize: 50 });
+                        //grid.setDataSource(dataGrid);
+                        //grid.dataSource.read();
+                        //grid.refresh();
+                        if(response.status == true) {
+                            swal(
+                                'Sửa!',
+                                'Bạn đã sửa thành công.',
+                                'success'
+                            );
+                            //editGrid(idGrid)
+                            //resolve()
+                            setdataGridThongTinXe(idGrid);
+                        } else {
+                            swal(
+                                'Lỗi!',
+                                response.error,
+                                'error'
+                            );
+                        }
+
+                    }
+                }
+            };
+            $.ajax(options);
+            //                }
+            //            }, 0)
+            //        })
+            //    },
+            //    allowOutsideClick: false
+            //}).then(function (password) {
+            //    //swal({
+            //    //    type: 'success',
+            //    //    title: 'Ajax request finished!',
+            //    //    html: 'Submitted email: ' + email
+            //    //})
+            //})
+        }
+    </script>
+} 

@@ -1,0 +1,735 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QLVanTai_2017Container1StoreContainer" CdmEntityContainer="QLVanTai_2017">
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="QLVanTai_2017Container1.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_BaocaoTongHop_BenXe" FunctionName="QLVanTai_2017Container1.Store.sp_BaocaoTongHop_BenXe">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_BaocaoTongHop_BenXe_Result">
+          <ScalarProperty Name="IdBenDi" ColumnName="IdBenDi" />
+          <ScalarProperty Name="NgayXuatBenKeHoach" ColumnName="NgayXuatBenKeHoach" />
+          <ScalarProperty Name="SoChuyenKeHoach" ColumnName="SoChuyenKeHoach" />
+          <ScalarProperty Name="SoChuyenXuatBenNgay" ColumnName="SoChuyenXuatBenNgay" />
+          <ScalarProperty Name="ChenhLech" ColumnName="ChenhLech" />
+          <ScalarProperty Name="TyLeThucHien" ColumnName="TyLeThucHien" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_BaoCaoTongHop_So" FunctionName="QLVanTai_2017Container1.Store.sp_BaoCaoTongHop_So">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_BaoCaoTongHop_So_Result">
+          <ScalarProperty Name="BX_IdBenXe" ColumnName="BX_IdBenXe" />
+          <ScalarProperty Name="TenBenXe" ColumnName="TenBenXe" />
+          <ScalarProperty Name="NgayXuatBenKeHoach" ColumnName="NgayXuatBenKeHoach" />
+          <ScalarProperty Name="SoLuotXuatBenKeHoach" ColumnName="SoLuotXuatBenKeHoach" />
+          <ScalarProperty Name="SoChuyenXuatBenNgay" ColumnName="SoChuyenXuatBenNgay" />
+          <ScalarProperty Name="SoChuyenChenhLech" ColumnName="SoChuyenChenhLech" />
+          <ScalarProperty Name="TyLeXuatBen" ColumnName="TyLeXuatBen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="QLVanTai_2017Container1.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="QLVanTai_2017Container1.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoTongHop_DonViVanTai" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoTongHop_DonViVanTai">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoTongHop_DonViVanTai_Result">
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="TX_BienSoXe" ColumnName="TX_BienSoXe" />
+          <ScalarProperty Name="TaiTrong" ColumnName="TaiTrong" />
+          <ScalarProperty Name="TX_BX_TongLuotVanChuyen" ColumnName="TX_BX_TongLuotVanChuyen" />
+          <ScalarProperty Name="SoLuotXuatBen" ColumnName="SoLuotXuatBen" />
+          <ScalarProperty Name="SoLuotKhach" ColumnName="SoLuotKhach" />
+          <ScalarProperty Name="TyLeVanChuyen" ColumnName="TyLeVanChuyen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoTongHop_SoGiaoThong" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoTongHop_SoGiaoThong">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoTongHop_SoGiaoThong_Result">
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+          <ScalarProperty Name="TenTuyen" ColumnName="TenTuyen" />
+          <ScalarProperty Name="SoChuyenKeHoach" ColumnName="SoChuyenKeHoach" />
+          <ScalarProperty Name="SoChuyenThucHien" ColumnName="SoChuyenThucHien" />
+          <ScalarProperty Name="TyLeXuatBen" ColumnName="TyLeXuatBen" />
+          <ScalarProperty Name="SoLuotKhach" ColumnName="SoLuotKhach" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoTongHop_ToanQuoc" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoTongHop_ToanQuoc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoTongHop_ToanQuoc_Result">
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="TS_TenTinh" ColumnName="TS_TenTinh" />
+          <ScalarProperty Name="SoChuenDangKy" ColumnName="SoChuenDangKy" />
+          <ScalarProperty Name="SoLuotXuatBen" ColumnName="SoLuotXuatBen" />
+          <ScalarProperty Name="TyLeThucHien" ColumnName="TyLeThucHien" />
+          <ScalarProperty Name="SoLuotKhach" ColumnName="SoLuotKhach" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoTongHop_Tuyen" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoTongHop_Tuyen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoTongHop_Tuyen_Result">
+          <ScalarProperty Name="CT_IdCongTyVT" ColumnName="CT_IdCongTyVT" />
+          <ScalarProperty Name="TenCongTy" ColumnName="TenCongTy" />
+          <ScalarProperty Name="TongLuotXuatBen" ColumnName="TongLuotXuatBen" />
+          <ScalarProperty Name="SoLuotXuatBen" ColumnName="SoLuotXuatBen" />
+          <ScalarProperty Name="TyLeXuatBen" ColumnName="TyLeXuatBen" />
+          <ScalarProperty Name="SoLuotKhach" ColumnName="SoLuotKhach" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoTongHopTaiBen" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoTongHopTaiBen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoTongHopTaiBen_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="IdBenDi" ColumnName="IdBenDi" />
+          <ScalarProperty Name="TX_BienSoXe" ColumnName="TX_BienSoXe" />
+          <ScalarProperty Name="BienSoDi" ColumnName="BienSoDi" />
+          <ScalarProperty Name="GioXuatBenKeHoach" ColumnName="GioXuatBenKeHoach" />
+          <ScalarProperty Name="GioRaBen" ColumnName="GioRaBen" />
+          <ScalarProperty Name="SoKhach" ColumnName="SoKhach" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeChayNhoHon70_DonViVanTai" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeChayNhoHon70_DonViVanTai">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeChayNhoHon70_DonViVanTai_Result">
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="TX_BienSoXe" ColumnName="TX_BienSoXe" />
+          <ScalarProperty Name="TaiTrong" ColumnName="TaiTrong" />
+          <ScalarProperty Name="TX_BX_TongLuotVanChuyen" ColumnName="TX_BX_TongLuotVanChuyen" />
+          <ScalarProperty Name="SoLuotXuatBen" ColumnName="SoLuotXuatBen" />
+          <ScalarProperty Name="TongSoKhach" ColumnName="TongSoKhach" />
+          <ScalarProperty Name="TyLeVanChuyen" ColumnName="TyLeVanChuyen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeChayNhoHon70_SoGiaoThong" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeChayNhoHon70_SoGiaoThong">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeChayNhoHon70_SoGiaoThong_Result">
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+          <ScalarProperty Name="TenTuyen" ColumnName="TenTuyen" />
+          <ScalarProperty Name="SoChuyenKeHoach" ColumnName="SoChuyenKeHoach" />
+          <ScalarProperty Name="SoChuyenThucHien" ColumnName="SoChuyenThucHien" />
+          <ScalarProperty Name="TyLeXuatBen" ColumnName="TyLeXuatBen" />
+          <ScalarProperty Name="SoLuotKhach" ColumnName="SoLuotKhach" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeChayNhoHon70_ToanQuoc" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeChayNhoHon70_ToanQuoc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeChayNhoHon70_ToanQuoc_Result">
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="TS_TenTinh" ColumnName="TS_TenTinh" />
+          <ScalarProperty Name="SoChuenDangKy" ColumnName="SoChuenDangKy" />
+          <ScalarProperty Name="SoChuyenThucHien" ColumnName="SoChuyenThucHien" />
+          <ScalarProperty Name="TyLeThucHien" ColumnName="TyLeThucHien" />
+          <ScalarProperty Name="SoLuotKhach" ColumnName="SoLuotKhach" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeChayNhoHon70_Tuyen" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeChayNhoHon70_Tuyen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeChayNhoHon70_Tuyen_Result">
+          <ScalarProperty Name="CT_IdCongTyVT" ColumnName="CT_IdCongTyVT" />
+          <ScalarProperty Name="TenCongTy" ColumnName="TenCongTy" />
+          <ScalarProperty Name="SoLuotXuatBenKeHoach" ColumnName="SoLuotXuatBenKeHoach" />
+          <ScalarProperty Name="SoLuotXuatBen" ColumnName="SoLuotXuatBen" />
+          <ScalarProperty Name="TyLeXuatBen" ColumnName="TyLeXuatBen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeChaySaiGio_DonViVanTai" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeChaySaiGio_DonViVanTai">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeChaySaiGio_DonViVanTai_Result">
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="TX_BienSoXe" ColumnName="TX_BienSoXe" />
+          <ScalarProperty Name="TaiTrong" ColumnName="TaiTrong" />
+          <ScalarProperty Name="TX_BX_TongLuotVanChuyen" ColumnName="TX_BX_TongLuotVanChuyen" />
+          <ScalarProperty Name="SoLuotXuatBen" ColumnName="SoLuotXuatBen" />
+          <ScalarProperty Name="SoLuotKhach" ColumnName="SoLuotKhach" />
+          <ScalarProperty Name="TyLeVanChuyen" ColumnName="TyLeVanChuyen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeChaySaiGio_SoGiaoThong" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeChaySaiGio_SoGiaoThong">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeChaySaiGio_SoGiaoThong_Result">
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+          <ScalarProperty Name="TenTuyen" ColumnName="TenTuyen" />
+          <ScalarProperty Name="SoChuyenKeHoach" ColumnName="SoChuyenKeHoach" />
+          <ScalarProperty Name="SoChuyenThucHien" ColumnName="SoChuyenThucHien" />
+          <ScalarProperty Name="TyLeXuatBen" ColumnName="TyLeXuatBen" />
+          <ScalarProperty Name="SoLuotKhach" ColumnName="SoLuotKhach" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeChaySaiGio_ToanQuoc" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeChaySaiGio_ToanQuoc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeChaySaiGio_ToanQuoc_Result">
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="TS_TenTinh" ColumnName="TS_TenTinh" />
+          <ScalarProperty Name="SoChuenDangKy" ColumnName="SoChuenDangKy" />
+          <ScalarProperty Name="SoLuotXuatBen" ColumnName="SoLuotXuatBen" />
+          <ScalarProperty Name="TyLeThucHien" ColumnName="TyLeThucHien" />
+          <ScalarProperty Name="SoLuotKhach" ColumnName="SoLuotKhach" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeChaySaiGio_Tuyen" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeChaySaiGio_Tuyen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeChaySaiGio_Tuyen_Result">
+          <ScalarProperty Name="CT_IdCongTyVT" ColumnName="CT_IdCongTyVT" />
+          <ScalarProperty Name="TenCongTy" ColumnName="TenCongTy" />
+          <ScalarProperty Name="TongLuotXuatBen" ColumnName="TongLuotXuatBen" />
+          <ScalarProperty Name="SoLuotXuatBen" ColumnName="SoLuotXuatBen" />
+          <ScalarProperty Name="TyLeXuatBen" ColumnName="TyLeXuatBen" />
+          <ScalarProperty Name="SoLuotKhach" ColumnName="SoLuotKhach" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeChaySaiGioTaiBen" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeChaySaiGioTaiBen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeChaySaiGioTaiBen_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="IdBenDi" ColumnName="IdBenDi" />
+          <ScalarProperty Name="TX_BienSoXe" ColumnName="TX_BienSoXe" />
+          <ScalarProperty Name="BienSoDi" ColumnName="BienSoDi" />
+          <ScalarProperty Name="GioXuatBenKeHoach" ColumnName="GioXuatBenKeHoach" />
+          <ScalarProperty Name="GioRaBen" ColumnName="GioRaBen" />
+          <ScalarProperty Name="SoKhach" ColumnName="SoKhach" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeKhongHoatDong_DonViVanTai" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeKhongHoatDong_DonViVanTai">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeKhongHoatDong_DonViVanTai_Result">
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="TX_BienSoXe" ColumnName="TX_BienSoXe" />
+          <ScalarProperty Name="TaiTrong" ColumnName="TaiTrong" />
+          <ScalarProperty Name="TX_BX_TongLuotVanChuyen" ColumnName="TX_BX_TongLuotVanChuyen" />
+          <ScalarProperty Name="SoLuotKhongXuatBen" ColumnName="SoLuotKhongXuatBen" />
+          <ScalarProperty Name="TyLeVanChuyen" ColumnName="TyLeVanChuyen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeKhongHoatDong_SoGiaoThong" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeKhongHoatDong_SoGiaoThong">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeKhongHoatDong_SoGiaoThong_Result">
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+          <ScalarProperty Name="TenTuyen" ColumnName="TenTuyen" />
+          <ScalarProperty Name="SoChuyenKeHoach" ColumnName="SoChuyenKeHoach" />
+          <ScalarProperty Name="SoChuyenKhongThucHien" ColumnName="SoChuyenKhongThucHien" />
+          <ScalarProperty Name="TyLeKhongXuatBen" ColumnName="TyLeKhongXuatBen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeKhongHoatDong_ToanQuoc" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeKhongHoatDong_ToanQuoc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeKhongHoatDong_ToanQuoc_Result">
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="TS_TenTinh" ColumnName="TS_TenTinh" />
+          <ScalarProperty Name="SoChuenDangKy" ColumnName="SoChuenDangKy" />
+          <ScalarProperty Name="SoChuyenKhongThucHien" ColumnName="SoChuyenKhongThucHien" />
+          <ScalarProperty Name="TyLeKhongThucHien" ColumnName="TyLeKhongThucHien" />
+          <ScalarProperty Name="SoLuotKhach" ColumnName="SoLuotKhach" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeKhongHoatDong_Tuyen" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeKhongHoatDong_Tuyen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeKhongHoatDong_Tuyen_Result">
+          <ScalarProperty Name="CT_IdCongTyVT" ColumnName="CT_IdCongTyVT" />
+          <ScalarProperty Name="TenCongTy" ColumnName="TenCongTy" />
+          <ScalarProperty Name="SoLuotXuatBenKeHoach" ColumnName="SoLuotXuatBenKeHoach" />
+          <ScalarProperty Name="SoLuotKhongXuatBen" ColumnName="SoLuotKhongXuatBen" />
+          <ScalarProperty Name="TyLeKhongXuatBen" ColumnName="TyLeKhongXuatBen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HD_BaoCaoXeKhongHoatDongTaiBen" FunctionName="QLVanTai_2017Container1.Store.sp_HD_BaoCaoXeKhongHoatDongTaiBen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_HD_BaoCaoXeKhongHoatDongTaiBen_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="IdBenDi" ColumnName="IdBenDi" />
+          <ScalarProperty Name="TX_BienSoXe" ColumnName="TX_BienSoXe" />
+          <ScalarProperty Name="GioXuatBenKeHoach" ColumnName="GioXuatBenKeHoach" />
+          <ScalarProperty Name="GioRaBen" ColumnName="GioRaBen" />
+          <ScalarProperty Name="SoKhach" ColumnName="SoKhach" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="QLVanTai_2017Container1.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="QLVanTai_2017Container1.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="QLVanTai_2017Container1.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="QLVanTai_2017Container1.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="BC_CapDonViVanTai">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.BC_CapDonViVanTai">
+        <MappingFragment StoreEntitySet="BC_CapDonViVanTai">
+          <ScalarProperty Name="SoKhach" ColumnName="SoKhach" />
+          <ScalarProperty Name="PhanTramThucHien" ColumnName="PhanTramThucHien" />
+          <ScalarProperty Name="SoChuyenThucChay" ColumnName="SoChuyenThucChay" />
+          <ScalarProperty Name="SoChuyenKeHoach" ColumnName="SoChuyenKeHoach" />
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="Thang" ColumnName="Thang" />
+          <ScalarProperty Name="Nam" ColumnName="Nam" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BC_HoatDongCapSo">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.BC_HoatDongCapSo">
+        <MappingFragment StoreEntitySet="BC_HoatDongCapSo">
+          <ScalarProperty Name="SoKhach" ColumnName="SoKhach" />
+          <ScalarProperty Name="PhanTramThucHien" ColumnName="PhanTramThucHien" />
+          <ScalarProperty Name="SoChuyenThucChay" ColumnName="SoChuyenThucChay" />
+          <ScalarProperty Name="SoChuyenKeHoach" ColumnName="SoChuyenKeHoach" />
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="Thang" ColumnName="Thang" />
+          <ScalarProperty Name="Nam" ColumnName="Nam" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BC_HoatDongCapTuyen">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.BC_HoatDongCapTuyen">
+        <MappingFragment StoreEntitySet="BC_HoatDongCapTuyen">
+          <ScalarProperty Name="SoKhach" ColumnName="SoKhach" />
+          <ScalarProperty Name="PhanTramThucHien" ColumnName="PhanTramThucHien" />
+          <ScalarProperty Name="SoChuyenThucChay" ColumnName="SoChuyenThucChay" />
+          <ScalarProperty Name="SoChuyenKeHoach" ColumnName="SoChuyenKeHoach" />
+          <ScalarProperty Name="CT_IdCongTyVT" ColumnName="CT_IdCongTyVT" />
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="Thang" ColumnName="Thang" />
+          <ScalarProperty Name="Nam" ColumnName="Nam" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BC_TongHop_Ben">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.BC_TongHop_Ben">
+        <MappingFragment StoreEntitySet="BC_TongHop_Ben">
+          <ScalarProperty Name="TyLeThucHien" ColumnName="TyLeThucHien" />
+          <ScalarProperty Name="SoChuyenChenhLech" ColumnName="SoChuyenChenhLech" />
+          <ScalarProperty Name="SoChuyenThucChay" ColumnName="SoChuyenThucChay" />
+          <ScalarProperty Name="SoChuyenKeHoach" ColumnName="SoChuyenKeHoach" />
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="BX_IdBenXe" ColumnName="BX_IdBenXe" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HT_NhatKy">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.HT_NhatKy">
+        <MappingFragment StoreEntitySet="HT_NhatKy">
+          <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+          <ScalarProperty Name="ThoiGianTao" ColumnName="ThoiGianTao" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="LoaiNhatKy" ColumnName="LoaiNhatKy" />
+          <ScalarProperty Name="TenNhatKy" ColumnName="TenNhatKy" />
+          <ScalarProperty Name="IDNhatKy" ColumnName="IDNhatKy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HT_Quyen">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.HT_Quyen">
+        <MappingFragment StoreEntitySet="HT_Quyen">
+          <ScalarProperty Name="NhomQuyen" ColumnName="NhomQuyen" />
+          <ScalarProperty Name="TenQuyen" ColumnName="TenQuyen" />
+          <ScalarProperty Name="IDQuyen" ColumnName="IDQuyen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HT_TaiKhoan">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.HT_TaiKhoan">
+        <MappingFragment StoreEntitySet="HT_TaiKhoan">
+          <ScalarProperty Name="IDSo" ColumnName="IDSo" />
+          <ScalarProperty Name="IDDonViVanTai" ColumnName="IDDonViVanTai" />
+          <ScalarProperty Name="IDBen" ColumnName="IDBen" />
+          <ScalarProperty Name="ThoiGianTao" ColumnName="ThoiGianTao" />
+          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+          <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
+          <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HT_ThongTinTaiKhoan">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.HT_ThongTinTaiKhoan">
+        <MappingFragment StoreEntitySet="HT_ThongTinTaiKhoan">
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NhatTrinhXes">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.NhatTrinhXe">
+        <MappingFragment StoreEntitySet="NhatTrinhXe">
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="GioDenBen" ColumnName="GioDenBen" />
+          <ScalarProperty Name="IdBenDen" ColumnName="IdBenDen" />
+          <ScalarProperty Name="XeTangCuong" ColumnName="XeTangCuong" />
+          <ScalarProperty Name="XeVeDonVi" ColumnName="XeVeDonVi" />
+          <ScalarProperty Name="XeKhongDuDieuKien" ColumnName="XeKhongDuDieuKien" />
+          <ScalarProperty Name="XeXepKhach" ColumnName="XeXepKhach" />
+          <ScalarProperty Name="SoKhach" ColumnName="SoKhach" />
+          <ScalarProperty Name="GioRaBen" ColumnName="GioRaBen" />
+          <ScalarProperty Name="GioCapXuatBen" ColumnName="GioCapXuatBen" />
+          <ScalarProperty Name="GioXuatBenKeHoach" ColumnName="GioXuatBenKeHoach" />
+          <ScalarProperty Name="GioVaoBen" ColumnName="GioVaoBen" />
+          <ScalarProperty Name="BienSoDi" ColumnName="BienSoDi" />
+          <ScalarProperty Name="IdBenDi" ColumnName="IdBenDi" />
+          <ScalarProperty Name="CT_IdCongTyVT" ColumnName="CT_IdCongTyVT" />
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_CapTuyenChoTinh_So">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_CapTuyenChoTinh_So">
+        <MappingFragment StoreEntitySet="QLVT_CapTuyenChoTinh_So">
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+          <ScalarProperty Name="DS_IdCapTuyenTS" ColumnName="DS_IdCapTuyenTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_CongTyVanTai">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_CongTyVanTai">
+        <MappingFragment StoreEntitySet="QLVT_CongTyVanTai">
+          <ScalarProperty Name="CT_TT_IdTrangThai" ColumnName="CT_TT_IdTrangThai" />
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="SoLuongXe" ColumnName="SoLuongXe" />
+          <ScalarProperty Name="MaCongTy" ColumnName="MaCongTy" />
+          <ScalarProperty Name="TenCongTy" ColumnName="TenCongTy" />
+          <ScalarProperty Name="CT_IdCongTyVT" ColumnName="CT_IdCongTyVT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_CongTyVanTai_TrangThai">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_CongTyVanTai_TrangThai">
+        <MappingFragment StoreEntitySet="QLVT_CongTyVanTai_TrangThai">
+          <ScalarProperty Name="CT_TT_GhiChu" ColumnName="CT_TT_GhiChu" />
+          <ScalarProperty Name="CT_TT_TenTrangThai" ColumnName="CT_TT_TenTrangThai" />
+          <ScalarProperty Name="CT_TT_IdTrangThai" ColumnName="CT_TT_IdTrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_DanhSachCapTuyenChoDN">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_DanhSachCapTuyenChoDN">
+        <MappingFragment StoreEntitySet="QLVT_DanhSachCapTuyenChoDN">
+          <ScalarProperty Name="CT_IdCongTyVT" ColumnName="CT_IdCongTyVT" />
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+          <ScalarProperty Name="DS_IdCapTuyenDN" ColumnName="DS_IdCapTuyenDN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_LuongTuyen">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_LuongTuyen">
+        <MappingFragment StoreEntitySet="QLVT_LuongTuyen">
+          <ScalarProperty Name="LT_DC_IdLuongTuyen" ColumnName="LT_DC_IdLuongTuyen" />
+          <ScalarProperty Name="LT_PL_IdLuongTuyen" ColumnName="LT_PL_IdLuongTuyen" />
+          <ScalarProperty Name="TT_IdTrangThaiTuyen" ColumnName="TT_IdTrangThaiTuyen" />
+          <ScalarProperty Name="LT_LuuLuongQuyDinh" ColumnName="LT_LuuLuongQuyDinh" />
+          <ScalarProperty Name="LT_CuLy" ColumnName="LT_CuLy" />
+          <ScalarProperty Name="LT_HanhTrinhChay" ColumnName="LT_HanhTrinhChay" />
+          <ScalarProperty Name="LT_MaTuyen" ColumnName="LT_MaTuyen" />
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_LuongTuyen_DiemDauCuoi">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_LuongTuyen_DiemDauCuoi">
+        <MappingFragment StoreEntitySet="QLVT_LuongTuyen_DiemDauCuoi">
+          <ScalarProperty Name="LT_DC_TT_IdTrangThai" ColumnName="LT_DC_TT_IdTrangThai" />
+          <ScalarProperty Name="LT_DC_TenBen_02" ColumnName="LT_DC_TenBen_02" />
+          <ScalarProperty Name="LT_DC_TenBen_01" ColumnName="LT_DC_TenBen_01" />
+          <ScalarProperty Name="LT_DC_IdBen_02" ColumnName="LT_DC_IdBen_02" />
+          <ScalarProperty Name="LT_DC_IdBen_01" ColumnName="LT_DC_IdBen_01" />
+          <ScalarProperty Name="LT_DC_IdLuongTuyen" ColumnName="LT_DC_IdLuongTuyen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_LuongTuyen_DiemDauCuoi_TrangThai">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_LuongTuyen_DiemDauCuoi_TrangThai">
+        <MappingFragment StoreEntitySet="QLVT_LuongTuyen_DiemDauCuoi_TrangThai">
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="TenTrangThai" ColumnName="TenTrangThai" />
+          <ScalarProperty Name="LT_DC_TT_IdTrangThai" ColumnName="LT_DC_TT_IdTrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_LuongTuyen_PhanLoai">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_LuongTuyen_PhanLoai">
+        <MappingFragment StoreEntitySet="QLVT_LuongTuyen_PhanLoai">
+          <ScalarProperty Name="LT_PL_MaLoai" ColumnName="LT_PL_MaLoai" />
+          <ScalarProperty Name="LT_PL_TenLoai" ColumnName="LT_PL_TenLoai" />
+          <ScalarProperty Name="LT_PL_IdLuongTuyen" ColumnName="LT_PL_IdLuongTuyen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_LuongTuyen_TrangThai">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_LuongTuyen_TrangThai">
+        <MappingFragment StoreEntitySet="QLVT_LuongTuyen_TrangThai">
+          <ScalarProperty Name="TT_GhiChu" ColumnName="TT_GhiChu" />
+          <ScalarProperty Name="TT_TenTrangThai" ColumnName="TT_TenTrangThai" />
+          <ScalarProperty Name="TT_IdTrangThaiTuyen" ColumnName="TT_IdTrangThaiTuyen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_ThongTinBenXe">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_ThongTinBenXe">
+        <MappingFragment StoreEntitySet="QLVT_ThongTinBenXe">
+          <ScalarProperty Name="TS_TT_IdTrangThai" ColumnName="TS_TT_IdTrangThai" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="SoLuotXuatBenDangKy" ColumnName="SoLuotXuatBenDangKy" />
+          <ScalarProperty Name="SoLuotXuatBenQuyHoach" ColumnName="SoLuotXuatBenQuyHoach" />
+          <ScalarProperty Name="SoTuyenQuyHoach" ColumnName="SoTuyenQuyHoach" />
+          <ScalarProperty Name="LoaiBenXe" ColumnName="LoaiBenXe" />
+          <ScalarProperty Name="DienTich_NhaCho" ColumnName="DienTich_NhaCho" />
+          <ScalarProperty Name="DienTich_PhuongTienKhac" ColumnName="DienTich_PhuongTienKhac" />
+          <ScalarProperty Name="DienTich_XeKhach" ColumnName="DienTich_XeKhach" />
+          <ScalarProperty Name="TongDienTich" ColumnName="TongDienTich" />
+          <ScalarProperty Name="CoQuanQuanLy" ColumnName="CoQuanQuanLy" />
+          <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="MaBen" ColumnName="MaBen" />
+          <ScalarProperty Name="TenBenXe" ColumnName="TenBenXe" />
+          <ScalarProperty Name="BX_IdBenXe" ColumnName="BX_IdBenXe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_ThongTinTinh_So_Ben_TrangThai">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_ThongTinTinh_So_Ben_TrangThai">
+        <MappingFragment StoreEntitySet="QLVT_ThongTinTinh_So_Ben_TrangThai">
+          <ScalarProperty Name="TS_TT_GhiChu" ColumnName="TS_TT_GhiChu" />
+          <ScalarProperty Name="TS_TT_TenTrangThai" ColumnName="TS_TT_TenTrangThai" />
+          <ScalarProperty Name="TS_TT_IdTrangThai" ColumnName="TS_TT_IdTrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_ThongTinTinh_SoGiaoThong">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_ThongTinTinh_SoGiaoThong">
+        <MappingFragment StoreEntitySet="QLVT_ThongTinTinh_SoGiaoThong">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+          <ScalarProperty Name="GiamDocSo" ColumnName="GiamDocSo" />
+          <ScalarProperty Name="TS_TT_IdTrangThai" ColumnName="TS_TT_IdTrangThai" />
+          <ScalarProperty Name="TS_TenTinh" ColumnName="TS_TenTinh" />
+          <ScalarProperty Name="TS_IdMaTinh" ColumnName="TS_IdMaTinh" />
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_ThongTinXe">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_ThongTinXe">
+        <MappingFragment StoreEntitySet="QLVT_ThongTinXe">
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+          <ScalarProperty Name="TX_TT_IdTrangThaiXe" ColumnName="TX_TT_IdTrangThaiXe" />
+          <ScalarProperty Name="CT_IdCongTyVT" ColumnName="CT_IdCongTyVT" />
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="TX_MaSoXe" ColumnName="TX_MaSoXe" />
+          <ScalarProperty Name="TX_BienSoXe" ColumnName="TX_BienSoXe" />
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_ThongTinXe_beta">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_ThongTinXe_beta">
+        <MappingFragment StoreEntitySet="QLVT_ThongTinXe_beta">
+          <ScalarProperty Name="TX_GioXuatBen" ColumnName="TX_GioXuatBen" />
+          <ScalarProperty Name="TX_BX_TongLuotVanChuyen" ColumnName="TX_BX_TongLuotVanChuyen" />
+          <ScalarProperty Name="TX_BX_SoGhe" ColumnName="TX_BX_SoGhe" />
+          <ScalarProperty Name="TX_BX_SoGiuong" ColumnName="TX_BX_SoGiuong" />
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="TX_BX_IdXe" ColumnName="TX_BX_IdXe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_ThongTinXe_GSHT">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_ThongTinXe_GSHT">
+        <MappingFragment StoreEntitySet="QLVT_ThongTinXe_GSHT">
+          <ScalarProperty Name="TX_GSHT_Website" ColumnName="TX_GSHT_Website" />
+          <ScalarProperty Name="TX_GSHT_MatKhau" ColumnName="TX_GSHT_MatKhau" />
+          <ScalarProperty Name="TX_GSHT_TaiKhoan" ColumnName="TX_GSHT_TaiKhoan" />
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="TX_GSHT_Id" ColumnName="TX_GSHT_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_ThongTinXe_LichSuThayDoiHopDong">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_ThongTinXe_LichSuThayDoiHopDong">
+        <MappingFragment StoreEntitySet="QLVT_ThongTinXe_LichSuThayDoiHopDong">
+          <ScalarProperty Name="LSCN_LyDoChuyen" ColumnName="LSCN_LyDoChuyen" />
+          <ScalarProperty Name="LSCN_ThoiGianChuyen" ColumnName="LSCN_ThoiGianChuyen" />
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+          <ScalarProperty Name="CT_IdCongTyVT" ColumnName="CT_IdCongTyVT" />
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="LSCN_IdLS" ColumnName="LSCN_IdLS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLVT_ThongTinXe_TrangThaiXe">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.QLVT_ThongTinXe_TrangThaiXe">
+        <MappingFragment StoreEntitySet="QLVT_ThongTinXe_TrangThaiXe">
+          <ScalarProperty Name="TX_TT_GhiChu" ColumnName="TX_TT_GhiChu" />
+          <ScalarProperty Name="TX_TT_IdTenTrangThai" ColumnName="TX_TT_IdTenTrangThai" />
+          <ScalarProperty Name="TX_TT_IdTrangThaiXe" ColumnName="TX_TT_IdTrangThaiXe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transfer_NhatKyTruyenTaiDuLieu">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.Transfer_NhatKyTruyenTaiDuLieu">
+        <MappingFragment StoreEntitySet="Transfer_NhatKyTruyenTaiDuLieu">
+          <ScalarProperty Name="IDNhatTrinhXe" ColumnName="IDNhatTrinhXe" />
+          <ScalarProperty Name="ThongTinThem" ColumnName="ThongTinThem" />
+          <ScalarProperty Name="DuLieu" ColumnName="DuLieu" />
+          <ScalarProperty Name="IDUngDungTruyenTaiDuLieu" ColumnName="IDUngDungTruyenTaiDuLieu" />
+          <ScalarProperty Name="IDNhatKyTruyenTaiDuLieu" ColumnName="IDNhatKyTruyenTaiDuLieu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transfer_UngDungTruyenTaiDuLieu">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.Transfer_UngDungTruyenTaiDuLieu">
+        <MappingFragment StoreEntitySet="Transfer_UngDungTruyenTaiDuLieu">
+          <ScalarProperty Name="ThoiGianTao" ColumnName="ThoiGianTao" />
+          <ScalarProperty Name="MaBiMat" ColumnName="MaBiMat" />
+          <ScalarProperty Name="MaUngDung" ColumnName="MaUngDung" />
+          <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+          <ScalarProperty Name="IDUngDungTruyenTaiDuLieu" ColumnName="IDUngDungTruyenTaiDuLieu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_LuongTuyen">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.view_LuongTuyen">
+        <MappingFragment StoreEntitySet="view_LuongTuyen">
+          <ScalarProperty Name="LT_PL_TenLoai" ColumnName="LT_PL_TenLoai" />
+          <ScalarProperty Name="LT_PL_IdLuongTuyen" ColumnName="LT_PL_IdLuongTuyen" />
+          <ScalarProperty Name="TT_TenTrangThai" ColumnName="TT_TenTrangThai" />
+          <ScalarProperty Name="TT_IdTrangThaiTuyen" ColumnName="TT_IdTrangThaiTuyen" />
+          <ScalarProperty Name="LT_LuuLuongQuyDinh" ColumnName="LT_LuuLuongQuyDinh" />
+          <ScalarProperty Name="LT_CuLy" ColumnName="LT_CuLy" />
+          <ScalarProperty Name="LT_HanhTrinhChay" ColumnName="LT_HanhTrinhChay" />
+          <ScalarProperty Name="TenTuyen" ColumnName="TenTuyen" />
+          <ScalarProperty Name="LT_DC_IdBen_02" ColumnName="LT_DC_IdBen_02" />
+          <ScalarProperty Name="LT_DC_IdBen_01" ColumnName="LT_DC_IdBen_01" />
+          <ScalarProperty Name="LT_DC_IdLuongTuyen" ColumnName="LT_DC_IdLuongTuyen" />
+          <ScalarProperty Name="LT_MaTuyen" ColumnName="LT_MaTuyen" />
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_ThongTinXe">
+      <EntityTypeMapping TypeName="QLVanTai_2017Container1.view_ThongTinXe">
+        <MappingFragment StoreEntitySet="view_ThongTinXe">
+          <ScalarProperty Name="TX_TT_IdTenTrangThai" ColumnName="TX_TT_IdTenTrangThai" />
+          <ScalarProperty Name="LT_DC_IdBen_02" ColumnName="LT_DC_IdBen_02" />
+          <ScalarProperty Name="LT_DC_IdBen_01" ColumnName="LT_DC_IdBen_01" />
+          <ScalarProperty Name="TenTuyen" ColumnName="TenTuyen" />
+          <ScalarProperty Name="LT_MaTuyen" ColumnName="LT_MaTuyen" />
+          <ScalarProperty Name="LT_IdLuongTuyen" ColumnName="LT_IdLuongTuyen" />
+          <ScalarProperty Name="TX_TT_IdTrangThaiXe" ColumnName="TX_TT_IdTrangThaiXe" />
+          <ScalarProperty Name="TenCongTy" ColumnName="TenCongTy" />
+          <ScalarProperty Name="CT_IdCongTyVT" ColumnName="CT_IdCongTyVT" />
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="TX_GioXuatBen" ColumnName="TX_GioXuatBen" />
+          <ScalarProperty Name="TX_BX_TongLuotVanChuyen" ColumnName="TX_BX_TongLuotVanChuyen" />
+          <ScalarProperty Name="TX_BX_SoGiuong" ColumnName="TX_BX_SoGiuong" />
+          <ScalarProperty Name="TX_BX_SoGhe" ColumnName="TX_BX_SoGhe" />
+          <ScalarProperty Name="TX_MaSoXe" ColumnName="TX_MaSoXe" />
+          <ScalarProperty Name="TX_BienSoXe" ColumnName="TX_BienSoXe" />
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="HT_PhanQuyen" TypeName="QLVanTai_2017Container1.HT_PhanQuyen" StoreEntitySet="HT_PhanQuyen">
+      <EndProperty Name="HT_TaiKhoan">
+        <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+      </EndProperty>
+      <EndProperty Name="HT_Quyen">
+        <ScalarProperty Name="IDQuyen" ColumnName="IDQuyen" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_NhatTrinhTheoXe" FunctionName="QLVanTai_2017Container1.Store.sp_NhatTrinhTheoXe">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_NhatTrinhTheoXe_Result">
+          <ScalarProperty Name="TX_IdXe" ColumnName="TX_IdXe" />
+          <ScalarProperty Name="TX_BienSoXe" ColumnName="TX_BienSoXe" />
+          <ScalarProperty Name="BienSoDi" ColumnName="BienSoDi" />
+          <ScalarProperty Name="IdBenDi" ColumnName="IdBenDi" />
+          <ScalarProperty Name="BenDi" ColumnName="BenDi" />
+          <ScalarProperty Name="GioXuatBenKeHoach" ColumnName="GioXuatBenKeHoach" />
+          <ScalarProperty Name="GioCapXuatBen" ColumnName="GioCapXuatBen" />
+          <ScalarProperty Name="GioRaBen" ColumnName="GioRaBen" />
+          <ScalarProperty Name="SoKhach" ColumnName="SoKhach" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Tuyen_Duoi70" FunctionName="QLVanTai_2017Container1.Store.Tuyen_Duoi70">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.Tuyen_Duoi70_Result">
+          <ScalarProperty Name="CT_IdCongTyVT" ColumnName="CT_IdCongTyVT" />
+          <ScalarProperty Name="TenCongTy" ColumnName="TenCongTy" />
+          <ScalarProperty Name="SoLuongXe" ColumnName="SoLuongXe" />
+          <ScalarProperty Name="SoXeDuoi70" ColumnName="SoXeDuoi70" />
+          <ScalarProperty Name="TongLuotVanChuyen" ColumnName="TongLuotVanChuyen" />
+          <ScalarProperty Name="TongLuot" ColumnName="TongLuot" />
+          <ScalarProperty Name="TyLeThucHien" ColumnName="TyLeThucHien" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_BaoCaoTongHop_ToanQuoc" FunctionName="QLVanTai_2017Container1.Store.sp_BaoCaoTongHop_ToanQuoc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLVanTai_2017Container1.sp_BaoCaoTongHop_ToanQuoc_Result">
+          <ScalarProperty Name="TS_IdTinh_So" ColumnName="TS_IdTinh_So" />
+          <ScalarProperty Name="TS_TenTinh" ColumnName="TS_TenTinh" />
+          <ScalarProperty Name="NgayXuatBen" ColumnName="NgayXuatBen" />
+          <ScalarProperty Name="SoLuotXuatBenKeHoachNgay" ColumnName="SoLuotXuatBenKeHoachNgay" />
+          <ScalarProperty Name="SochuyenXuatBen" ColumnName="SochuyenXuatBen" />
+          <ScalarProperty Name="SoChuyenChenhLech" ColumnName="SoChuyenChenhLech" />
+          <ScalarProperty Name="TyLeXuatBen" ColumnName="TyLeXuatBen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

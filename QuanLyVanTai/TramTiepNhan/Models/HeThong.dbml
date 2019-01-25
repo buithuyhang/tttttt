@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLVanTai_2017" Class="HeThongDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=sonphat.kingdark.org\MSSQLSERVER2014;Initial Catalog=QLVanTai_2017;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="QLVanTai_2017ConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.HT_NhatKy" Member="HT_NhatKies">
+    <Type Name="HT_NhatKy">
+      <Column Name="IDNhatKy" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenNhatKy" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LoaiNhatKy" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MoTa" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ThoiGianTao" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IDTaiKhoan" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Association Name="HT_TaiKhoan_HT_NhatKy" Member="HT_TaiKhoan" ThisKey="IDTaiKhoan" OtherKey="IDTaiKhoan" Type="HT_TaiKhoan" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NhatTrinhXe" Member="NhatTrinhXes">
+    <Type Name="NhatTrinhXe">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TX_IdXe" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="LT_IdLuongTuyen" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CT_IdCongTyVT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdBenDi" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BienSoDi" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="GioVaoBen" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="GioXuatBenKeHoach" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="GioCapXuatBen" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="GioRaBen" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SoKhach" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="XeXepKhach" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="XeKhongDuDieuKien" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="XeVeDonVi" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="XeTangCuong" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdBenDen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GioDenBen" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="NhatTrinhXe_Transfer_NhatKyTruyenTaiDuLieu" Member="Transfer_NhatKyTruyenTaiDuLieus" ThisKey="Id" OtherKey="IDNhatTrinhXe" Type="Transfer_NhatKyTruyenTaiDuLieu" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HT_PhanQuyen" Member="HT_PhanQuyens">
+    <Type Name="HT_PhanQuyen">
+      <Column Name="IDTaiKhoan" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDQuyen" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="HT_Quyen_HT_PhanQuyen" Member="HT_Quyen" ThisKey="IDQuyen" OtherKey="IDQuyen" Type="HT_Quyen" IsForeignKey="true" />
+      <Association Name="HT_TaiKhoan_HT_PhanQuyen" Member="HT_TaiKhoan" ThisKey="IDTaiKhoan" OtherKey="IDTaiKhoan" Type="HT_TaiKhoan" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HT_Quyen" Member="HT_Quyens">
+    <Type Name="HT_Quyen">
+      <Column Name="IDQuyen" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenQuyen" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="NhomQuyen" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="HT_Quyen_HT_PhanQuyen" Member="HT_PhanQuyens" ThisKey="IDQuyen" OtherKey="IDQuyen" Type="HT_PhanQuyen" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HT_TaiKhoan" Member="HT_TaiKhoans">
+    <Type Name="HT_TaiKhoan">
+      <Column Name="IDTaiKhoan" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenTaiKhoan" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="MatKhau" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ThoiGianTao" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IDBen" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IDDonViVanTai" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IDSo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Association Name="HT_TaiKhoan_HT_NhatKy" Member="HT_NhatKies" ThisKey="IDTaiKhoan" OtherKey="IDTaiKhoan" Type="HT_NhatKy" />
+      <Association Name="HT_TaiKhoan_HT_PhanQuyen" Member="HT_PhanQuyens" ThisKey="IDTaiKhoan" OtherKey="IDTaiKhoan" Type="HT_PhanQuyen" />
+      <Association Name="HT_TaiKhoan_HT_ThongTinTaiKhoan" Member="HT_ThongTinTaiKhoan" ThisKey="IDTaiKhoan" OtherKey="IDTaiKhoan" Type="HT_ThongTinTaiKhoan" Cardinality="One" />
+      <Association Name="HT_TaiKhoan_Transfer_UngDungTruyenTaiDuLieu" Member="Transfer_UngDungTruyenTaiDuLieus" ThisKey="IDTaiKhoan" OtherKey="IDTaiKhoan" Type="Transfer_UngDungTruyenTaiDuLieu" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HT_ThongTinTaiKhoan" Member="HT_ThongTinTaiKhoans">
+    <Type Name="HT_ThongTinTaiKhoan">
+      <Column Name="IDTaiKhoan" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="HT_TaiKhoan_HT_ThongTinTaiKhoan" Member="HT_TaiKhoan" ThisKey="IDTaiKhoan" OtherKey="IDTaiKhoan" Type="HT_TaiKhoan" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Transfer_NhatKyTruyenTaiDuLieu" Member="Transfer_NhatKyTruyenTaiDuLieus">
+    <Type Name="Transfer_NhatKyTruyenTaiDuLieu">
+      <Column Name="IDNhatKyTruyenTaiDuLieu" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDUngDungTruyenTaiDuLieu" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="DuLieu" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ThongTinThem" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IDNhatTrinhXe" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Association Name="NhatTrinhXe_Transfer_NhatKyTruyenTaiDuLieu" Member="NhatTrinhXe" ThisKey="IDNhatTrinhXe" OtherKey="Id" Type="NhatTrinhXe" IsForeignKey="true" />
+      <Association Name="Transfer_UngDungTruyenTaiDuLieu_Transfer_NhatKyTruyenTaiDuLieu" Member="Transfer_UngDungTruyenTaiDuLieu" ThisKey="IDUngDungTruyenTaiDuLieu" OtherKey="IDUngDungTruyenTaiDuLieu" Type="Transfer_UngDungTruyenTaiDuLieu" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Transfer_UngDungTruyenTaiDuLieu" Member="Transfer_UngDungTruyenTaiDuLieus">
+    <Type Name="Transfer_UngDungTruyenTaiDuLieu">
+      <Column Name="IDUngDungTruyenTaiDuLieu" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDTaiKhoan" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="MaUngDung" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="MaBiMat" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ThoiGianTao" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Transfer_UngDungTruyenTaiDuLieu_Transfer_NhatKyTruyenTaiDuLieu" Member="Transfer_NhatKyTruyenTaiDuLieus" ThisKey="IDUngDungTruyenTaiDuLieu" OtherKey="IDUngDungTruyenTaiDuLieu" Type="Transfer_NhatKyTruyenTaiDuLieu" />
+      <Association Name="HT_TaiKhoan_Transfer_UngDungTruyenTaiDuLieu" Member="HT_TaiKhoan" ThisKey="IDTaiKhoan" OtherKey="IDTaiKhoan" Type="HT_TaiKhoan" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QLVT_ThongTinXe" Member="QLVT_ThongTinXes">
+    <Type Name="QLVT_ThongTinXe">
+      <Column Name="TX_IdXe" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TX_BienSoXe" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="TX_MaSoXe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TS_IdTinh_So" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CT_IdCongTyVT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TX_TT_IdTrangThaiXe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LT_IdLuongTuyen" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="QLVT_CongTyVanTai_QLVT_ThongTinXe" Member="QLVT_CongTyVanTai" ThisKey="CT_IdCongTyVT" OtherKey="CT_IdCongTyVT" Type="QLVT_CongTyVanTai" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QLVT_LuongTuyen" Member="QLVT_LuongTuyens">
+    <Type Name="QLVT_LuongTuyen">
+      <Column Name="LT_IdLuongTuyen" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LT_MaTuyen" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="LT_HanhTrinhChay" Type="System.String" DbType="NVarChar(512)" CanBeNull="true" />
+      <Column Name="LT_CuLy" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="LT_LuuLuongQuyDinh" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TT_IdTrangThaiTuyen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LT_PL_IdLuongTuyen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LT_DC_IdLuongTuyen" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QLVT_CongTyVanTai" Member="QLVT_CongTyVanTais">
+    <Type Name="QLVT_CongTyVanTai">
+      <Column Name="CT_IdCongTyVT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenCongTy" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="MaCongTy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SoLuongXe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="TS_IdTinh_So" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="QLVT_CongTyVanTai_QLVT_ThongTinXe" Member="QLVT_ThongTinXes" ThisKey="CT_IdCongTyVT" OtherKey="CT_IdCongTyVT" Type="QLVT_ThongTinXe" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QLVT_ThongTinBenXe" Member="QLVT_ThongTinBenXes">
+    <Type Name="QLVT_ThongTinBenXe">
+      <Column Name="BX_IdBenXe" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenBenXe" Type="System.String" DbType="NVarChar(512)" CanBeNull="true" />
+      <Column Name="MaBen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TS_IdTinh_So" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SDT" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="CoQuanQuanLy" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="TongDienTich" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DienTich_XeKhach" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DienTich_PhuongTienKhac" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DienTich_NhaCho" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="LoaiBenXe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SoTuyenQuyHoach" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SoLuotXuatBenQuyHoach" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SoLuotXuatBenDangKy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="TS_TT_IdTrangThai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

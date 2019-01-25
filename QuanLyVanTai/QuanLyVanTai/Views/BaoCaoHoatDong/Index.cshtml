@@ -1,0 +1,203 @@
+﻿@{
+    ViewBag.Title = "BÁO CÁO HOẠT ĐỘNG TOÀN QUỐC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title" id="plTitle_ToanQuoc"></h3>
+    </div>
+    <div class="panel-body">
+        <div id="body_dau">
+            <div class="row">
+
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <span class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="padding-left:0px; padding-right:5px; text-align:right;">SỞ:</span>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <!--List So-->
+                        @*<input id="cbbSo_BaoCaoHoatDongDonViVanTai" class="input-group" style="width:100%; max-width:100000px;" />*@
+                        <input id="fabric" placeholder="CHỌN SỞ..." style="width:100%; max-width:100000px;">
+                        <input id="hf_fabric" type="hidden">
+                        <input id="hf_fabricc" type="hidden">
+                    </div>
+                    <span class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding-left:0px; padding-right:5px; text-align:right;">TỪ:</span>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <input id="datepicker_BaoCaoHoatDongToanQuoc" class="input-group" style="width:100%; ">
+                    </div>
+                    <span class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding-left:0px; padding-right:5px; text-align:right;">ĐẾN:</span>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <input id="datepicker_BaoCaoHoatDongToanQuoc1" class="input-group" style="width:100%; ">
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-xs-1" style="padding-left:0px;">
+                        <button class="btn btn-primary input-group" id="btnXemBieuDoChayXe_ToanQuoc" style="width:100%;">XEM</button>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="text-align: right;">
+                    <div class="col-lg-0 col-md-0 col-sm-1 col-xs-2"></div>
+                    <div class="col-lg-12 col-md-12 col-sm-11 col-xs-10">
+                        <input type="search" id="txtSearch_BaoCaoHoatDong_TongHop_ToanQuoc" class="k-textbox" style="width:100%;  max-width:100000px;" placeholder="Tìm Kiếm" />
+                    </div>
+                </div>
+            </div>
+            <hr style="margin-bottom:10px;margin-top:10px;" />
+            <div class="row" style="padding-bottom:5px;">
+                @*<span> TÌM KIẾM THÔNG TIN CHO SỞ:</span>
+                    <strong> <span id="sp_So_Search"></span> </strong>*@
+                <span>ĐÃ CHỌN : </span>
+                <span id="spanfabric" style="font-weight:bold;">0</span><span> SỞ</span><span id="chitietchon" style="font-weight:bold;"></span>
+            </div>
+        </div>
+    </div>
+    <div id="grid_BaoCaoHoatDongToanQuoc"></div>
+</div>
+@section scripts{
+    <script src="~/Scripts/BaoCao/gridKendo.js"></script>
+    <script>
+        var dataBien1 = @Html.Raw(Json.Encode(ViewBag.BienToanQuoc));
+        var danhsach_So = @Html.Raw(Json.Encode(ViewBag.List_So));
+    </script>
+    <script>
+        $(window).resize(function () {
+            var gridElement = $("#grid_BaoCaoHoatDongToanQuoc");
+            otherElementsHeightThongTinXe = $("#body_dau").height() + $(".navbar-static-top").height();
+            gridElement.children(".k-grid-content").height($(window).height() - otherElementsHeightThongTinXe + 100);
+        });
+        $("#datepicker_BaoCaoHoatDongToanQuoc").kendoDatePicker({
+            dateInput: true,
+            format: "dd/MM/yyyy",
+            culture: "vi-VN",
+            value: kendo.parseDate(new Date()),
+        });
+        $("#datepicker_BaoCaoHoatDongToanQuoc1").kendoDatePicker({
+            dateInput: true,
+            format: "dd/MM/yyyy",
+            culture: "vi-VN",
+            value: kendo.parseDate(new Date()),
+        });
+
+        var today = kendo.parseDate(new Date(dataBien1.Nam, dataBien1.Thang - 1, dataBien1.Ngay), 'dd/MM/yyyy');
+        var today1 = kendo.parseDate(new Date(dataBien1.Nam1, dataBien1.Thang1 - 1, dataBien1.Ngay1), 'dd/MM/yyyy');
+        var datepicker_ThangNam = $("#datepicker_BaoCaoHoatDongToanQuoc").data('kendoDatePicker');
+        var datepicker_ThangNam1 = $("#datepicker_BaoCaoHoatDongToanQuoc1").data('kendoDatePicker');
+        datepicker_ThangNam.value(today); datepicker_ThangNam1.value(today1);
+
+        $("#fabric").kendoDropDownList({
+            name: "fabric",
+            dataTextField: "TS_TenTinh",
+            dataValueField: "TS_IdTinh_So",
+            dataSource: danhsach_So,
+            filter: "contains",
+            suggest: true,
+            template: "<input type='checkbox' id='chk_fabric_#=data.TS_IdTinh_So #' onclick='UpdateIdinHF(this);' value='#=data.TS_IdTinh_So #' name='fabric' />" + "<label>" + "${ data.TS_TenTinh }"+"</label>",
+            close: onClose,
+            change: onChange,
+        });
+
+        //var dropdown = $("#fabric").data("kendoComboBox");
+        //dropdown.value(dataBien.So);
+        //$( "#chk_fabric_-1").prop('checked', true);
+        //$("#spanfabric").html(dataBien.So - 1);
+        $("#spanfabric").html(dataBien1.SoSoGet);
+        $('input[id*="chk_"]').each(function () {
+            $(this).prop("checked", true); 
+            var hf = $("#hf_fabric").get(0);
+            UpdateIdInHiddenField(hf, $(this).val(), true);
+        });
+    </script>
+    <!--Loại Báo Cáo-->
+    <script>
+        Panel_Title("plTitle_ToanQuoc", "BÁO CÁO HOẠT ĐỘNG TOÀN QUỐC", "BÁO CÁO TỔNG HỢP");
+        var datatest = @Html.Raw(Json.Encode(ViewBag.BaoCaoTongHop_ToanQuoc));
+        console.log(datatest);
+        BaoCaoHoatDong_BaoCaoTongHop_BaoCaoToanQuoc("grid_BaoCaoHoatDongToanQuoc", datatest);
+        removeitemperpage();
+    </script>
+    <!--Search Event-->
+    <script>
+        $("#txtSearch_BaoCaoHoatDong_TongHop_ToanQuoc").keyup(function () {
+            var selecteditem = $('#txtSearch_BaoCaoHoatDong_TongHop_ToanQuoc').val();
+            var kgrid = $("#grid_BaoCaoHoatDongToanQuoc").data("kendoGrid");
+            selecteditem = selecteditem.toUpperCase();
+            var selectedArray = selecteditem.split(" ");
+            if (selecteditem) {
+                //kgrid.dataSource.filter({ field: "UserName", operator: "eq", value: selecteditem });
+                var orfilter = { logic: "or", filters: [] };
+                var andfilter = { logic: "and", filters: [] };
+                $.each(selectedArray, function (i, v) {
+                    if (v.trim() == "") {
+                    }
+                    else {
+                        $.each(selectedArray, function (i, v1) {
+                            if (v1.trim() == "") {
+                            } else {
+                                orfilter.filters.push({ field: "TS_TenTinh", operator: "contains", value: v1 });
+                                andfilter.filters.push(orfilter);
+                                orfilter = { logic: "or", filters: [] };
+                            }
+                        });
+                    }
+                });
+                kgrid.dataSource.filter(andfilter);
+            }
+            else {
+                kgrid.dataSource.filter({});
+            }
+        });
+    </script>
+    <!--Event Click-->
+    <script>
+        $('#btnXemBieuDoChayXe_ToanQuoc').on('click', function () {
+            var name = "a";
+            var nhieuso = $("#hf_fabric").val();
+            console.log(nhieuso);
+            var ngayBatDau = kendo.toString($("#datepicker_BaoCaoHoatDongToanQuoc").data('kendoDatePicker').value(), "dd");
+            var thangBatDau = kendo.toString($("#datepicker_BaoCaoHoatDongToanQuoc").data('kendoDatePicker').value(), "MM");
+            var namBatDau = kendo.toString($("#datepicker_BaoCaoHoatDongToanQuoc").data('kendoDatePicker').value(), "yyyy");
+
+            var ngayBatDau1 = kendo.toString($("#datepicker_BaoCaoHoatDongToanQuoc1").data('kendoDatePicker').value(), "dd");
+            var thangBatDau1 = kendo.toString($("#datepicker_BaoCaoHoatDongToanQuoc1").data('kendoDatePicker').value(), "MM");
+            var namBatDau1 = kendo.toString($("#datepicker_BaoCaoHoatDongToanQuoc1").data('kendoDatePicker').value(), "yyyy");
+            var dt1 = ngayBatDau + "/" + thangBatDau + "/" + namBatDau;
+            var dt2 = ngayBatDau1 + "/" + thangBatDau1 + "/" + namBatDau1;
+        var options = {
+            type: "POST",
+            url: @Html.Raw(Json.Encode(Url.Action("GetBaoCaoHoatDongToanQuoc_NhieuSo", "BaoCaoHoatDong"))),
+                data: {
+                    name : name,
+                    dt1:dt1,
+                    dt2:dt2,
+                    so: nhieuso
+                },
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response != null) {
+                        console.log(response);
+                        var grid = $("#grid_BaoCaoHoatDongToanQuoc").data("kendoGrid");
+                        dataGrid = new kendo.data.DataSource({
+                            data: response.ListTraVe,
+                            pageSize: 100,
+                            aggregate: [
+                                            { field: "TS_TenTinh", aggregate: "count" },
+                                            { field: "SoChuenDangKy", aggregate: "sum" },
+                                            { field: "SoLuotXuatBen", aggregate: "sum" },
+                                            { field: "SoLuotKhach", aggregate: "sum" },
+                                            { field: "TyLeThucHien", aggregate: "average" },
+                                       ]
+                        });
+                        grid.setDataSource(dataGrid);
+                        grid.dataSource.read();
+                        grid.dataSource.sort({field: "TS_IdTinh_So", dir: "asc"});
+                        grid.refresh();
+                        if(response.BienToanQuoc.SoSoGet == "Tất Cả"){
+                            $("#spanfabric").html("Tất Cả");
+                            $("#chitietchon").html();
+                        }else{
+                            $("#spanfabric").html(response.BienToanQuoc.SoSoGet);
+                        }
+                }
+            }
+        };
+        $.ajax(options);
+    });
+    </script>
+}

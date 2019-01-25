@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "TRANG ĐĂNG NHẬP";
+    Layout = "~/Views/Shared/_Layout_DangNhap.cshtml";
+}
+
+<style>
+    .navbar-inverse .navbar-nav > li > a{
+            color:blue;
+            font-weight:bold;
+        }
+        .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus{
+            color: black;
+            background-color: transparent;
+        }    
+    
+</style>
+<div id="phannoidung">
+    <div id="phanthan_noidung">
+        <div id="phanthan_de">
+
+        </div>
+        <div id="phanthan_than">
+
+        </div>  
+    </div> 
+</div>
+    
+@section scripts{
+    @*Vị Trí nội dung*@
+    <script src="~/Scripts/BaoCao/gridKendo.js"></script>
+    <script>
+        Chinh_Location("phanthan_noidung", "phanthan_de", "phanthan_than");
+        $(window).resize(function () {
+            Chinh_Location("phanthan_noidung", "phanthan_de", "phanthan_than");
+        });
+    </script>
+}
+
+

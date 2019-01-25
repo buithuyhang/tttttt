@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - ĐĂNG NHẬP</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            background-image: url('../../Content/imgs/bg1.png');
+            min-height: 100%;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-size:cover;
+            width: 100%;
+        }
+
+        @@media (min-width: 768px) {
+            .navbar-collapse.collapse {
+                display: none !important;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .navbar-header {
+                float: none;
+            }
+        }
+
+        @@media (min-width: 1200px) {
+            .navbar-collapse.collapse {
+                display: block !important;
+            }
+
+            .navbar-toggle {
+                display: none;
+            }
+
+            .navbar-header {
+                float: left;
+            }
+        }
+
+        body .navbar-inverse .navbar-nav > li > a {
+            color: blue;
+            font-weight: bold;
+        }
+
+            body .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+                color: black;
+                background-color: transparent;
+            }
+
+        #phanthan_noidung {
+            position: absolute;
+            margin: auto;
+            border:1px solid black;
+            opacity: 0.5;
+        }
+        #phanthan_de{
+            position:absolute;
+            margin: auto;           
+            background-color: #2d7ecc;
+        }
+        #phanthan_than{
+            position:absolute;
+            margin: auto;
+            background-color: #E0F0F7;
+        }
+        #phan_chu{
+            position:absolute;
+            margin: auto;
+        }
+        #phan_input{
+            position:absolute;
+            margin: auto;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:white;padding:5px;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <a href="#"><img src="~/Content/imgs/logo.png" alt="Logo" height="45" width="45" /></a>
+                <ul id="menu" class="nav navbar-nav navbar-left text-uppercase pull-right">
+                    <li>@Html.ActionLink("TRANG CHỦ", "Index", "TrangDangNhap", null, new { @class = "myclass;" })</li>
+                    <li>@Html.ActionLink("HỖ TRỢ", "", "")</li>
+                </ul>
+                @*@Html.Partial("_LoginPartial")*@
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid body-content full">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://rawgit.com/HubSpot/pace/v1.0.0/pace.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    @*<link href="~/style/bootstrap1.min.css" rel="stylesheet" />*@
+    <script src="~/Scripts/kendo/kendo.all.min.js"></script>
+    <script src="~/Scripts/kendo/cultures/kendo.culture.vi-VN.min.js"></script>
+    <script src="~/Scripts/kendo/jszip.min.js"></script>
+    <script src="~/Scripts/sweetalert2.all.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>*@

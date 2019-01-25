@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "NhatTrinhXe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title" id="plTitle_NhatTrinhXe"></h3>
+    </div>
+    <div class="panel-body">
+        <div id="body_dau">            
+            <div class="row" style="padding-bottom:5px;">
+                <div class="col-md-2">TÌM CHO BIỂN SỐ XE:</div>
+                <div class="col-md-3 pull-left" style="font-weight:bold;"><span id="sp_NTXBienSoXe_Search"></span></div>
+                <div class="col-md-2">THUỘC ĐƠN VỊ:</div>
+                <div class="col-md-2 pull-left" style="font-weight:bold;"><span id="sp_NTXDV_Search"><a></a></span></div>
+            </div>
+            <div class="row" style="padding-bottom:5px;">
+                <div class="col-md-2">CHẠY TUYẾN:</div>
+                <div class="col-md-3 pull-left" style="font-weight:bold;"><span id="sp_NTXTuyen_Search"></span></div>
+                <div class="col-md-2">TỪ NGÀY:</div>
+                <div class="col-md-2 pull-left" style="font-weight:bold;"><span id="sp_NTXTN_Search"><a></a></span></div>
+                <div class="col-md-1">ĐẾN NGÀY:</div>
+                <div class="col-md-1 pull-left" style="font-weight:bold;"><span id="sp_NTXDN_Search"><a></a></span></div>
+            </div>
+        </div>
+    </div>
+    <div id="grid_BaoCaoHoatDongNhatTrinhXe"></div>
+</div>
+@section scripts{
+<script src="~/Scripts/BaoCao/gridKendo.js"></script>
+    <script>
+    $(window).resize(function () {
+        var gridElement = $("#grid_BaoCaoHoatDongNhatTrinhXe");
+        otherElementsHeightThongTinXe = $("#body_dau").height() + $(".navbar-fixed-top").height() + 200;
+        gridElement.children(".k-grid-content").height($(window).height() - otherElementsHeightThongTinXe);
+    });
+    var dataBien = @Html.Raw(Json.Encode(ViewBag.BienCuaNTX_DVVT));
+    var dataBien1 = @Html.Raw(Json.Encode(ViewBag.BienCuaNTX_DVVT1));        
+        $("#sp_NTXBienSoXe_Search").html(dataBien.BienSo)
+        $("#sp_NTXDV_Search").html(dataBien1.TenCongTy);
+        $("#sp_NTXTuyen_Search").html(dataBien1.TenTuyen);
+        $("#sp_NTXTN_Search").html(dataBien.TuNgay)
+        $("#sp_NTXDN_Search").html(dataBien.DenNgay)
+    </script>
+    <script>
+        Panel_Title("plTitle_NhatTrinhXe", "BÁO CÁO HOẠT ĐỘNG XE", "NHẬT TRÌNH XE");
+        var datatest = @Html.Raw(Json.Encode(ViewBag.BaoCaoNhatTrinhXe_DVVT));
+        console.log(datatest);
+        BaoCao_NhatTrinhXe("grid_BaoCaoHoatDongNhatTrinhXe", datatest);
+    </script>
+}
+

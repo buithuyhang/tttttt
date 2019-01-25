@@ -1,0 +1,287 @@
+﻿@model List<string>
+<div class="content-wrapper">
+    <div class="container">
+        <section class="content-header">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="@Url.Action("Index", "BaoCaoHoatDong", new { name = "b", })">
+                        <div class="info-box bg-aqua">
+                            <span class="info-box-icon"><i class="fa fa-line-chart"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Báo cáo tổng hợp</span>
+                                <span id="nuBaoCaoHoatDong" class="info-box-number">0</span>
+                                <div class="progress">
+                                    <div id="BaoCaoHoatDong" class="progress-bar" style="width: 0%"></div>
+                                </div>
+                                <span id="txtBaoCaoHoatDong" class="progress-description">
+                                    Đã thực hiện...
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </a>
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="@Url.Action("Index", "BaoCaoHoatDongThuongXuyen")">
+                        <div class="info-box bg-green">
+                            <span class="info-box-icon"><i class="glyphicon glyphicon-signal"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Báo cáo trực tuyến</span>
+                                <span class="info-box-number">0</span>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-description">
+                                    Đang cập nhật...
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                    </a>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="@Url.Action("BaoCaoToanQuoc", "BaoCaoHoatDongNhoHon70")">
+                        <div class="info-box bg-yellow">
+                            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Báo cáo < 70%</span>
+                                <span class="info-box-number">0</span>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-description">
+                                    Tồn tại 70% xe / 30 ngày
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                    </a>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="@Url.Action("Index", "BaoCaoHoatDong", new { name = "b", })">
+                        <div class="info-box bg-red">
+                            <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Báo cáo không thực hiện</span>
+                                <span id="nuBaoCaoKhongThucHien" class="info-box-number">0</span>
+                                <div class="progress">
+                                    <div id="BaoCaoKhongThucHien" class="progress-bar" style="width: 0%"></div>
+                                </div>
+                                <span id="txtBaoCaoKhongThucHien" class="progress-description">
+                                    Không thực hiện...
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                    </a>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </section>
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- AREA CHART -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Biểu đồ thực tế / kế hoạch toàn quốc</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body chart-responsive">
+                            <div class="chart" id="line-chart" style="height: 300px;"></div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                    <!-- DONUT CHART -->
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Biểu đồ Tỷ lệ số chuyến thực hiện</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body chart-responsive" style="font-family: FontAwesome !important ">
+                            <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col (LEFT) -->
+                <div class="col-md-6">
+                    <!-- LINE CHART -->
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Biểu đồ tăng trưởng xe</h3>
+                            <div class="box-tools pull-right">
+                                <select id="TangTruong" class="btn btn-box-tool">
+                                    <option value="Thang">Theo tháng</option>
+                                    <option value="Nam" selected="selected">Theo năm</option>
+                                </select>
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body chart-responsive">
+                            <div class="chart" id="revenue-chart" style="height: 300px;"></div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                    <!-- BAR CHART -->
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Tần xuất xuất bến / giờ</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body chart-responsive">
+                            <div class="chart" id="bar-chart" style="height: 300px;"></div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col (RIGHT) -->
+            </div>
+        </section>
+        <!-- Main content -->
+        <!-- /.content -->
+    </div>
+    <!-- /.container -->
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            TongLuongVanChuyen();
+            TangTruongTheoNam();
+            TanXuatXuatBen();
+            KhongThucHien();
+           
+            $("#TangTruong").change(function () {
+                $("#revenue-chart").html("");
+                if ($(this).val() === 'Thang') {
+                    TangTruongTheoThang();
+                }
+                if ($(this).val() === 'Nam') {
+                    TangTruongTheoNam();
+                }
+            });
+            
+            function TongLuongVanChuyen() {
+                $.get('@Url.Action("GetDataTongLuotVanChuyen", "Home")', function (result) {
+                    var area = new Morris.Line({
+                        element: 'line-chart',
+                        resize: true,
+                        data: JSON.parse(JSON.stringify(result)),
+                        xkey: "label",
+                        ykeys: ['KeHoach', 'ThucTe'],
+                        xLabelAngle: 90,
+                        labels: ['Kế hoạch', 'Thực tế'],
+                        parseTime: false,
+                        lineColors: ['#3F6699', '#0D1B4C'],
+                        hideHover: 'auto'
+                    });
+                });
+            }
+
+            function TangTruongTheoNam() {
+                $.get('@Url.Action("GetDataTocDoTangTruongTheoNam", "Home")', function (result) {
+                    var area = new Morris.Area({
+                        element: 'revenue-chart',
+                        resize: true,
+                        data: JSON.parse(JSON.stringify(result)),
+                        xkey: "label",
+                        ykeys: ['TangTruong'],
+                        labels: ['Số lượng xe'],
+                        parseTime: false,
+                        lineColors: ['#3F6699'],
+                        hideHover: 'auto'
+                    });
+                });
+            }
+
+         
+
+            function TangTruongTheoThang() {
+                $.get('@Url.Action("GetDataTocDoTangTruongTheoThang", "Home")', function (result) {
+                    var area = new Morris.Area({
+                        element: 'revenue-chart',
+                        resize: true,
+                        data: JSON.parse(JSON.stringify(result)),
+                        xkey: "label",
+                        ykeys: ['TangTruong'],
+                        xLabelAngle: 90,
+                        labels: ['Số lượng xe'],
+                        parseTime: false,
+                        lineColors: ['#3F6699'],
+                        hideHover: 'auto'
+                    });
+                });
+            }
+
+            function KhongThucHien() {
+                $.get('@Url.Action("GetDataKhongThucHien", "Home")', function (result) {
+                    var tem = Math.ceil(result[0].value / (result[0].value + result[1].value) * 100);
+                    $("#BaoCaoHoatDong").width(tem + '%');
+                    $("#txtBaoCaoHoatDong").text("Đã thực hiện được " + tem + "% kế hoạch");
+                    $("#nuBaoCaoHoatDong").text("Đã thực hiện " + result[0].value + " chuyến");
+                    var temKhongTH = Math.ceil(result[1].value / (result[0].value + result[1].value) * 100);
+                    $("#BaoCaoKhongThucHien").width(tem + '%');
+                    $("#txtBaoCaoKhongThucHien").text("Không thực hiện trên " + temKhongTH + "% kế hoạch");
+                    $("#nuBaoCaoKhongThucHien").text("Không thực hiện " + result[1].value + " chuyến");
+                    var donut = new Morris.Donut({
+                        element: 'sales-chart',
+                        resize: true,
+                        colors: ["#3c8dbc", "#f56954"],
+                        data: JSON.parse(JSON.stringify(result)),
+                        hideHover: 'auto'
+                    });
+
+                    $('tspan').attr("font-family", "Verdana");
+                });
+            }
+            
+            function TanXuatXuatBen() {
+                $.get('@Url.Action("GetDataTanXuatXuatBenTrenGio", "Home")', function (result) {
+                    var bar = new Morris.Bar({
+                        element: 'bar-chart',
+                        resize: true,
+                        data: result,
+                        barColors: ['#00a65a'],
+                        xkey: 'label',
+                        ykeys: ['value'],
+                        labels: [' Chuyến'],
+                        hideHover: 'auto'
+                    });
+                });
+            }
+           
+        });
+    </script>
+    <style>
+        svg text, svg text tspan {
+            font-family: Verdana;
+        }
+    </style>
+}

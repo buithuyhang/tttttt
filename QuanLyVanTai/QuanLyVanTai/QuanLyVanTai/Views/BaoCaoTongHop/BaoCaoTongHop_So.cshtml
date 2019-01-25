@@ -1,0 +1,229 @@
+﻿
+@{
+    ViewBag.Title = "BaoCaoTongHop_So";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title" id="plTitle_TongHopSo"></h3>
+    </div>
+    <div class="panel-body">
+        <div id="body_dau">
+            <div class="row">               
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <span class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="padding-left:0px; padding-right:5px; text-align:right;">SỞ:</span>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <!--List So-->
+                        @*<input id="cbbSo_BaoCaoTongHopSo" class="input-group" style="width:100%; max-width:100000px;" />*@
+                        <input id="fabric" placeholder="CHỌN SỞ..." style="width:100%; max-width:100000px;">
+                        <input id="hf_fabric" type="hidden">
+                    </div>
+                    <span class="col-lg-1 col-md-1 col-sm-1 col-xs-2" style="padding-left:0px; padding-right:5px; text-align:right;">THÁNG:</span>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <input id="datepicker_BaoCaoTongHopSo" class="input-group" style="width:100%; ">
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-xs-2" style="padding-left:0px;">
+                        <button class="btn btn-primary input-group" id="btnXem_BaoCaoTongHopToanQuoc" style="width:100%;">XEM</button>
+                    </div>
+                </div>
+            </div>
+            <hr style="margin-bottom:10px;margin-top:10px;" />
+            <div class="row" style="padding-bottom:5px;">                
+                @*<span>THUỘC SỞ:</span>
+                <strong><span id="sp_SoTongHop_Search"></span></strong>*@
+                <span>ĐÃ CHỌN : </span>
+                <span id="spanfabric" style="font-weight:bold;">0</span><span> SỞ</span>                 
+            </div>
+        </div>
+    </div>
+    <div id="grid_BaoCaoTongHopSo"></div>
+</div>
+@section scripts{
+<script src="~/Scripts/BaoCao/gridKendo.js"></script>
+    <script>
+    var otherElementsHeightThongTinXe = $("#body_dau").height() + $(".navbar-fixed-top").height() + 200;
+    $(window).resize(function () {
+        var gridElement = $("#grid_BaoCaoTongHopSo");
+        otherElementsHeightThongTinXe = $("#body_dau").height() + $(".navbar-fixed-top").height() + 200;
+        gridElement.children(".k-grid-content").height($(window).height() - otherElementsHeightThongTinXe);
+    });
+    Panel_Title("plTitle_TongHopSo", "BÁO CÁO TỔNG HỢP", "BÁO CÁO SỞ");
+    </script>
+    <!--DataSource-->
+    <script>
+        var bien = @Html.Raw(Json.Encode(ViewBag.BienSo));
+        var danhsach_SoTongHop = @Html.Raw(Json.Encode(ViewBag.List_SoTongHop));
+        console.log(danhsach_SoTongHop);
+        var datatest = @Html.Raw(Json.Encode(ViewBag.BaoCaoTongHop_So));
+    </script>
+    <!--Object on View-->
+    <script>
+        //datetime
+        $("#datepicker_BaoCaoTongHopSo").kendoDatePicker({
+            dateInput: true,
+            start: "year",
+            depth: "year",
+            format: "MM/yyyy",
+            culture: "vi-VN",
+            value: kendo.parseDate(new Date()),
+        });
+        var today = kendo.parseDate(new Date(bien.Nam, bien.Thang - 1), 'MM/yyyy');
+        var datepicker_ThangNam = $("#datepicker_BaoCaoTongHopSo").data('kendoDatePicker');
+        datepicker_ThangNam.value(today);
+        //list so
+        //$("#cbbSo_BaoCaoTongHopSo").kendoComboBox({
+        //    dataTextField: "TS_TenTinh",
+        //    dataValueField: "TS_IdTinh_So",
+        //    dataSource: {
+        //        data: danhsach_SoTongHop,
+        //        sort: { field: "TS_IdTinh_So", dir: "asc" }
+        //    },
+        //    filter: "contains",
+        //    suggest: true,
+        //    index: 0,
+        //});
+        //var combobox = $("#cbbSo_BaoCaoTongHopSo").data("kendoComboBox");
+        //combobox.value(bien.Id_So);
+        //$("#sp_SoTongHop_Search").html(combobox.text());
+        $("#fabric").kendoDropDownList({
+            name: "fabric",
+            dataTextField: "TS_TenTinh",
+            dataValueField: "TS_IdTinh_So",
+            dataSource: danhsach_SoTongHop,
+            filter: "contains",
+            suggest: true,
+            template: "<input type='checkbox' id='chk_fabric_#=data.TS_IdTinh_So #' onclick='UpdateIdinHF(this);' value='#=data.TS_IdTinh_So #' name='fabric' />" + " " + "${ data.TS_TenTinh }",
+            close: onClose,
+            change: onChange
+        });
+    </script>
+    <!--Create Grid-->
+    <script>
+        //BaoCaoTongHop_BaoCaoTaiBen("grid_BaoCaoTongHopSo", datatest);
+        $("#grid_BaoCaoTongHopSo").kendoGrid({
+            resizeable: true,
+            sortable: true,
+            selectable: "row",
+            scrollable: true,
+            dataSource: {
+                data: datatest,
+                pageSize: 25,
+                //group: {
+                //    field: "BX_IdBenXe", aggregates: [{ field: "BX_IdBenXe", aggregate: "count" }]
+                //},
+                //aggregate: { field: "BX_IdBenXe", aggregate: "count" },
+            },
+            pageable: {
+                pageSizes: [25, 50, 100, 150, 200, "all"],
+                numeric: true,
+                info: false
+            },
+            dataBinding: function () {
+                record = 0;
+                $('.k-grid-content').height($(window).height() - otherElementsHeightThongTinXe);
+            },
+            columns: [{
+                title: "STT",
+                template: "#= ++record #",
+                width: 30,
+                headerAttributes: {
+                    "class": "table-header-cell",
+                    style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                },
+                //groupFooterTemplate: "TỔNG:",
+                //footerTemplate: "TỔNG:"
+            },{
+                field: "NgayXuatBenKeHoach",
+                title: "NGÀY XUẤT BẾN KẾ HOẠCH",
+                width: 100,
+                headerAttributes: {
+                    "class": "table-header-cell",
+                    style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+                },
+                //groupFooterTemplate: "#=count#",
+                //footerTemplate: "#=count#"
+            },
+        {
+            field: "TenBenXe",
+            title: "BẾN XE",
+            width: 100,
+            headerAttributes: {
+                "class": "table-header-cell",
+                style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+            },
+            template: '<a target="_blank" href="#=URL#">#=TenBenXe#</a>'
+        },
+        {
+            field: "SoLuotXuatBenKeHoach",
+            title: "SỐ LƯỢT XUẤT BẾN KẾ HOẠCH",
+            width: 100,
+            headerAttributes: {
+                "class": "table-header-cell",
+                style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+            }
+        },{
+            field: "SoChuyenXuatBenNgay",
+            title: "SỐ CHUYẾN XUẤT BẾN NGÀY",
+            width: 100,
+            headerAttributes: {
+                "class": "table-header-cell",
+                style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+            }
+        }
+        ,
+        {
+            field: "TyLeXuatBen",
+            title: "TỈ LỆ (%)",
+            width: 100,
+            headerAttributes: {
+                "class": "table-header-cell",
+                style: "text-align: center; font-size: 12px; font-weight: bold; white-space: normal; vertical-align: middle"
+            }
+        }
+            ]
+        });
+        removeitemperpage();
+    </script>
+    <!--Click Event-->
+    <script>
+        $('#btnXem_BaoCaoTongHopToanQuoc').on('click', function () {
+            var thangBatDau = kendo.toString($("#datepicker_BaoCaoTongHopSo").data('kendoDatePicker').value(), "MM");
+            var namBatDau = kendo.toString($("#datepicker_BaoCaoTongHopSo").data('kendoDatePicker').value(), "yyyy");
+            //var So = $("#cbbSo_BaoCaoTongHopSo").data("kendoComboBox");
+            //var IdSo = So.value();
+            var IdSo;
+            var tt = $("#hf_fabric").val();       
+            IdSo = tt;
+
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("LayBaoCaoTongHopChoNhieuSo", "BaoCaoTongHop"))),
+                data: '{nam:"' + namBatDau + '", thang:"' + thangBatDau + '", so:"'+ IdSo +'"}',
+                cache: false,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    if (response != null) {
+                        var grid = $("#grid_BaoCaoTongHopSo").data("kendoGrid");
+                        dataGrid = new kendo.data.DataSource({
+                            data: response,
+                            pageSize: 25
+                            //group: {
+                            //    field: "Ten_So", aggregates: [{ field: "NgayXuatBenKeHoach", aggregate: "count" }]
+                            //},
+                            //aggregate: { field: "ngay", aggregate: "count" },
+                        });
+                        grid.setDataSource(dataGrid);
+                        grid.dataSource.read();
+                        grid.refresh();
+                        //$("#sp_SoTongHop_Search").html(So.text());
+                    }
+                }
+            };
+            
+            $.ajax(options);
+        });
+    </script>
+}
+

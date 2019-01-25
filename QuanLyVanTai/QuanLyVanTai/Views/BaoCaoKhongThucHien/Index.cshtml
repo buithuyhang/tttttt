@@ -1,0 +1,328 @@
+﻿@{
+    ViewBag.Title = "BÁO CÁO KHÔNG THỰC HIÊN TOÀN QUỐC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-info"  style="height: 100%;">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title" id="plTitle_ToanQuoc"></h3>
+    </div>
+    <div class="panel-body">
+        <div id="body_dau">
+            <div class="row">
+
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <span class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="padding-left:0px; padding-right:5px; text-align:right;">SỞ:</span>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <!--List So-->
+                        <input id="selectsSoKhongThucHien" placeholder="CHỌN SỞ..." style="width:100%; max-width:100000px;">
+                        <input id="hf_selectsSoKhongThucHien" type="hidden">
+                    </div>
+                    <span class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding-left:0px; padding-right:5px; text-align:right;">TỪ:</span>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <input id="dateBauDauKhongThucHienTQ" class="input-group" style="width:100%; ">
+                    </div>
+                    <span class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding-left:0px; padding-right:5px; text-align:right;">ĐẾN:</span>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <input id="dateKetThucKhongThucHienTQ" class="input-group" style="width:100%; ">
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-xs-1" style="padding-left:0px;">
+                        <button class="btn btn-primary input-group" id="btnXemBCKhongThucHienTQ" style="width:100%;">XEM</button>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="text-align: right;">
+                    <div class="col-lg-0 col-md-0 col-sm-1 col-xs-2"></div>
+                    <div class="col-lg-12 col-md-12 col-sm-11 col-xs-10">
+                        <input type="search" id="txtSearchBCKhongThucHienTQ" class="k-textbox" style="width:100%;  max-width:100000px;" placeholder="Tìm Kiếm" />
+                    </div>
+                </div>
+            </div>
+            <hr style="margin-bottom:10px;margin-top:10px;" />
+            <div class="row" style="padding-bottom:5px;">
+                <span>ĐÃ CHỌN : </span>
+                <span id="spanfabric" style="font-weight:bold;">0</span><span> SỞ</span><span id="chitietchon" style="font-weight:bold;"></span>
+            </div>
+        </div>
+    </div>
+    <div id="splitter" style="height: 100%;">
+        <div id="gridBCKhongThucHienTQ" style="height: 100%;"></div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/BaoCao/KhongHoatDong/DungChung.js"></script>
+    <script>
+        var otherElementsHeightThongTinXe = 0;
+        //$(window).resize(function () {
+        //    var gridElement = $("#gridBCKhongThucHienTQ");
+        //    otherElementsHeightThongTinXe = $(".panel.panel-info .panel-heading.text-center").height() + $(".panel.panel-info .panel-body").height() + + $(".main-header").height();
+        //    gridElement.children(".k-grid-content").height($("body").height() - otherElementsHeightThongTinXe);
+        //    gridElement.data("kendoGrid").resize();
+        //});
+
+        var DataDefault = @Html.Raw(Json.Encode(ViewBag.DataDefault));
+        $("#dateBauDauKhongThucHienTQ").kendoDatePicker({
+            dateInput: true,
+            format: "dd/MM/yyyy",
+            culture: "vi-VN",
+            value: kendo.parseDate(DataDefault.TuNgay, "dd/MM/yyyy")
+        });
+        $("#dateKetThucKhongThucHienTQ").kendoDatePicker({
+            dateInput: true,
+            format: "dd/MM/yyyy",
+            culture: "vi-VN",
+            value: kendo.parseDate(DataDefault.DenNgay, "dd/MM/yyyy")
+        });
+
+
+        $("#selectsSoKhongThucHien").kendoDropDownList({
+            name: "selectsSoKhongThucHien",
+            dataTextField: "TS_TenTinh",
+            dataValueField: "TS_IdTinh_So",
+            dataSource: @Html.Raw(Json.Encode(ViewBag.LstSo)),
+            filter: "contains",
+            suggest: true,
+            template: "<input type='checkbox' id='chk_selectsSoKhongThucHien_#=data.TS_IdTinh_So #' onclick='UpdateIdinHF(this);' value='#=data.TS_IdTinh_So #' name='selectsSoKhongThucHien' />" + "<label>" + "${ data.TS_TenTinh }" + "</label>",
+            close: onClose,
+            change: onChange,
+        });
+
+        //        $("#spanfabric").html(SoSoGet);
+        setDefaultDropList("selectsSoKhongThucHien", "hf_selectsSoKhongThucHien");
+    @*Loại Báo Cáo*@
+        Panel_Title("plTitle_ToanQuoc", "BÁO CÁO KHÔNG THỰC HIÊN", "BÁO CÁO TỔNG HỢP");
+        removeitemperpage();
+
+    @*Search Event*@
+        $("#txtSearchBCKhongThucHienTQ").keyup(function () {
+            var selecteditem = $('#txtSearchBCKhongThucHienTQ').val();
+            var kgrid = $("#gridBCKhongThucHienTQ").data("kendoGrid");
+            selecteditem = selecteditem.toUpperCase();
+            var selectedArray = selecteditem.split(" ");
+            if (selecteditem) {
+                //kgrid.dataSource.filter({ field: "UserName", operator: "eq", value: selecteditem });
+                var orfilter = { logic: "or", filters: [] };
+                var andfilter = { logic: "and", filters: [] };
+                $.each(selectedArray, function (i, v) {
+                    if (v.trim() == "") {
+                    }
+                    else {
+                        $.each(selectedArray, function (i, v1) {
+                            if (v1.trim() == "") {
+                            } else {
+                                orfilter.filters.push({ field: "TS_TenTinh", operator: "contains", value: v1 });
+                                andfilter.filters.push(orfilter);
+                                orfilter = { logic: "or", filters: [] };
+                            }
+                        });
+                    }
+                });
+                kgrid.dataSource.filter(andfilter);
+            }
+            else {
+                kgrid.dataSource.filter({});
+            }
+        });
+    //Event Click
+        $('#btnXemBCKhongThucHienTQ').on('click', function () {
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetBCKhongThucHienTQ", "BaoCaoKhongThucHien"))),
+                data: {
+                    LstSo: $("#hf_selectsSoKhongThucHien").val(),
+                    TuNgay: kendo.toString($("#dateBauDauKhongThucHienTQ").data('kendoDatePicker').value(), "dd/MM/yyyy"),
+                    DenNgay:kendo.toString($("#dateKetThucKhongThucHienTQ").data('kendoDatePicker').value(), "dd/MM/yyyy")
+                },
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        var grid = $("#gridBCKhongThucHienTQ").data("kendoGrid");
+                        var dataGrid = new kendo.data.DataSource({
+                            data: response.data,
+                            pageSize: 100,
+                            aggregate: [
+                                { field: "TS_TenTinh", aggregate: "count" },
+                                { field: "SoChuenDangKy", aggregate: "sum" },
+                                { field: "SoLuotKhongXuatBen", aggregate: "sum" },
+                                { field: "SoLuotKhach", aggregate: "sum" },
+                            ]
+                        });
+                        grid.setDataSource(dataGrid);
+                        grid.dataSource.read();
+                        grid.refresh();
+                    }
+                }
+            };
+            $.ajax(options);
+        });
+
+        //Grid
+        function troBaoCaoKhongThucHienBen(e) {
+                window.open("@Url.Action("BaoCaoSo", "BaoCaoKhongThucHien")"
+                    + "?So=" + $(e).attr("data-IdSo")
+                + "&TuNgay=" + DataDefault.TuNgay
+                + "&DenNgay=" + DataDefault.DenNgay);
+            return false;
+        }
+        var record = 0;
+        $("#gridBCKhongThucHienTQ").kendoGrid({
+            sortable: true,
+            selectable: "row",
+            scrollable: true,
+            //height: 500,
+            dataSource: {
+                data: @Html.Raw(Json.Encode(ViewBag.DataGrid)),
+                pageSize: 100,
+                aggregate: [
+                    { field: "TS_TenTinh", aggregate: "count" },
+                    { field: "SoBen", aggregate: "sum" },
+                    { field: "TongCongSuat", aggregate: "sum" },
+                    { field: "SoXe", aggregate: "sum" },
+                    { field: "TongSoTuyen", aggregate: "sum" },
+                    { field: "SoChuenDangKy", aggregate: "sum" },
+                    { field: "SoLuotKhongXuatBen", aggregate: "sum" },
+                ]
+            },
+            pageable: {
+                pageSizes: [100, 150, 200, "all"],
+                numeric: true,
+                info: false
+            },
+            dataBinding: function () {
+                record = 0;
+                $('.k-grid-content').height($(window).height() - otherElementsHeightThongTinXe);
+            },
+            columns: [
+                {
+                    title: "STT",
+                    template: "#= ++record #",
+                    width: 45,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-weight: bold; font-size: 14px; white-space: normal; vertical-align: middle; background: #AEAAAA;"
+                    },
+                    footerTemplate: "<div style='text-align: right;'><strong>Tổng: </strong> </div>",
+                    attributes: { style: "text-align: center;" }
+                },
+                {
+                    field: "TS_TenTinh",
+                    title: "TỈNH",
+                    width: 80,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-weight: bold; font-size: 14px; white-space: normal; vertical-align: middle; background: #AEAAAA;"
+                    },
+                    attributes: { style: "text-align: left;" },
+                    template: '<a href="javascript:void(0)" onclick="troBaoCaoKhongThucHienBen(this)" data-IdSo="#=TS_IdTinh_So#">#=TS_TenTinh#</a>',
+                    footerTemplate: "<div style='text-align: left;'><strong>#=kendo.toString(count,'n0')#</strong> Sở</div>",
+                }, {
+                    field: "SoBen",
+                    title: "SỐ BẾN XE",
+                    width: 80,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-weight: bold; font-size: 14px; white-space: normal; vertical-align: middle; background: #AEAAAA;"
+                    },
+                    format: "{0:n0}",
+                    attributes: { style: "text-align: right;" },
+                    footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                },
+                {
+                    field: "TongCongSuat",
+                    title: "TỔNG CÔNG SUẤT",
+                    width: 80,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-weight: bold; font-size: 14px; white-space: normal; vertical-align: middle; background: #AEAAAA;"
+                    },
+                    format: "{0:n0}",
+                    attributes: { style: "text-align: right;" },
+                    footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+
+                },
+                {
+                    field: "SoXe",
+                    title: "TỔNG SỐ XE",
+                    width: 80,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-weight: bold; font-size: 14px; white-space: normal; vertical-align: middle; background: #AEAAAA;"
+                    },
+                    format: "{0:n0}",
+                    attributes: { style: "text-align: right;" },
+                    footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                },
+                {
+                    field: "SoXe",
+                    title: "TỔNG SỐ XE",
+                    width: 80,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-weight: bold; font-size: 14px; white-space: normal; vertical-align: middle; background: #AEAAAA;"
+                    },
+                    format: "{0:n0}",
+                    attributes: { style: "text-align: right;" },
+                    footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                },
+                {
+                    field: "TongSoTuyen",
+                    title: "TỔNG SỐ TUYẾN",
+                    width: 80,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-weight: bold; font-size: 14px; white-space: normal; vertical-align: middle; background: #AEAAAA;"
+                    },
+                    format: "{0:n0}",
+                    attributes: { style: "text-align: right;" },
+                    footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                },
+                {
+                     title: "SỐ CHUYẾN",
+                    width: 80,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-weight: bold; font-size: 14px; white-space: normal; vertical-align: middle; background: #AEAAAA;"
+                    },
+                    columns: [
+                        {
+                            field: "SoChuenDangKy",
+                            title: "SỐ CHUYẾN ĐĂNG KÝ",
+                            width: 50,
+                            headerAttributes: {
+                                "class": "table-header-cell",
+                                style: "text-align: center; font-weight: bold; font-size: 14px; white-space: normal; vertical-align: middle; background: #AEAAAA;"
+                            },
+                            attributes: { style: "text-align: right;" },
+                            footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                            format: "{0:n0}",
+                        },
+                        {
+                            field: "SoLuotKhongXuatBen",
+                            title: "SỐ LƯỢT XUẤT BẾN",
+                            width: 50,
+                            headerAttributes: {
+                                "class": "table-header-cell",
+                                style: "text-align: center; font-weight: bold; font-size: 14px; white-space: normal; vertical-align: middle; background: #AEAAAA;"
+                            },
+                            attributes: { style: "text-align: right;" },
+                            footerTemplate: "<div style='text-align: right;'><strong>#=kendo.toString(sum,'n0')#</strong> </div>",
+                            format: "{0:n0}",
+                        }
+                    ]
+                },
+                {
+                    field: "TyLeKhongThucHien",
+                    title: "TỈ LỆ KHÔNG THỰC HIỆN(%)",
+                    width: 80,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "text-align: center; font-weight: bold; font-size: 14px; white-space: normal; vertical-align: middle; background: #AEAAAA;"
+                    },
+                    format: "{0:n2}",
+                    attributes: { style: "text-align: right;" }
+                }
+            ]
+        });
+
+
+    </script>
+}

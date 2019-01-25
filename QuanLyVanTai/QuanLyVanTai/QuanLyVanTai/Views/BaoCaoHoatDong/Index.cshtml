@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "BaoCaoHoatDong_ToanQuoc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title" id="plTitle_ToanQuoc"></h3>
+    </div>
+    <div class="panel-body">
+        <div id="body_dau">
+            @*<div class="col-md-5">
+                <div class="row" style="padding-bottom:5px;">
+                    <div class="col-md-4">THÁNG:</div>
+                    <div class="col-md-8"><input id="datepicker_BaoCaoHoatDongToanQuoc"></div>
+                </div>
+            </div>
+            <div class="col-md-3" style="padding-bottom:10px;">
+                <button class="btn btn-primary input-group" id="btnXemBieuDoChayXe_ToanQuoc">XEM</button>
+            </div>
+            <div class="col-md-4 pull-right">
+                <input type="search" id="txtSearch_BaoCaoHoatDong_TongHop_ToanQuoc" class="k-textbox" style="width:500px" placeholder="Tìm Kiếm" />
+            </div>*@
+            <div class="row">
+
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    @*<span class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="padding-left:0px; padding-right:5px; text-align:right;">SỞ:</span>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <input id="cbbSo_BaoCaoHoatDongDonViVanTai" class="input-group" style="width:100%; max-width:100000px;" />
+                    </div>*@
+                    <span class="col-lg-1 col-md-1 col-sm-1 col-xs-2" style="padding-left:0px; padding-right:5px; text-align:right;">THÁNG:</span>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <input id="datepicker_BaoCaoHoatDongToanQuoc" class="input-group" style="width:100%; ">
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-xs-2" style="padding-left:0px;">
+                        <button class="btn btn-primary input-group" id="btnXemBieuDoChayXe_ToanQuoc" style="width:100%;">XEM</button>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="text-align: right;">
+                    <div class="col-lg-0 col-md-0 col-sm-1 col-xs-2"></div>
+                    <div class="col-lg-12 col-md-12 col-sm-11 col-xs-10">
+                        <input type="search" id="txtSearch_BaoCaoHoatDong_TongHop_ToanQuoc" class="k-textbox" style="width:100%;  max-width:100000px;" placeholder="Tìm Kiếm" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="grid_BaoCaoHoatDongToanQuoc"></div>
+</div>
+@section scripts{
+    <script src="~/Scripts/BaoCao/gridKendo.js"></script>
+    <script>
+        $(window).resize(function () {
+            var gridElement = $("#grid_BaoCaoHoatDongToanQuoc");
+            otherElementsHeightThongTinXe = $("#body_dau").height() + $(".navbar-fixed-top").height() + 200;
+            gridElement.children(".k-grid-content").height($(window).height() - otherElementsHeightThongTinXe);
+        });
+        $("#datepicker_BaoCaoHoatDongToanQuoc").kendoDatePicker({
+            dateInput: true,
+            format: "MM/yyyy",
+            start: "year",
+            depth: "year",
+            culture: "vi-VN",
+            value: kendo.parseDate(new Date()),
+        });
+        var dataBien = @Html.Raw(Json.Encode(ViewBag.BienToanQuoc));
+        var today = kendo.parseDate(new Date(dataBien.Nam, dataBien.Thang - 1), 'MM/yyyy');
+        var datepicker_ThangNam = $("#datepicker_BaoCaoHoatDongToanQuoc").data('kendoDatePicker');
+        datepicker_ThangNam.value(today);
+    </script>
+    <!--Loại Báo Cáo-->
+    <script>
+        var name = getUrlParameter('name');
+        if (name == "a") {
+            Panel_Title("plTitle_ToanQuoc", "BÁO CÁO HOẠT ĐỘNG TOÀN QUỐC", "BÁO CÁO TỔNG HỢP");
+            var datatest = @Html.Raw(Json.Encode(ViewBag.BaoCaoTongHop_ToanQuoc));
+            console.log(datatest);
+            BaoCaoHoatDong_BaoCaoTongHop_BaoCaoToanQuoc("grid_BaoCaoHoatDongToanQuoc", datatest);
+            removeitemperpage();
+        }
+        else if(name == "b")
+        {
+            Panel_Title("plTitle_ToanQuoc", "BÁO CÁO HOẠT ĐỘNG TOÀN QUỐC", "BÁO CÁO XE KHÔNG THỰC HIỆN");
+            var datatest = @Html.Raw(Json.Encode(ViewBag.BaoCaoTongHop_ToanQuoc));
+            console.log(datatest);
+            BaoCaoHoatDong_BaoCaoXeKhongThucHien_BaoCaoToanQuoc("grid_BaoCaoHoatDongToanQuoc", datatest);
+            removeitemperpage();
+        }
+        else if (name == "c") {
+            Panel_Title("plTitle_ToanQuoc", "BÁO CÁO HOẠT ĐỘNG TOÀN QUỐC", "BÁO CÁO XE CHẠY KHÔNG ĐÚNG GIỜ");
+            var datatest = @Html.Raw(Json.Encode(ViewBag.BaoCaoTongHop_ToanQuoc));
+            console.log(datatest);
+            BaoCaoHoatDong_BaoCaoXeKhongDungGio_BaoCaoToanQuoc("grid_BaoCaoHoatDongToanQuoc", datatest);
+            removeitemperpage();
+        }
+        else if (name == "d") {
+            Panel_Title("plTitle_ToanQuoc", "BÁO CÁO HOẠT ĐỘNG TOÀN QUỐC", "BÁO CÁO XE THỰC HIỆN DƯỚI 70% SỐ CHUYẾN");
+            var datatest = @Html.Raw(Json.Encode(ViewBag.BaoCaoTongHop_ToanQuoc));
+            console.log(datatest);
+            BaoCaoHoatDong_BaoCaoXeThucHien70_BaoCaoToanQuoc("grid_BaoCaoHoatDongToanQuoc", datatest);
+            removeitemperpage();
+        }
+        else if (name == "e") {
+            Panel_Title("plTitle_ToanQuoc", "BÁO CÁO HOẠT ĐỘNG TOÀN QUỐC", "BÁO CÁO XE KHÔNG VỀ BẾN");
+            var datatest = @Html.Raw(Json.Encode(ViewBag.BaoCaoTongHop_ToanQuoc));
+            console.log(datatest);
+            BaoCaoHoatDong_BaoCaoXeKhongVeBen_BaoCaoToanQuoc("grid_BaoCaoHoatDongToanQuoc", datatest);
+            removeitemperpage();
+        }
+        else if(name == "undefined"){
+            Panel_Title("plTitle_ToanQuoc", "BÁO CÁO HOẠT ĐỘNG TOÀN QUỐC", "BÁO CÁO TỔNG HỢP");
+            var datatest = @Html.Raw(Json.Encode(ViewBag.BaoCaoTongHop_ToanQuoc));
+            console.log(datatest);
+            BaoCaoHoatDong_BaoCaoTongHop_BaoCaoToanQuoc("grid_BaoCaoHoatDongToanQuoc", datatest);
+            removeitemperpage();
+        }
+    </script>
+    <!--Search Event-->
+    <script>
+        $("#txtSearch_BaoCaoHoatDong_TongHop_ToanQuoc").keyup(function () {
+            var selecteditem = $('#txtSearch_BaoCaoHoatDong_TongHop_ToanQuoc').val();
+            var kgrid = $("#grid_BaoCaoHoatDongToanQuoc").data("kendoGrid");
+            selecteditem = selecteditem.toUpperCase();
+            var selectedArray = selecteditem.split(" ");
+            if (selecteditem) {
+                //kgrid.dataSource.filter({ field: "UserName", operator: "eq", value: selecteditem });
+                var orfilter = { logic: "or", filters: [] };
+                var andfilter = { logic: "and", filters: [] };
+                $.each(selectedArray, function (i, v) {
+                    if (v.trim() == "") {
+                    }
+                    else {
+                        $.each(selectedArray, function (i, v1) {
+                            //var lengthStr = selecteditem.length;
+                            //var strBS = "";
+                            //if(lengthStr > 3 && lengthStr < 10 && selecteditem[3] != '-'){
+                            //    strBS = [selecteditem.slice(0, 3), "-", selecteditem.slice(3)].join('');
+                            //} else {
+                            //    strBS = v1;
+                            //}
+
+                            if (v1.trim() == "") {
+                            } else {
+                                orfilter.filters.push({ field: "TS_TenTinh", operator: "contains", value: v1 });
+                                andfilter.filters.push(orfilter);
+                                orfilter = { logic: "or", filters: [] };
+                            }
+                        });
+                    }
+                });
+                kgrid.dataSource.filter(andfilter);
+            }
+            else {
+                kgrid.dataSource.filter({});
+            }
+        });
+    </script>
+    <!--Event Click-->
+    <script>
+        $('#btnXemBieuDoChayXe_ToanQuoc').on('click', function () {
+            var name = getUrlParameter('name');
+            var thangBatDau = kendo.toString($("#datepicker_BaoCaoHoatDongToanQuoc").data('kendoDatePicker').value(), "MM");
+            var namBatDau = kendo.toString($("#datepicker_BaoCaoHoatDongToanQuoc").data('kendoDatePicker').value(), "yyyy");
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetBaoCaoTongHopAll", "BaoCaoHoatDong"))),
+                data: {
+                    name : name,
+                    thang:thangBatDau,
+                    nam:namBatDau
+                },
+                cache: false,
+                dataType: "json",
+                //contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    if (response != null) {
+                        console.log(response);
+                        var grid = $("#grid_BaoCaoHoatDongToanQuoc").data("kendoGrid");
+                        dataGrid = new kendo.data.DataSource({
+                            data: response,
+                            pageSize: 25
+                        });
+                        grid.setDataSource(dataGrid);
+                        grid.dataSource.read();
+                        grid.refresh();
+                    }
+                }
+            };
+            $.ajax(options);
+        });
+    </script>
+}

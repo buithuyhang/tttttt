@@ -1,0 +1,706 @@
+﻿@{
+    ViewBag.Title = "Quản lý luồng tuyến";
+    Layout = "~/Views/Shared/_Layout_HeThong.cshtml";
+}
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-md-6 text-center" style="margin: 8px 0 8px 0">
+                <span class="h2">QUẢN LÝ LUỒNG TUYẾN</span>
+            </div>
+            <div class="col-sm-3 col-md-3 pull-right">
+                <form class="navbar-form" onsubmit="return false;" role="search">
+                    <div class="input-group" style="width: 100%">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm" id="idTxtSearchLuongTuyen">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        @*Bang du lieu*@
+        <div class="col-md-2">
+            <div id="gridTinhSoLuongTuyen"></div>
+        </div>
+        <div class="col-md-10">
+            <div id="gridTTLuongTuyen"></div>
+        </div>
+
+        @*Begin Button*@
+        <div class="col-md-12" style="margin-top: 15px">
+            @*<div class="btn btn-group-justified row">*@
+            <div class="col-md-1">
+                <button class="btn btn-primary btn-block" onclick="themTTLuongTuyen()" id="idBtnThemLuongTuyen">Thêm</button>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-warning btn-block" onclick="suaTTLuongTuyen()" id="idBtnSuaLuongTuyen">Sửa</button>
+            </div>
+            @*<div class="col-md-1">
+                    <button class="btn btn-danger btn-block" onclick="xoaTTLuongTuyen()" id="idBtnXoaLuongTuyen">Xóa</button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-success btn-block" onclick="khoiPhucTTLuongTuyen()" id="idBtnKhoiLuongTuyen" disabled>Khôi phục</button>
+                </div>*@
+            @*</div>*@
+        </div>
+        @*End Button*@
+    </div>
+</div>
+<!--Popup Them_Sua-->
+<div id="modalThemSuaLuongTuyen" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">Thông tin luồng tuyến</h4>
+            </div>
+            <div class="modal-body row">
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Tỉnh đi</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="idCbbTinhDiLuongTuyen" data-live-search="true"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Bến đi</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="idCbbBenDiLuongTuyen" data-live-search="true"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Tỉnh đến</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="idCbbTinhDenLuongTuyen" data-live-search="true"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Bến đến</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="idCbbBenDenLuongTuyen" data-live-search="true"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Mã tuyến</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="idMaTuyenLuongTuyen" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Hành trình chạy</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="idHanhTrinhChay" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Cự ly</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" value="0" min="0" id="idCuLyLuongTuyen" placeholder="Mã luồng tuyến">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Lưu lượng</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control"  value="0" min="0" id="idLuuLuongLuongTuyen" placeholder="Lưu lượng">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Trạng thái</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="idCbbTrangThaiLuongTuyen" data-minimum-results-for-search="Infinity"></select>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                        <label class="col-sm-3 text-left control-label">Phân loại</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="idCbbPhanLoaiLuongTuyen" data-minimum-results-for-search="Infinity" style="width: 100%"></select>
+                        </div>
+                    </div>*@
+
+                    @*<div class="form-group" id="idDiemDauCuoiLuongTuyen">
+                            <label class="col-sm-3 text-left control-label">Đầu cuối</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="idDauCuoiLuongTuyen" readonly="readonly"/>
+                            </div>
+                        </div>*@
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnThemLuongTuyen">Thêm</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+    }
+    .custom-combobox-input {
+        margin: 0;
+        padding: 5px 10px;
+    }
+</style>
+
+@section scripts{
+    <script src="~/Scripts/QuanLyLuongTuyen/ScriptQuanLyLuongTuyen.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        //Script grid TT Tinh so
+        CreateGridTinhSoLuongTuyen();
+        CreateGridTTLuongTuyen();
+        // Removes default text near page size.
+        $('.k-pager-sizes')
+            .contents()
+            .filter(function() {
+
+                return this.nodeType === 3;
+            }).remove();
+        //
+        var dataGridTinhSo = @Html.Raw(ViewBag.lstTinhSoLuongTuyen);
+        var TinhSoLuongTuyen = $("#gridTinhSoLuongTuyen");
+        TinhSoLuongTuyen.data("kendoGrid").setDataSource(new kendo.data.DataSource({ data: dataGridTinhSo }));
+
+        var dataGrid = @Html.Raw(ViewBag.dataGridLuongTuyen);
+        var grid = $("#gridTTLuongTuyen");
+        grid.data("kendoGrid").setDataSource(new kendo.data.DataSource({ data: dataGrid }));
+
+        //Event button
+        function themTTLuongTuyen() {
+            $("#modalThemSuaLuongTuyen").modal();
+            $("#btnSuaLuongTuyen").attr('id', 'btnThemLuongTuyen');
+            $("#btnThemLuongTuyen").html("Thêm");
+            $("#btnThemLuongTuyen").removeClass("btn-warning");
+            $("#btnThemLuongTuyen").addClass("btn-primary");
+            //event Them TT tinh so
+            $("#btnThemLuongTuyen").unbind("click");
+            $("#btnThemLuongTuyen").click(themThongTinLuongTuyen);
+            //
+            setModalThemCongTyVanTai();
+        }
+
+        function suaTTLuongTuyen() {
+            if ($("#gridTTLuongTuyen").data("kendoGrid").select().length === 1) {
+                $("#modalThemSuaLuongTuyen").modal();
+                var grid = $("#gridTTLuongTuyen").data("kendoGrid");
+                var selectedItem = grid.dataItem(grid.select());
+
+                $("#btnThemLuongTuyen").attr('id', 'btnSuaLuongTuyen');
+                $("#btnSuaLuongTuyen").html("Sửa");
+                $("#btnSuaLuongTuyen").removeClass("btn-primary");
+                $("#btnSuaLuongTuyen").addClass("btn-warning");
+                //event Sua TT tinh so
+                $("#btnSuaLuongTuyen").unbind("click");
+                $("#btnSuaLuongTuyen").click(suaThongTinLuongTuyen);
+                setModalSuaCongTyVanTai();
+            }
+        }
+
+        @*function addOptionSelectTinhSoLuongTuyen(idSelectDi,idSelectDen ) {
+            var newOptions = @Html.Raw(ViewBag.lstTinhSoLuongTuyen);
+
+            //Tỉnh đi
+            var selectTinhDi = $("#idCbbTinhDiLuongTuyen");
+
+            if(selectTinhDi.prop) {
+                var options = selectTinhDi.prop('options');
+            }
+            else {
+                var options = selectTinhDi.attr('options');
+            }
+            $('option', selectTinhDi).remove();
+
+            $.each(newOptions, function(val, obj) {
+                options[options.length] = new Option(obj.TS_TenTinh, obj.TS_IdTinh_So);
+            });
+
+            if (idSelectDi === -1)
+                $('#idCbbTinhDiLuongTuyen').prop('selectedIndex', 0);
+            else
+                selectTinhDi.val(idSelectDi);
+            // Tỉnh đến
+            var selectTinhDen = $("#idCbbTinhDenLuongTuyen");
+
+            if(selectTinhDen.prop) {
+                var options2 = selectTinhDen.prop('options');
+            }
+            else {
+                var options2 = selectTinhDen.attr('options');
+            }
+            $('option', selectTinhDen).remove();
+
+            $.each(newOptions, function(val, obj) {
+                options2[options2.length] = new Option(obj.TS_TenTinh, obj.TS_IdTinh_So);
+            });
+
+            if (idSelectDen === -1)
+                $('#idCbbTinhDenLuongTuyen').prop('selectedIndex', 0);
+            else
+                selectTinhDen.val(idSelectDen);
+        }*@
+
+        @*function addOptionSelectTrangThaiLuongTuyen(idSelect) {
+            var newOptions = @Html.Raw(ViewBag.lstTrangThaiLuongTuyen);
+
+            var select = $("#idCbbTrangThaiLuongTuyen");
+            if (select.prop) {
+                var options = select.prop('options');
+            } else {
+                var options = select.attr('options');
+            }
+            $('option', select).remove();
+
+            $.each(newOptions,
+                function(val, obj) {
+                    options[options.length] = new Option(obj.TT_TenTrangThai, obj.TT_IdTrangThaiTuyen);
+                });
+            if (idSelect === -1)
+                $('#idCbbTrangThaiLuongTuyen').prop('selectedIndex', 0);
+            else
+                select.val(idSelect);
+        }*@
+
+        @*function addOptionSelectPhanLoaiLuongTuyen(idSelect) {
+            var newOptions = @Html.Raw(ViewBag.lstPhanLoaiLuongTuyen);
+            var selectedOption = idSelect;
+
+            var select = $("#idCbbPhanLoaiLuongTuyen");
+            if (select.prop) {
+                var options = select.prop('options');
+            } else {
+                var options = select.attr('options');
+            }
+            $('option', select).remove();
+
+            $.each(newOptions,
+                function(val, obj) {
+                    options[options.length] = new Option(obj.LT_PL_TenLoai, obj.LT_PL_IdLuongTuyen);
+                });
+            if (idSelect === -1)
+                $('#idCbbPhanLoaiLuongTuyen').prop('selectedIndex', 0);
+            else
+                select.val(selectedOption);
+        }*@
+
+        //function addOptionSelectBenDi(idSelect, newOptions) {
+        //    var select = $("#idCbbBenDiLuongTuyen");
+        //    if (select.prop) {
+        //        var options = select.prop('options');
+        //    } else {
+        //        var options = select.attr('options');
+        //    }
+        //    $('option', select).remove();
+
+        //    $.each(newOptions,
+        //        function(val, obj) {
+        //            options[options.length] = new Option(obj.TenBenXe, obj.BX_IdBenXe);
+        //        });
+        //    //if (idSelect === -1) {
+        //    //    select.val(newOptions[0].BX_IdBenXe);
+        //    //} else
+        //    //    select.val(idSelect);
+        //}
+
+        //function addOptionSelectBenDen(idSelect, newOptions) {
+        //    var select = $("#idCbbBenDenLuongTuyen");
+        //    if (select.prop) {
+        //        var options = select.prop('options');
+        //    } else {
+        //        var options = select.attr('options');
+        //    }
+        //    $('option', select).remove();
+
+        //    $.each(newOptions,
+        //        function(val, obj) {
+        //            options[options.length] = new Option(obj.TenBenXe, obj.BX_IdBenXe);
+        //        });
+
+        //    //if (idSelect === -1)
+        //    //    select.val(newOptions[0])
+        //    //else
+        //    //    select.val(idSelect);
+        //}
+
+        //function format(item) { console.log(item); return item.TS_TenTinh; }
+
+        function setOptionSelect(id, data, select, idItem, txtItem, search) {
+            data = $.map(data, function(item) {
+                //console.log(item)
+                return { id: item[idItem], text: item[txtItem] }
+            });
+
+            $("#" + id).select2({
+                placeholder: "Chọn",
+                allowClear: true,
+                //formatSelection: format,
+                //formatResult: format,
+                language: 'vi',
+                data: data,
+                theme: 'bootstrap',
+                containerCssClass:":all:",
+                width: "100%"
+            });
+            if (select === -1) {
+                $('#' + id).select2("val",$('#'+ id +' option:eq(0)').val());
+            }
+                //$('#'+ id).select2().select2('val', '0');
+            else
+                //$("#" + id).val(select);
+                $('#'+id).val(select).trigger('change');
+    }
+
+        function setModalThemCongTyVanTai() {
+            var lstTinhSoLuongTuyen = @Html.Raw(ViewBag.lstTinhSoLuongTuyen);
+            setOptionSelect("idCbbTinhDiLuongTuyen", lstTinhSoLuongTuyen, -1,
+                "TS_IdTinh_So", "TS_TenTinh");
+            setOptionSelect("idCbbTinhDenLuongTuyen", lstTinhSoLuongTuyen, -1,
+                "TS_IdTinh_So", "TS_TenTinh");
+            var lstTrangThaiLuongTuyen = @Html.Raw(ViewBag.lstTrangThaiLuongTuyen);
+            setOptionSelect("idCbbTrangThaiLuongTuyen", lstTrangThaiLuongTuyen, -1,
+                "TT_IdTrangThaiTuyen", "TT_TenTrangThai");
+            @*var lstPhanLoaiLuongTuyen = @Html.Raw(ViewBag.lstPhanLoaiLuongTuyen);
+            setOptionSelect("idCbbPhanLoaiLuongTuyen", lstPhanLoaiLuongTuyen, -1,
+                "LT_PL_IdLuongTuyen", "LT_PL_TenLoai");*@
+            //addOptionSelectTinhSoLuongTuyen(-1, -1);
+            $("#idCbbBenDiLuongTuyen").val();
+            $("#idCbbBenDenLuongTuyen").val();
+            $("#idMaTuyenLuongTuyen").val("");
+            $("#idHanhTrinhChay").val("");
+            $("#idCuLyLuongTuyen").val("");
+            $("#idLuuLuongLuongTuyen").val("");
+            //addOptionSelectTrangThaiLuongTuyen(-1);
+            //addOptionSelectPhanLoaiLuongTuyen(-1);
+        }
+
+        function setModalSuaCongTyVanTai() {
+            var grid = $('#gridTTLuongTuyen').data('kendoGrid');
+            var selectedItem = grid.dataItem(grid.select());
+            
+            var lstTinhSoLuongTuyen = @Html.Raw(ViewBag.lstTinhSoLuongTuyen);
+            setOptionSelect("idCbbTinhDiLuongTuyen", lstTinhSoLuongTuyen, selectedItem.IdTinhSoDi,
+                "TS_IdTinh_So", "TS_TenTinh");
+            setOptionSelect("idCbbTinhDenLuongTuyen", lstTinhSoLuongTuyen, selectedItem.IdTinhSoDen,
+                "TS_IdTinh_So", "TS_TenTinh");
+            var lstTrangThaiLuongTuyen = @Html.Raw(ViewBag.lstTrangThaiLuongTuyen);
+            setOptionSelect("idCbbTrangThaiLuongTuyen", lstTrangThaiLuongTuyen, selectedItem.TT_IdTrangThaiTuyen,
+                "TT_IdTrangThaiTuyen", "TT_TenTrangThai");
+            @*var lstPhanLoaiLuongTuyen = @Html.Raw(ViewBag.lstPhanLoaiLuongTuyen);
+            setOptionSelect("idCbbPhanLoaiLuongTuyen", lstPhanLoaiLuongTuyen, selectedItem.LT_PL_IdLuongTuyen,
+                "LT_PL_IdLuongTuyen", "LT_PL_TenLoai");*@
+
+            //addOptionSelectBenDi(selectedItem.LT_DC_IdBen_01);
+            //addOptionSelectBenDen(selectedItem.LT_DC_IdBen_02);
+            $("#idMaTuyenLuongTuyen").val(selectedItem.LT_MaTuyen);
+            $("#idHanhTrinhChay").val(selectedItem.LT_HanhTrinhChay);
+            $("#idCuLyLuongTuyen").val(selectedItem.LT_CuLy);
+            $("#idLuuLuongLuongTuyen").val(selectedItem.LT_LuuLuongQuyDinh);
+            getLstBenXe($("#idCbbTinhDiLuongTuyen").val(), 1, selectedItem.LT_DC_IdBen_01);
+            getLstBenXe($("#idCbbTinhDenLuongTuyen").val(), 2, selectedItem.LT_DC_IdBen_02);
+        }
+
+        $("#idCbbTinhDiLuongTuyen").change(function () {
+            //var $select = $("#idCbbTinhDiLuongTuyen").select2();
+            //$select.select2('destroy');
+            $('#idCbbBenDiLuongTuyen').children('option').remove()
+            //$("#idCbbTinhDiLuongTuyen").select2('val', '');
+
+            getLstBenXe($("#idCbbTinhDiLuongTuyen").val(), 1, -1);
+        });
+
+        $("#idCbbTinhDenLuongTuyen").change(function () {
+            //$("#idCbbTinhDenLuongTuyen").select2().select2('destroy');
+            $('#idCbbBenDenLuongTuyen').children('option').remove()
+
+            getLstBenXe($("#idCbbTinhDenLuongTuyen").val(), 2, -1);
+        });
+
+        function getLstBenXe(idTinhSo, insert, selected) {
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetLstBenXe", "QuanLyLuongTuyen"))),
+                data: { TS_IdTinh_So: idTinhSo},
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response != null /*&& response.d != null*/) {
+                        if (response.status === true) {
+                            var lst = response.data;
+                            if (insert === 1) {
+                                setOptionSelect("idCbbBenDiLuongTuyen", lst, selected, "BX_IdBenXe", "TenBenXe");
+                            } else if (insert === 2) {
+                                setOptionSelect("idCbbBenDenLuongTuyen", lst, selected, "BX_IdBenXe", "TenBenXe");
+                            }
+                        } else {
+                            swal(
+                                'Lỗi!',
+                                response.error,
+                                'error'
+                            );
+                        }
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+        $("#idTxtSearchLuongTuyen").keyup(function () {
+            var selecteditem = $('#idTxtSearchLuongTuyen').val();
+            var kgrid = $("#gridTTLuongTuyen").data("kendoGrid");
+            selecteditem = selecteditem.toUpperCase();
+            var selectedArray = selecteditem.split(" ");
+            if (selecteditem) {
+                //kgrid.dataSource.filter({ field: "UserName", operator: "eq", value: selecteditem });
+                var orfilter = { logic: "or", filters: [] };
+                var andfilter = { logic: "and", filters: [] };
+                $.each(selectedArray, function (i, v) {
+                    if (v.trim() == "") {
+                    }
+                    else {
+                        $.each(selectedArray, function (i, v1) {
+                            //var lengthStr = selecteditem.length;
+                            //var strBS = "";
+                            //if(lengthStr > 3 && lengthStr < 10 && selecteditem[3] != '-'){
+                            //    strBS = [selecteditem.slice(0, 3), "-", selecteditem.slice(3)].join('');
+                            //} else {
+                            //    strBS = v1;
+                            //}
+
+                            if (v1.trim() == "") {
+                            } else {
+                                orfilter.filters.push({ field: "LT_MaTuyen", operator: "contains", value: v1 },
+                                    { field: "LT_DC_TenBen_01", operator: "contains", value: v1 },
+                                    { field: "LT_DC_TenBen_02", operator: "contains", value: v1 },
+                                    { field: "LT_HanhTrinhChay", operator: "contains", value: v1 });
+                                andfilter.filters.push(orfilter);
+                                orfilter = { logic: "or", filters: [] };
+
+                            }
+                        });
+                    }
+                });
+                kgrid.dataSource.filter(andfilter);
+            }
+            else {
+                kgrid.dataSource.filter({});
+            }
+        });
+
+        function setdataGridLuongTuyen(idGrid) {
+            var grid = $('#gridTinhSoLuongTuyen').data('kendoGrid');
+            var selectedItem = grid.dataItem(grid.select());
+
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetDSLuongTuyen", "QuanLyLuongTuyen"))),
+                data: { idTinhSo: selectedItem.TS_IdTinh_So},
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response != null /*&& response.d != null*/) {
+                        if(response.status == true){
+                            var grid = $('#' + idGrid).data('kendoGrid');
+                            grid.setDataSource(new kendo.data.DataSource({ data: response.data}));
+                            grid.dataSource.read();
+                            grid.refresh();
+                            //$('#modalThemSuaLuongTuyen').modal('toggle');
+                        } else {
+                            swal(
+                                'Lỗi!',
+                                response.error,
+                                'error'
+                            );
+                        }
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+
+        //event button popup
+        function themThongTinLuongTuyen() {
+            swal({
+                //html: true,
+                title: 'Thêm luồng tuyến',
+                html: 'Đang thêm luồng tuyến.<br>Vui lòng đợi trong giây lát...',
+                onOpen: function() {
+                    swal.showLoading()
+                }
+            });
+            ThemTTLuongTuyen('gridTTLuongTuyen');
+        };
+
+        function suaThongTinLuongTuyen() {
+            swal({
+                //html: true,
+                title: 'Sửa luồng tuyến',
+                html: 'Đang sửa luồng tuyến.<br>Vui lòng đợi trong giây lát...',
+                onOpen: function() {
+                    swal.showLoading()
+                }
+            });
+            SuaTTLuongTuyen('gridTTLuongTuyen');
+        };
+
+
+        function ThemTTLuongTuyen(idGrid) {
+            var phanLoai;
+            var idTinhDi = $("#idCbbTinhDiLuongTuyen");
+            var idTinhDen = $("#idCbbTinhDenLuongTuyen");
+            if ( idTinhDi == idTinhDen) {
+                phanLoai = 1;
+            } else if (idTinhDi == idTinhDen) {
+                phanLoai = 2;
+            }
+
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("ThemTTLuongTuyen", "QuanLyLuongTuyen"))),
+                data: {
+                    benDi: $("#idCbbBenDiLuongTuyen").val(),
+                    benDen: $("#idCbbBenDenLuongTuyen").val(),
+                    maTuyen: $("#idMaTuyenLuongTuyen").val(),
+                    hanhTrinhChay: $("#idHanhTrinhChay").val(),
+                    cuLy: $("#idCuLyLuongTuyen").val(),
+                    luuLuong: $("#idLuuLuongLuongTuyen").val(),
+                    idTrangThai: $("#idCbbTrangThaiLuongTuyen").val(),
+                    idPhanLoai: phanLoai
+
+                },
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response != null /*&& response.d != null*/) {
+                        if(response.status === true){
+                            swal(
+                                'Thêm!',
+                                response.message,
+                                'success'
+                            );
+                            setdataGridLuongTuyen(idGrid);
+                        } else {
+                            swal(
+                                'Lỗi!',
+                                response.error,
+                                'error'
+                            );
+                        }
+                        $('#modalThemSuaLuongTuyen').modal('toggle');
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+        function SuaTTLuongTuyen(idGrid) {
+            //swal({
+            //    title: 'Sửa',
+            //    input: 'password',
+            //    text: "Xác nhận mật khẩu",
+            //    showCancelButton: true,
+            //    confirmButtonText: 'Đồng ý',
+            //    showLoaderOnConfirm: true,
+            //    preConfirm: function (password) {
+            //        return new Promise(function (resolve, reject) {
+            //            setTimeout(function() {
+            //                if (password === '') {
+            //                    reject('Bạn chưa nhập mật khẩu')
+            //                } else {
+            var grid = $('#' + idGrid).data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+
+            var phanLoai;
+            var idTinhDi = $("#idCbbTinhDiLuongTuyen");
+            var idTinhDen = $("#idCbbTinhDenLuongTuyen");
+            if ( idTinhDi == idTinhDen) {
+                phanLoai = 1;
+            } else if (idTinhDi == idTinhDen) {
+                phanLoai = 2;
+            }
+
+            //request
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("SuaTTLuongTuyen", "QuanLyLuongTuyen"))),
+                data: {
+                    idLuongTuyen: selectedItem.LT_IdLuongTuyen,
+                    benDi: $("#idCbbBenDiLuongTuyen").val(),
+                    benDen: $("#idCbbBenDenLuongTuyen").val(),
+                    maTuyen: $("#idMaTuyenLuongTuyen").val(),
+                    hanhTrinhChay: $("#idHanhTrinhChay").val(),
+                    cuLy: $("#idCuLyLuongTuyen").val(),
+                    luuLuong: $("#idLuuLuongLuongTuyen").val(),
+                    idTrangThai: $("#idCbbTrangThaiLuongTuyen").val(),
+                    idPhanLoai: phanLoai
+
+                },
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response != null /*&& response.d != null*/) {
+                        //var grid = $("#gridBaoCaoHoatDong").data("kendoGrid");
+                        //var dataGrid = new kendo.data.DataSource({ data: response, group: groups, aggregate: agg, pageSize: 50 });
+                        //grid.setDataSource(dataGrid);
+                        //grid.dataSource.read();
+                        //grid.refresh();
+                        if(response.status == true) {
+                            swal(
+                                'Sửa!',
+                                'Bạn đã sửa thành công.',
+                                'success'
+                            );
+                            //editGrid(idGrid)
+                            //resolve()
+                            setdataGridLuongTuyen(idGrid);
+                        } else {
+                            swal(
+                                'Lỗi!',
+                                response.error,
+                                'error'
+                            );
+                        }
+                        $('#modalThemSuaLuongTuyen').modal('toggle');
+                    }
+                }
+            };
+            $.ajax(options);
+            //                }
+            //            }, 0)
+            //        })
+            //    },
+            //    allowOutsideClick: false
+            //}).then(function (password) {
+            //    //swal({
+            //    //    type: 'success',
+            //    //    title: 'Ajax request finished!',
+            //    //    html: 'Submitted email: ' + email
+            //    //})
+            //})
+        }
+
+    </script>
+} 

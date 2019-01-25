@@ -1,0 +1,552 @@
+﻿@{
+    ViewBag.Title = "Quản lý bến xe";
+    Layout = "~/Views/Shared/_Layout_HeThong.cshtml";
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-md-6 text-center" style="margin: 8px 0 8px 0">
+                <span class="h2">QUẢN LÝ BẾN XE</span>
+            </div>
+            <div class="col-sm-3 col-md-3 pull-right">
+                <form class="navbar-form" onsubmit="return false;" role="search">
+                    <div class="input-group" style="width: 100%">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm" id="idTxtSearchBenXe">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        @*Bang du lieu*@
+        <div class="col-md-12">
+            <div id="gridTTBenXe"></div>
+        </div>
+
+        @*Begin Button*@
+        <div class="col-md-12 row" style="margin-top: 15px">
+            @*<div class="btn btn-group-justified row">*@
+            <div class="col-md-1">
+                <button class="btn btn-primary btn-block" onclick="themTTBenXe()" id="idBtnThemBenXe">Thêm</button>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-warning btn-block" onclick="suaTTBenXe()" id="idBtnSuaBenXe">Sửa</button>
+            </div>
+            @*<div class="col-md-1">
+                    <button class="btn btn-danger btn-block" onclick="xoaTTBenXe()" id="idBtnXoaBenXe">Xóa</button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-success btn-block" onclick="khoiPhucTTBenXe()" id="idBtnKhoiBenXe" disabled>Khôi phục</button>
+                </div>*@
+            @*</div>*@
+        </div>
+        @*End Button*@
+    </div>
+</div>
+<!--Popup Them_Sua-->
+<div id="modalThemSuaBenXe" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 1224px">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">Thông tin bến xe</h4>
+            </div>
+            <div class="modal-body row">
+                <form class="form-horizontal col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Mã bến xe</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control" value="0" min="0" id="idMaBenXe" min="0" placeholder="Mã bến xe">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Tên bến xe</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="idTenBenXe" placeholder="Tên bến xe">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Tỉnh sở</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="idcbbTinhSo"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Địa chỉ</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="idDiaChiBenXe" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Số điện thoại</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control" value="0" min="0" id="idSDTBenXe" placeholder="Số điện thoại">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Cơ quan quản lý</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="idCoQuanQLBenXe" placeholder="Cơ quan quản lý">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Tổng diện tích</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control" id="idTongDienTichBenXe" min="0" placeholder="Tổng diện tích">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Diện tích xe khách</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control" id="idDienTichXeKhachBenXe" value="0" min="0" placeholder="Diện tích xe khách">
+                        </div>
+                    </div>
+                </form>
+
+                <form class="form-horizontal col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Diện tích phương tiện khác</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control" id="idDienTichPhuongTienKhacBenXe" value="0" min="0" placeholder="Diện tích phương tiện khác">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Diện tích nhà chờ</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control" id="idDienTichNhaChoBenXe" value="0" min="0" placeholder="Diện tích nhà chờ">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Loại bến xe</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control" id="idLoaiBenXe" value="0" min="0" placeholder="Loại bến xe">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Số tuyến quy hoạch</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control" id="idSoTuyenQuyHoachBenXe" value="0" min="0" placeholder="Số tuyến quy hoạch">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Số lượt xuất bến quy hoạch</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control" id="idSoLuotXuatBenQuyHoachBenXe" value="0" min="0" placeholder="Số lượt xuất bến quy hoạch">
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="idTrangThaiBenXe">
+                        <label class="col-sm-5 text-left control-label">Trạng thái</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="idcbbTrangThaiBenXe"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 text-left control-label">Ghi chú</label>
+                        <div class="col-sm-7">
+                            <textarea class="form-control" rows="4" id="idGhiChuBenXe"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnThemBenXe">Thêm</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/QuanLyBenXe/ScriptQuanLyBenXe.js"></script>
+
+    <script>
+        //Script grid TT Tinh so
+        CreateGridTTBenXe();
+        // Removes default text near page size.
+        $('.k-pager-sizes')
+            .contents()
+            .filter(function () {
+
+                return this.nodeType === 3;
+            }).remove();
+        //
+        var dataGridBenXe = @Html.Raw(ViewBag.dataGridBenXe);
+        var grid = $("#gridTTBenXe");
+        grid.data("kendoGrid").setDataSource(new kendo.data.DataSource({ data: dataGridBenXe }));
+        //Event button
+        function themTTBenXe() {
+            $("#modalThemSuaBenXe").modal();
+            $("#btnSuaBenXe").attr('id', 'btnThemBenXe');
+            $("#btnThemBenXe").html("Thêm");
+            $("#btnThemBenXe").removeClass("btn-warning");
+            $("#btnThemBenXe").addClass("btn-primary");
+            //event Them TT tinh so
+            $("#btnThemBenXe").unbind("click");
+            $("#btnThemBenXe").click(themThongTinBenXe);
+            setDialogThem();
+        }
+
+        function suaTTBenXe() {
+            if ($("#gridTTBenXe").data("kendoGrid").select().length == 1) {
+                $("#modalThemSuaBenXe").modal();
+                var grid = $("#gridTTBenXe").data("kendoGrid");
+                var selectedItem = grid.dataItem(grid.select());
+
+                $("#idMaTinh").val(selectedItem.maBenXe);
+                $("#idTenTinh").val(selectedItem.tenBenXe);
+                $("#idDiaChi").val(selectedItem.diaChi);
+                $("#idSoDienThoai").val(selectedItem.sdt);
+
+                $("#btnThemBenXe").attr('id', 'btnSuaBenXe');
+                $("#btnSuaBenXe").html("Sửa");
+                $("#btnSuaBenXe").removeClass("btn-primary");
+                $("#btnSuaBenXe").addClass("btn-warning");
+                //event Sua TT tinh so
+                $("#btnSuaBenXe").unbind("click");
+                $("#btnSuaBenXe").click(suaThongTinBenXe);
+                setDialogSua();
+            }
+        }
+
+        function setDialogThem() {
+            $('#idTenBenXe').val("");
+            $('#idMaBenXe').val("");
+            $('#idcbbTinhSo').val("");
+            $('#idDiaChiBenXe').val("");
+            $('#idSDTBenXe').val("");
+            $('#idCoQuanQLBenXe').val("");
+            $('#idTongDienTichBenXe').val("");
+            $('#idDienTichXeKhachBenXe').val("");
+            $('#idDienTichPhuongTienKhacBenXe').val("");
+            $('#idDienTichNhaChoBenXe').val("");
+            $('#idLoaiBenXe').val("");
+            $('#idSoTuyenQuyHoachBenXe').val("");
+            $('#idSoLuotXuatBenQuyHoachBenXe').val("");
+            $('#idGhiChuBenXe').val("");
+            $('#idcbbTrangThaiBenXe').val("");
+            addOptionSelectTinhSo(1);
+            addOptionSelectTrangThaiTinhSo(1);
+        }
+
+        function setDialogSua() {
+            var grid = $("#gridTTBenXe").data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+
+            $('#idTenBenXe').val(selectedItem.TenBenXe);
+            $('#idMaBenXe').val(selectedItem.MaBen);
+            $('#idDiaChiBenXe').val(selectedItem.DiaChi);
+            $('#idSDTBenXe').val(selectedItem.SDT);
+            $('#idCoQuanQLBenXe').val(selectedItem.CoQuanQuanLy);
+            $('#idTongDienTichBenXe').val(selectedItem.TongDienTich);
+            $('#idDienTichXeKhachBenXe').val(selectedItem.DienTich_XeKhach);
+            $('#idDienTichPhuongTienKhacBenXe').val(selectedItem.DienTich_PhuongTienKhac);
+            $('#idDienTichNhaChoBenXe').val(selectedItem.DienTich_NhaCho);
+            $('#idLoaiBenXe').val(selectedItem.LoaiBenXe);
+            $('#idSoTuyenQuyHoachBenXe').val(selectedItem.SoTuyenQuyHoach);
+            $('#idSoLuotXuatBenQuyHoachBenXe').val(selectedItem.SoLuotXuatBenQuyHoach);
+            $('#idGhiChuBenXe').val(selectedItem.GhiChu);
+            addOptionSelectTinhSo(selectedItem.TS_IdTinh_So);
+            addOptionSelectTrangThaiTinhSo(selectedItem.TS_TT_IdTrangThai);
+        }
+
+        function addOptionSelectTinhSo(idSelect) {
+            var newOptions = @Html.Raw(ViewBag.lstTinhSo);
+            var selectedOption = idSelect;
+            var select = $("#idcbbTinhSo");
+            if(select.prop) {
+                var options = select.prop('options');
+            }
+            else {
+                var options = select.attr('options');
+            }
+            $('option', select).remove();
+
+            $.each(newOptions, function(val, obj) {
+                options[options.length] = new Option(obj.TS_TenTinh, obj.TS_IdTinh_So);
+            });
+            select.val(selectedOption);
+        }
+
+        function addOptionSelectTrangThaiTinhSo(idSelect) {
+            var newOptions = @Html.Raw(ViewBag.lstTrangThaiBenXe);
+            var selectedOption = idSelect;
+
+            var select = $("#idcbbTrangThaiBenXe");
+            if(select.prop) {
+                var options = select.prop('options');
+            }
+            else {
+                var options = select.attr('options');
+            }
+            $('option', select).remove();
+
+            $.each(newOptions, function(val, obj) {
+                options[options.length] = new Option(obj.TS_TT_TenTrangThai, obj.TS_TT_IdTrangThai);
+            });
+            select.val(selectedOption);
+        }
+
+        $("#idTxtSearchBenXe").keyup(function () {
+            var selecteditem = $('#idTxtSearchBenXe').val();
+            var kgrid = $("#gridTTBenXe").data("kendoGrid");
+            selecteditem = selecteditem.toUpperCase();
+            var selectedArray = selecteditem.split(" ");
+            if (selecteditem) {
+                //kgrid.dataSource.filter({ field: "UserName", operator: "eq", value: selecteditem });
+                var orfilter = { logic: "or", filters: [] };
+                var andfilter = { logic: "and", filters: [] };
+                $.each(selectedArray, function (i, v) {
+                    if (v.trim() === "") {
+                    }
+                    else {
+                        $.each(selectedArray, function (i, v1) {
+                            //var lengthStr = selecteditem.length;
+                            //var strBS = "";
+                            //if(lengthStr > 3 && lengthStr < 10 && selecteditem[3] != '-'){
+                            //    strBS = [selecteditem.slice(0, 3), "-", selecteditem.slice(3)].join('');
+                            //} else {
+                            //    strBS = v1;
+                            //}
+
+                            if (v1.trim() === "") {
+                            } else {
+                                orfilter.filters.push({ field: "MaBen", value: v1 },
+                                                      { field: "TenBenXe", operator: "contains", value: v1 },
+                                                      { field: "TenTinhSo", operator: "contains", value: v1 },
+                                                      { field: "CoQuanQuanLy", operator: "contains", value: v1 });
+                                andfilter.filters.push(orfilter);
+                                orfilter = { logic: "or", filters: [] };
+                            }
+                        });
+                    }
+                });
+                kgrid.dataSource.filter(andfilter);
+            }
+            else {
+                kgrid.dataSource.filter({});
+            }
+        });
+
+        function setdataGridBenXeBenXe(idGrid){
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("GetDSBenXe", "QuanLyBenXe"))),
+                data: {},
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response != null /*&& response.d != null*/) {
+                        if(response.status === true){
+                            var grid = $('#' + idGrid).data('kendoGrid');
+                            grid.setDataSource(new kendo.data.DataSource({ data: response.data}));
+                            grid.dataSource.read();
+                            grid.refresh();
+
+                            $('#modalThemSuaBenXe').modal('toggle');
+                        } else {
+                            swal(
+                                'Lỗi!',
+                                response.error,
+                                'error'
+                            );
+                        }
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+
+        //event button popup
+        function themThongTinBenXe() {
+            swal({
+                //html: true,
+                title: 'Thêm bến xe',
+                html: 'Đang thêm bến xe.<br>Vui lòng đợi trong giây lát...',
+                onOpen: function() {
+                    swal.showLoading()
+                }
+            });
+            ThemTTBenXe('gridTTBenXe');
+        };
+
+        function suaThongTinBenXe() {
+            swal({
+                //html: true,
+                title: 'Sửa thông tin bến xe',
+                html: 'Đang sửa thông tin bến xe.<br>Vui lòng đợi trong giây lát...',
+                onOpen: function() {
+                    swal.showLoading()
+                }
+            });
+            SuaTTBenXe('gridTTBenXe');
+        };
+
+
+        function ThemTTBenXe(idGrid) {
+            var str = {
+                TenBenXe: $('#idTenBenXe').val(),
+                MaBen: $('#idMaBenXe').val(),
+                TS_IdTinh_So: $('#idcbbTinhSo').val(),
+                DiaChi: $('#idDiaChiBenXe').val(),
+                SDT: $('#idSDTBenXe').val(),
+                CoQuanQuanLy: $('#idCoQuanQLBenXe').val(),
+                TongDienTich: $('#idTongDienTichBenXe').val(),
+                DienTich_XeKhach: $('#idDienTichXeKhachBenXe').val(),
+                DienTich_PhuongTienKhac: $('#idDienTichPhuongTienKhacBenXe').val(),
+                DienTich_NhaCho: $('#idDienTichNhaChoBenXe').val(),
+                LoaiBenXe: $('#idLoaiBenXe').val(),
+                SoTuyenQuyHoach: $('#idSoTuyenQuyHoachBenXe').val(),
+                SoLuotXuatBenQuyHoach: $('#idSoLuotXuatBenQuyHoachBenXe').val(),
+                GhiChu: $('#idGhiChuBenXe').val(),
+                TS_TT_IdTrangThai: $('#idcbbTrangThaiBenXe').val()
+            }
+
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("ThemTTBenXe", "QuanLyBenXe"))),
+                data: str,
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response != null /*&& response.d != null*/) {
+                        if(response.status == true){
+                            var grid = $('#' + idGrid).data('kendoGrid');
+                            grid.dataSource.add(str);
+
+                            swal(
+                                'Thêm!',
+                                'Bạn đã thêm:' +
+                                '<br>Mã bến xe:' +
+                                $('#idMaBenXe').val() +
+                                '<br>Tên bến xe: ' +
+                                $('#idTenBenXe').val(),
+                                'success'
+                            );
+                            setdataGridBenXeBenXe("gridTTBenXe");
+                        } else {
+                            swal(
+                              'Lỗi!',
+                              response.error,
+                              'error'
+                            )
+                        }
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+        function SuaTTBenXe(idGrid) {
+            //swal({
+            //    title: 'Sửa',
+            //    input: 'password',
+            //    text: "Xác nhận mật khẩu",
+            //    showCancelButton: true,
+            //    confirmButtonText: 'Đồng ý',
+            //    showLoaderOnConfirm: true,
+            //    preConfirm: function (password) {
+            //        return new Promise(function (resolve, reject) {
+            //            setTimeout(function() {
+            //                if (password === '') {
+            //                    reject('Bạn chưa nhập mật khẩu')
+            //                } else {
+            var grid = $('#' + idGrid).data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+
+            //request
+            var options = {
+                type: "POST",
+                url: @Html.Raw(Json.Encode(Url.Action("SuaTTBenXe", "QuanLyBenXe"))),
+                data: {
+                    BX_IdBenXe : selectedItem.BX_IdBenXe,
+                    TenBenXe: $('#idTenBenXe').val(),
+                    MaBen: $('#idMaBenXe').val(),
+                    TS_IdTinh_So: $('#idcbbTinhSo').val(),
+                    DiaChi: $('#idDiaChiBenXe').val(),
+                    SDT: $('#idSDTBenXe').val(),
+                    CoQuanQuanLy: $('#idCoQuanQLBenXe').val(),
+                    TongDienTich: $('#idTongDienTichBenXe').val(),
+                    DienTich_XeKhach: $('#idDienTichXeKhachBenXe').val(),
+                    DienTich_PhuongTienKhac: $('#idDienTichPhuongTienKhacBenXe').val(),
+                    DienTich_NhaCho: $('#idDienTichNhaChoBenXe').val(),
+                    LoaiBenXe: $('#idLoaiBenXe').val(),
+                    SoTuyenQuyHoach: $('#idSoTuyenQuyHoachBenXe').val(),
+                    SoLuotXuatBenQuyHoach: $('#idSoLuotXuatBenQuyHoachBenXe').val(),
+                    GhiChu: $('#idGhiChuBenXe').val(),
+                    TS_TT_IdTrangThai: $('#idcbbTrangThaiBenXe').val()
+                },
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    if (response != null /*&& response.d != null*/) {
+                        //var grid = $("#gridBaoCaoHoatDong").data("kendoGrid");
+                        //var dataGridBenXe = new kendo.data.DataSource({ data: response, group: groups, aggregate: agg, pageSize: 50 });
+                        //grid.setDataSource(dataGridBenXe);
+                        //grid.dataSource.read();
+                        //grid.refresh();
+                        if(response.status == true) {
+                            swal(
+                                'Sửa!',
+                                'Bạn đã sửa thành công.',
+                                'success'
+                            );
+                            setdataGridBenXeBenXe("gridTTBenXe");
+                            //resolve()
+                        } else {
+                            swal(
+                                'Lỗi!',
+                                response.error,
+                                'error'
+                            );
+                        }
+
+                    }
+                }
+            };
+            $.ajax(options);
+            //                }
+            //            }, 0)
+            //        })
+            //    },
+            //    allowOutsideClick: false
+            //}).then(function (password) {
+            //    //swal({
+            //    //    type: 'success',
+            //    //    title: 'Ajax request finished!',
+            //    //    html: 'Submitted email: ' + email
+            //    //})
+            //})
+        }
+
+        //function editGrid(idGrid){
+        //    // Get a reference to the grid
+        //    var grid = $("#"+idGrid).data("kendoGrid");
+
+        //    // Access the row that is selected
+        //    var select = grid.select();
+        //    // and now the data
+        //    var data = grid.dataItem(select);
+        //    // update the column `symbol` and set its value to `HPQ`
+        //    data.set("maTinh", $('#idMaTinh').val());
+        //    data.set("tenTinh", $('#idTenTinh').val());
+        //    data.set("diaChi", $('#idDiaChi').val());
+        //    data.set("sdt", $('#idSoDienThoai').val());
+        //}
+    </script>
+} 

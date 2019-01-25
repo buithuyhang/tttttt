@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e460c8f5b3f843788aab3fb73d58eefd" Name="Diagram1">
+        <EntityTypeShape EntityType="QLVanTai_2017Model.BC_CapDonViVanTai" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.BC_HoatDongCapSo" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.BC_HoatDongCapTuyen" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.BC_TongHop_Ben" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.HT_DonVi" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.HT_Quyen" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.HT_TaiKhoan" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.HT_ThongTinTaiKhoan" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.NhatTrinhXe" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_CapTuyenChoTinh_So" Width="1.5" PointX="8.25" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_CongTyVanTai" Width="1.5" PointX="5.25" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_DanhSachCapTuyenChoDN" Width="1.5" PointX="7.5" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_LuongTuyen" Width="1.5" PointX="6" PointY="28.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_LuongTuyen_DiemDauCuoi" Width="1.5" PointX="3.75" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_LuongTuyen_DiemDauCuoi_TrangThai" Width="1.5" PointX="1.5" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_LuongTuyen_PhanLoai" Width="1.5" PointX="3.75" PointY="29.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_LuongTuyen_TrangThai" Width="1.5" PointX="3.75" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_ThongTinBenXe" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_ThongTinTinh_So_Ben_TrangThai" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_ThongTinTinh_SoGiaoThong" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_ThongTinXe" Width="1.5" PointX="10.5" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_ThongTinXe_beta" Width="1.5" PointX="12.75" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_ThongTinXe_GSHT" Width="1.5" PointX="12.75" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_ThongTinXe_KEY_TABLE" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_ThongTinXe_LichSuThayDoiHopDong" Width="1.5" PointX="12.75" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_ThongTinXe_meta" Width="1.5" PointX="12.75" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_ThongTinXe_NhatTrinhXe" Width="1.5" PointX="12.75" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.QLVT_ThongTinXe_TrangThaiXe" Width="1.5" PointX="8.25" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVanTai_2017Model.sysdiagram" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="QLVanTai_2017Model.fk_DonViPhuTrach_TaiKhoan" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.fk_TaiKhoan_ThongTinTaiKhoan" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_CapTuyenChoTinh_So_QLVT_LuongTuyen" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_CapTuyenChoTinh_So_QLVT_ThongTinTinh_SoGiaoThong" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_CongTyVanTai_QLVT_ThongTinTinh_SoGiaoThong" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_DanhSachCapTuyenChoDN_QLVT_CongTyVanTai" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_ThongTinXe_QLVT_CongTyVanTai" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_DanhSachCapTuyenChoDN_QLVT_LuongTuyen" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_LuongTuyen_QLVT_LuongTuyen_DiemDauCuoi" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_LuongTuyen_QLVT_LuongTuyen_PhanLoai" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_LuongTuyen_QLVT_TrangThaiLuongTuyen" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_LuongTuyen_DiemDauCuoi_QLVT_LuongTuyen_DiemDauCuoi_TrangThai" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_ThongTinBenXe_QLVT_ThongTinTinh_SoGiaoThong" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_ThongTinBenXe_QLVT_TinhSo_Ben_TrangThai" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_ThongTinTinh_SoGiaoThong_QLVT_TinhSo_Ben_TrangThai" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_ThongTinXe_beta_QLVT_ThongTinXe" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_ThongTinXe_GSHT_QLVT_ThongTinXe" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_ThongTinXe_LichSuChuyenNhuong_QLVT_ThongTinXe" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_ThongTinXe_meta_QLVT_ThongTinXe" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_ThongTinXe_NhatTrinhXe_QLVT_ThongTinXe" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.FK_QLVT_ThongTinXe_QLVT_ThongTinXe_TrangThaiXe" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVanTai_2017Model.HT_PhanQuyen" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
